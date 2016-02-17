@@ -50,6 +50,9 @@ export EDITOR=nvim
 export PAGER="less"
 export LESS="-F -X -R"
 
+## tabs expanded to 4 spaces ##
+tabs -4
+
 ## use colors for less, man, etc. ##
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
