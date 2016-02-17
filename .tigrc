@@ -1,0 +1,3 @@
+set line-graphics = utf-8
+set tab-size = 4
+set ignore-case = true
