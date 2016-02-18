@@ -1,0 +1,28 @@
+[init]
+	templatedir = ~/.config/git/template/
+[core]
+	excludesfile = ~/.config/git/ignore
+[pull]
+	rebase = true
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+	path = nvim
+[difftool "icdiff"]
+	cmd = "icdiff --line-numbers --no-bold \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}"
+[merge]
+	tool = vimdiff
+[mergetool]
+	prompt = false
+	path = nvim
+[github]
+	user = edubxb
+[alias]
+	icdiff = difftool --tool icdiff
+[log]
+	date = format:%F %R
+[pretty]
+	simpleline = %C(bold)%m %h%Creset %C(cyan)%ad %Creset%s
