@@ -26,3 +26,5 @@
 	date = format:%F %R
 [pretty]
 	simpleline = %C(bold)%m %h%Creset %C(cyan)%ad %Creset%s
+[user]
+	useconfigonly = true
