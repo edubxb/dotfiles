@@ -64,9 +64,9 @@ if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-## local config ##
-if [ -f "${HOME}/.bashrc_local" ]; then
-  . "${HOME}/.bashrc_local"
+## host-dependent config ##
+if [ -f "${HOME}/.bashrc_$(hostname -s)" ]; then
+    . "${HOME}/.bashrc_$(hostname -s)"
 fi
 
 ## aliases ##
