@@ -15,6 +15,7 @@ export BASH_IT=$HOME/.bash_it
 
 if [[ -d "${BASH_IT}" ]]; then
   export BASH_IT_THEME='powerline-multiline'
+  export SCM_GIT_SHOW_REMOTE_INFO=true
   export POWERLINE_PROMPT_USER_INFO_MODE="sudo"
   export POWERLINE_LEFT_PROMPT="cwd scm python_venv"
   export POWERLINE_RIGHT_PROMPT="clock battery user_info"
@@ -73,4 +74,3 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
