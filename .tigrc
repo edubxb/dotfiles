@@ -1,3 +1,8 @@
-set line-graphics = utf-8
-set tab-size = 4
 set ignore-case = true
+set line-graphics = utf-8
+set refresh-interval = 5
+set refresh-mode = periodic
+set show-changes = true
+set tab-size = 4
+
+set main-view = date:display=relative id author commit-title:graph=v2,refs=true
