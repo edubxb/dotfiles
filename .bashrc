@@ -46,7 +46,6 @@ HISTFILESIZE=3000
 HISTTIMEFORMAT='%F %T  '
 
 ## edit & view ##
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export EDITOR=nvim
 export PAGER="less"
 export LESS="-F -X -R"
