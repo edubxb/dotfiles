@@ -8,6 +8,8 @@
 	default = simple
 [diff]
 	tool = vimdiff
+	compactionHeuristic = true
+	algorithm = minimal
 [difftool]
 	prompt = false
 	path = nvim
