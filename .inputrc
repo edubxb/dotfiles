@@ -1,4 +1,5 @@
 set bell-style visible
+set bind-tty-special-chars off
 set colored-stats on
 set completion-display-width 1
 set completion-ignore-case on
@@ -36,7 +37,8 @@ $if Bash
   Space: magic-space
 $endif
 
-Control-t: menu-complete
+"\C-t": menu-complete
+"\C-w": unix-filename-rubout
 #TAB: menu-complete
 #S-TAB: menu-complete-backward
 
