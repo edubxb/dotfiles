@@ -17,3 +17,6 @@ alias lselb='aws elb describe-load-balancers --output json | jq .LoadBalancerDes
 alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+
+## isolated pip, to ignore personal conf, for virtualenvs
+alias ipip="pip --isolated"
