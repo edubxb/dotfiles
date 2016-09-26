@@ -1,9 +1,9 @@
 set bell-style visible
 set bind-tty-special-chars off
+set colored-completion-prefix on
 set colored-stats on
 set completion-display-width 1
 set completion-ignore-case on
-set completion-prefix-display-length 1
 set convert-meta off
 set enable-meta-key on
 set input-meta on
