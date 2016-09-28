@@ -10,16 +10,18 @@
 	tool = vimdiff
 	compactionHeuristic = true
 	algorithm = minimal
-[difftool]
+[difftool "vimdiff"]
 	prompt = false
-	path = nvim
+	path = /usr/bin/nvim
 [difftool "icdiff"]
 	cmd = "icdiff --line-numbers --no-bold \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}"
 [merge]
-	tool = vimdiff
+	tool = fugitive
 [mergetool]
+	keepBackup = false
 	prompt = false
-	path = nvim
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [github]
 	user = edubxb
 [alias]
