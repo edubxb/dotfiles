@@ -33,3 +33,9 @@
 	simpleline = %C(bold)%m %h%Creset %C(cyan)%ad %Creset%s
 [user]
 	useconfigonly = true
+[interactive]
+	diffFilter = /usr/share/doc/git/contrib/diff-highlight/diff-highlight
+[pager]
+	diff = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
+	log = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
+	show = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
