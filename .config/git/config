@@ -24,9 +24,6 @@
 	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [github]
 	user = edubxb
-[alias]
-	icdiff = difftool --tool icdiff
-	rebaseme = !git rebase -i $(git merge-base master HEAD)
 [log]
 	date = format:%F %R
 [pretty]
@@ -39,3 +36,8 @@
 	diff = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
 	log = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
 	show = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
+[alias]
+	aliases = config --get-regexp alias
+	amend = commit --amend --reuse-message=HEAD
+	icdiff = difftool --tool icdiff
+	rebaseme = !git rebase -i $(git merge-base master HEAD)
