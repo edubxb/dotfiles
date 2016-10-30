@@ -2,14 +2,18 @@
 	templatedir = ~/.config/git/template/
 [core]
 	excludesfile = ~/.config/git/ignore
+[user]
+	useconfigonly = true
+[github]
+	user = edubxb
 [pull]
 	rebase = true
 [push]
 	default = simple
 [diff]
-	tool = vimdiff
-	compactionHeuristic = true
 	algorithm = minimal
+	compactionHeuristic = true
+	tool = vimdiff
 [difftool "vimdiff"]
 	prompt = false
 	path = /usr/bin/nvim
@@ -22,14 +26,10 @@
 	prompt = false
 [mergetool "fugitive"]
 	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
-[github]
-	user = edubxb
 [log]
 	date = format:%F %R
 [pretty]
 	simpleline = %C(bold)%m %h%Creset %C(cyan)%ad %Creset%s
-[user]
-	useconfigonly = true
 [interactive]
 	diffFilter = /usr/share/doc/git/contrib/diff-highlight/diff-highlight
 [pager]
