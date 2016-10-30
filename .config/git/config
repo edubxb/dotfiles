@@ -26,6 +26,7 @@
 	user = edubxb
 [alias]
 	icdiff = difftool --tool icdiff
+	rebaseme = !git rebase -i $(git merge-base master HEAD)
 [log]
 	date = format:%F %R
 [pretty]
