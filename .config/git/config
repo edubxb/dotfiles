@@ -14,7 +14,7 @@
 	prompt = false
 	path = /usr/bin/nvim
 [difftool "icdiff"]
-	cmd = "icdiff --line-numbers --no-bold \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}"
+	cmd = icdiff --line-numbers --no-bold \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
 [merge]
 	tool = fugitive
 [mergetool]
