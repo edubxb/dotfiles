@@ -41,3 +41,18 @@
 	amend = commit --amend --reuse-message=HEAD
 	icdiff = difftool --tool icdiff
 	rebaseme = !git rebase -i $(git merge-base master HEAD)
+[color "branch"]
+	current = 229 bold
+	local = 229
+	remote = normal
+[color "grep"]
+	match = 11 bold
+[color "interactive"]
+	prompt = normal bold
+	header = normal bold
+	help = normal
+	error = normal
+[color "status"]
+	changed = 98
+	branch = 229 bold
+	nobranch = 229 bold
