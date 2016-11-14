@@ -7,7 +7,7 @@ alias rm='rm -i'
 alias open='xdg-open'
 
 ## ag colors ##
-alias ag="ag --color-line-number '38;5;255;1' --color-match '38;5;11' --color-path '38;5;0;48;5;255'"
+alias ag="ag --color-line-number '38;5;255;1' --color-match '1;38;5;11' --color-path '38;5;0;48;5;255'"
 
 ## AWS aliases ##
 alias lsec2='jungle ec2 ls | grep running | cut -f1,5 | sort | sed -nr -e "s/\./-/g" -e "s/(.+)\t(.+)$/\1 → ec2-\2.eu-west-1.compute.amazonaws.com/gp"'
