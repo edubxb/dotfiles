@@ -37,14 +37,16 @@ $if Bash
   Space: magic-space
 $endif
 
-"\C-t": menu-complete
 "\C-w": unix-filename-rubout
-#TAB: menu-complete
-#S-TAB: menu-complete-backward
 
-# Flip through autocompletion matches with Shift-Tab.
-# "\e[Z": menu-complete
+# Flip through autocompletion matches
+"\e[1;2A": menu-complete
+"\e[1;2B": menu-complete-backward
+"\C-b": menu-complete
+"\C-f": menu-complete-backward
 
 # Filtered history search
-# "\e[A": history-search-backward
-# "\e[B": history-search-forward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\C-p": history-search-backward
+"\C-n": history-search-forward
