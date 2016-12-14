@@ -12,15 +12,18 @@
 	default = simple
 [diff]
 	algorithm = minimal
-	compactionHeuristic = true
+	;compactionHeuristic = true
+	indentHeuristic = true
 	tool = vimdiff
 [difftool "vimdiff"]
 	prompt = false
-	path = /usr/bin/nvim
+[difftool "cdiff"]
+	cmd = cdiff --side-by-side --width=0 --color=auto \"${LOCAL}\" \"${REMOTE}\"
 [difftool "icdiff"]
-	cmd = icdiff --line-numbers --no-bold \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
+	;cmd = icdiff --line-numbers --highlight --no-bold --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
+	cmd = icdiff --line-numbers --highlight --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
 [merge]
-	tool = fugitive
+	tool = vimdiff
 [mergetool]
 	keepBackup = false
 	prompt = false
@@ -39,6 +42,7 @@
 [alias]
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
+	cdiff = difftool --tool cdiff
 	icdiff = difftool --tool icdiff
 	rebaseme = !git rebase -i $(git merge-base master HEAD)
 [color "branch"]
@@ -48,11 +52,11 @@
 [color "grep"]
 	match = 11 bold
 [color "interactive"]
-	prompt = normal bold
+	error = normal
 	header = normal bold
 	help = normal
-	error = normal
+	prompt = normal bold
 [color "status"]
-	changed = 98
 	branch = 229 bold
+	changed = 98
 	nobranch = 229 bold
