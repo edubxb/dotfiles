@@ -5,4 +5,14 @@ set refresh-mode = periodic
 set show-changes = true
 set tab-size = 4
 
-set main-view = date:display=relative id author commit-title:graph=v2,refs=true
+set main-view = date:display=relative \
+                id \
+                author:email-user \
+                commit-title:graph=v2,refs=true
+
+set blame-view = date:relative \
+                 id:yes,color \
+                 author:email-user \
+                 file-name:auto \
+                 line-number:yes,interval=1 \
+                 text
