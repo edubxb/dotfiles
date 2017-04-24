@@ -43,8 +43,12 @@
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
 	cdiff = difftool --tool cdiff
+	fixup = commit --fixup
 	icdiff = difftool --tool icdiff
-	rebaseme = !git rebase -i $(git merge-base master HEAD)
+	rebaseme = "!f() { local ref=\"master\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
+	stash-all = stash save --include-untracked
+	squash = commit --squash
+	wip = "!f() { git commit -m \"WIP: $1\"; }; f"
 [color "branch"]
 	current = 229 bold
 	local = 229
