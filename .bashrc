@@ -10,8 +10,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-## Bash It ##
-export BASH_IT=$HOME/.bash_it
+## VTE script ##
+if [[ "${TILIX_ID}" ]]; then
+  source /etc/profile.d/vte-2.91.sh
+fi
+
+## Bash-it ##
+export BASH_IT="${HOME}/.bash_it"
 
 if [[ -d "${BASH_IT}" ]]; then
   export BASH_IT_THEME='powerline-multiline'
