@@ -78,3 +78,12 @@ fi
 
 ## aliases ##
 [[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
+
+## fzf ##
+if [[ -f "${HOME}/.fzf.bash" ]]; then
+  source "${HOME}/.fzf.bash"
+  export FZF_DEFAULT_OPTS="--reverse --border --inline-info --tabstop=4 --prompt='❯ '"
+  export FZF_DEFAULT_COMMAND='ag -g ""'
+  export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
+  export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+fi
