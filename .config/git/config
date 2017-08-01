@@ -66,3 +66,9 @@
 	branch = 229 bold
 	changed = 98
 	nobranch = 229 bold
+[includeIf "gitdir:~/Area51/personal/"]
+	path = ~/.config/git/config.personal
+[includeIf "gitdir:~/Area51/floss/"]
+	path = ~/.config/git/config.personal
+[includeIf "gitdir:~/Area51/work/"]
+	path = ~/.config/git/config.work
