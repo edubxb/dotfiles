@@ -1,12 +1,12 @@
 ## if not running interactively, don't do anything ##
-[ -z "$PS1" ] && return
+[[ -z "$PS1" ]] && return
 
 ## Bash programmable completion ##
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [[ -f /etc/bash_completion ]]; then
+    source /etc/bash_completion
   fi
 fi
 
@@ -20,11 +20,8 @@ if [[ -d "${BASH_IT}" ]]; then
   export POWERLINE_LEFT_PROMPT="cwd scm python_venv"
   export POWERLINE_RIGHT_PROMPT="clock battery user_info"
 
-  . "${BASH_IT}/bash_it.sh"
+  source "${BASH_IT}/bash_it.sh"
 fi
-
-## disable flow control shortcut ##
-stty -ixon
 
 ## Bash options ##
 shopt -s autocd
@@ -50,26 +47,25 @@ export EDITOR=nvim
 export PAGER="less"
 export LESS="-F -X -R"
 
+## disable flow control key binding ##
+stty -ixon
+
 ## tabs expanded to 4 spaces ##
 tabs -4
 
-## use colors for less, man, etc. ##
-[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+## colors for less, man, etc. ##
+[[ -f "${HOME}/.LESS_TERMCAP" ]] && source "${HOME}/.LESS_TERMCAP"
 
 ## make less more friendly for non-text input files ##
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL="/bin/sh" lesspipe)"
 
 ## enable ls color support ##
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+if [[ -x /usr/bin/dircolors ]]; then
+  test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 ## host-dependent config ##
-if [ -f "${HOME}/.bashrc_$(hostname -s)" ]; then
-    . "${HOME}/.bashrc_$(hostname -s)"
-fi
+[[ -f "${HOME}/.bashrc_$(hostname -s)" ]] && source "${HOME}/.bashrc_$(hostname -s)"
 
 ## aliases ##
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
