@@ -20,10 +20,14 @@ export BASH_IT="${HOME}/.bash_it"
 
 if [[ -d "${BASH_IT}" ]]; then
   export BASH_IT_THEME='powerline-multiline'
-  export SCM_GIT_SHOW_REMOTE_INFO=true
-  export POWERLINE_PROMPT_USER_INFO_MODE="sudo"
-  export POWERLINE_LEFT_PROMPT="cwd scm python_venv"
-  export POWERLINE_RIGHT_PROMPT="clock battery user_info"
+  export BATTERY_AC_CHAR=''
+  export SCM_GIT_SHOW_REMOTE_INFO='true'
+  export POWERLINE_SCM_GIT_CHAR=' '
+  export POWERLINE_LEFT_SEPARATOR=''
+  export POWERLINE_RIGHT_SEPARATOR=''
+  export POWERLINE_PROMPT_USER_INFO_MODE='sudo'
+  export POWERLINE_LEFT_PROMPT='cwd scm python_venv'
+  export POWERLINE_RIGHT_PROMPT='clock battery user_info'
 
   source "${BASH_IT}/bash_it.sh"
 fi
