@@ -1,19 +1,14 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
-## Bash programmable completion ##
-if ! shopt -oq posix; then
-  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
-  elif [[ -f /etc/bash_completion ]]; then
-    source /etc/bash_completion
-  fi
-fi
-
 ## VTE script ##
-if [[ "${TILIX_ID}" ]]; then
-  source /etc/profile.d/vte-2.91.sh
-fi
+[[ "${TILIX_ID}" ]] && source /etc/profile.d/vte-2.91.sh
+
+## Bash completion ##
+[[ -f /etc/bash_completion ]] &&  source /etc/bash_completion
+source "${HOME}/.travis/travis.sh"
+source <(awless completion bash)
+source <(env _PIPENV_COMPLETE="source-bash" pipenv)
 
 ## Bash-it ##
 export BASH_IT="${HOME}/.bash_it"
@@ -52,9 +47,12 @@ HISTFILESIZE=3000
 HISTTIMEFORMAT='%F %T  '
 
 ## edit & view ##
-export EDITOR=nvim
+export EDITOR="nvim"
+export VISUAL="nvim-qt --nofork"
+# export VISUAL="nvr --remote-wait"
+# export NVIM_LISTEN_ADDRESS="/tmp/neovim.socket"
 export PAGER="less"
-export LESS="-F -X -R"
+export LESS="-R"
 
 ## disable flow control key binding ##
 stty -ixon
@@ -76,14 +74,24 @@ fi
 ## host-dependent config ##
 [[ -f "${HOME}/.bashrc_$(hostname -s)" ]] && source "${HOME}/.bashrc_$(hostname -s)"
 
-## aliases ##
+## aliases & functions ##
+[[ -f "${HOME}/.bash_functions" ]] && source "${HOME}/.bash_functions"
 [[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
 
-## fzf ##
-if [[ -f "${HOME}/.fzf.bash" ]]; then
+## use time command if installed ##
+which time &> /dev/null
+[[ "$?" -eq 0 ]] && alias "time=command $(which time)"
+
+## direnv ##
+which direnv &> /dev/null
+[[ "$?" -eq 0 ]] && eval "$(direnv hook bash)"
+
+## fzf config ##
+which fzf &> /dev/null
+if [[ "$?" -eq 0 ]]; then
   source "${HOME}/.fzf.bash"
-  export FZF_DEFAULT_OPTS="--reverse --border --inline-info --tabstop=4 --prompt='❯ '"
-  export FZF_DEFAULT_COMMAND='ag -g ""'
+  export FZF_DEFAULT_OPTS="--reverse --inline-info --tabstop=4 --prompt='❯ '"
+  export FZF_DEFAULT_COMMAND="rg --files"
   export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
