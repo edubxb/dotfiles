@@ -50,3 +50,7 @@ $endif
 "\e[B": history-search-forward
 "\C-p": history-search-backward
 "\C-n": history-search-forward
+
+# Custom keybindings
+"\er": redraw-current-line
+"\C-g\C-p": "$(fpaste)\e\C-e\er"
