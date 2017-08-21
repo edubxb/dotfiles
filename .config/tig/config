@@ -1,4 +1,5 @@
 set ignore-case = true
+set ignore-case = smart-case
 set line-graphics = utf-8
 set refresh-interval = 5
 set refresh-mode = periodic
