@@ -7,16 +7,17 @@ function fpaste {
 function fco {
   local tags branches target
   git rev-parse HEAD &> /dev/null || return
-  tags=$(git tag | sort -Vr | sed 's/^/ /') || return
-  branches=$(git branch | sort -fu | sed -e 's/.* //' -e 's/^/ /') || return
-  target=$((echo "$branches" "$tags") | sed '/^$/d' |
-            fzf --border --height 35% --no-hscroll --ansi \
+  tags=$(git tag --sort=-v:refname | sed 's/^/ /') || return
+  branches=$(git branch -a | grep -v HEAD |
+             sed -E -e 's/.* //g' -e 's|remotes/([^/]+)/(.+)|\\e[3m\1\\e[0m\t\2|' -e 's/^/ /') || return
+  target=$((echo -e "$branches\n$tags") |
+            fzf --border --height 35% --no-hscroll --tabstop=1 -d $'\t' -n 2,3 --ansi \
                 --preview-window right:70% \
                 --preview 'git log --oneline --graph --color=always --date=short \
                            --pretty="format:%C(auto)%cd %h%d %s" \
-                           $(sed -r -e "s/.+( +|\t)(.+)/\2/" <<< {}) -- | head -'$LINES \
+                           $(sed -E -e "s/. (.+)/\1/" -e "s|\t|/|" <<< {}) -- | head -'$LINES \
                 +m -d ' ' -n 2 -q "$*") || return
-  git checkout $(echo "$target" | cut -d ' ' -f2)
+  git checkout $(sed -E -e "s/^(.+[ \t])(.+)/\2/" <<< "${target}")
 }
 
 function __awless_show {
