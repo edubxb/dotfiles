@@ -36,9 +36,9 @@
 [interactive]
 	diffFilter = /usr/share/doc/git/contrib/diff-highlight/diff-highlight
 [pager]
-	diff = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
-	log = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
-	show = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
+	diff = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
+	log = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
+	show = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
 [alias]
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
