@@ -16,6 +16,7 @@
 	indentHeuristic = true
 	tool = vimdiff
 [difftool "vimdiff"]
+	cmd = nvim-qt --nofork \"$LOCAL\" \"$REMOTE\" -- -d
 	prompt = false
 [difftool "cdiff"]
 	cmd = cdiff --side-by-side --width=0 --color=auto \"${LOCAL}\" \"${REMOTE}\"
@@ -28,7 +29,7 @@
 	keepBackup = false
 	prompt = false
 [mergetool "fugitive"]
-	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+	cmd = nvim-qt --no-fork -- -f -c \"Gdiff\" \"$MERGED\"
 [log]
 	date = format:%F %R
 [pretty]
