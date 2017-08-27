@@ -4,12 +4,6 @@
 ## VTE script ##
 [[ "${TILIX_ID}" ]] && source /etc/profile.d/vte-2.91.sh
 
-## Bash completion ##
-[[ -f /etc/bash_completion ]] &&  source /etc/bash_completion
-source "${HOME}/.travis/travis.sh"
-source <(awless completion bash)
-source <(env _PIPENV_COMPLETE="source-bash" pipenv)
-
 ## Bash-it ##
 export BASH_IT="${HOME}/.bash_it"
 
@@ -26,6 +20,11 @@ if [[ -d "${BASH_IT}" ]]; then
 
   source "${BASH_IT}/bash_it.sh"
 fi
+
+## Bash completion ##
+source "${HOME}/.travis/travis.sh"
+source <(awless completion bash)
+source <(env _PIPENV_COMPLETE="source-bash" pipenv)
 
 ## Bash options ##
 shopt -s autocd
@@ -52,7 +51,7 @@ export VISUAL="nvim-qt --nofork"
 # export VISUAL="nvr --remote-wait"
 # export NVIM_LISTEN_ADDRESS="/tmp/neovim.socket"
 export PAGER="less"
-export LESS="-R"
+export LESS="-F -R -X"
 
 ## disable flow control key binding ##
 stty -ixon
