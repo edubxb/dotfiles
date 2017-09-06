@@ -24,9 +24,9 @@ function __awless_show {
   local lock_file info
   lock_file="/tmp/awless-show.lock"
   [[ -f "${lock_file}" ]] && return
-  info="$(awless show --local --siblings $1 2> /dev/null)"
+  info="$(awless show --local --siblings --color=always $1 2> /dev/null)"
   if [[ -n "${info}" ]]; then
-    echo -ne "${info}"
+    echo "${info}"
   else
     touch "${lock_file}"
     awless sync --infra
@@ -36,17 +36,21 @@ function __awless_show {
 typeset -fx __awless_show
 
 function ec2sh {
-  local target
   if [[ -z "${AWS_DEFAULT_PROFILE}" ]]; then
     echo 'No AWS credentials found in the environment!'
     return
   else
-    target=$(awless ls instances --format tsv --no-headers \
+    local target
+    local ssh_command
+    target=$(awless ls instances --local --format tsv --no-headers \
                     --sort name,uptime --filter state=running |
              cut -f 1,3,7 |
-             fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 --ansi \
-                 --preview-window right:60% \
-                 --preview '__awless_show $(cut -f1 <<< {})') || return
-    awless ssh --private $(cut -f 1 <<< "${target}" )
+             fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 \
+                 --preview-window right:60%:wrap \
+                 --preview '__awless_show {1}' \
+                 --prompt "${AWS_DEFAULT_PROFILE} ❯ " --ansi -q "$*" ) || return
+    ssh_command=$(awless ssh --print-cli --disable-strict-host-keychecking \
+                         --private $(cut -f 1 <<< "${target}"))
+    command $(sed 's/-o StrictHostKeyChecking=no//' <<< "${ssh_command}")
   fi
 }
