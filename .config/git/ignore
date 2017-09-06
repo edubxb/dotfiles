@@ -1,0 +1,30 @@
+# Direnv stuff
+.direnv
+.envrc
+
+### mergetool backups ###
+*.orig
+
+### ctags ###
+tags
+TAGS
+.tags
+.TAGS
+
+### GNU global ###
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+### cscope ###
+cscope.files
+
+# pyenv
+.python-version
+
+# Rope
+.ropeproject/
+
+# IntelliJ
+.idea/
