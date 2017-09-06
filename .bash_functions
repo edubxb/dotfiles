@@ -1,7 +1,7 @@
 function fpaste {
   gpaste-client history --zero |
   grep -v -z "\[Image, .*\]" |
-  fzf --height 12 --no-hscroll --read0 -d ' ' -n 2.. \
+  fzf --border --height 14 --no-hscroll --read0 -d ' ' -n 2.. \
       --preview-window right:50%:wrap --preview 'echo {2..}' \
       --bind 'ctrl-x:execute-silent(gpaste-client delete {1})' |
   cut -d ' ' -f 2-
@@ -28,7 +28,7 @@ function fco {
 function fak {
     local target
     target=$(__awskeys_list | grep "^ " | tr -d ' ' |
-             fzf --border --min-height 10 --height 15 -q "$*") || return
+             fzf --min-height 10 --height 15 -q "$*") || return
     __awskeys_export "${target}"
 }
 
@@ -59,7 +59,7 @@ function ec2sh {
              fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 \
                  --preview-window right:60%:wrap \
                  --preview '__awless_show {1}' \
-                 --prompt "${AWS_DEFAULT_PROFILE} ❯ " --ansi -q "$*" ) || return
+                 --prompt " ${AWS_DEFAULT_PROFILE} ❯ " --ansi -q "$*" ) || return
     ssh_command=$(awless ssh --print-cli --disable-strict-host-keychecking \
                          --private $(cut -f 1 <<< "${target}"))
     command $(sed 's/-o StrictHostKeyChecking=no//' <<< "${ssh_command}")
