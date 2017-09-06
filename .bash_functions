@@ -1,7 +1,10 @@
 function fpaste {
-  gpaste-client history --raw --zero |
-  grep -v -z "$HOME/.local/share/gpaste/images/" |
-  fzf --height 35% --no-hscroll --read0 --preview-window right:50%:wrap --preview 'echo -n {}'
+  gpaste-client history --zero |
+  grep -v -z "\[Image, .*\]" |
+  fzf --height 12 --no-hscroll --read0 -d ' ' -n 2.. \
+      --preview-window right:50%:wrap --preview 'echo {2..}' \
+      --bind 'ctrl-x:execute-silent(gpaste-client delete {1})' |
+  cut -d ' ' -f 2-
 }
 
 function fco {
