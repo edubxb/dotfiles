@@ -25,6 +25,13 @@ function fco {
   git checkout "${target}"
 }
 
+function fak {
+    local target
+    target=$(__awskeys_list | grep "^ " | tr -d ' ' |
+             fzf --border --min-height 10 --height 15 -q "$*") || return
+    __awskeys_export "${target}"
+}
+
 function __awless_show {
   local lock_file info
   lock_file="/tmp/awless-show.lock"
