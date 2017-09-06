@@ -8,19 +8,21 @@ function fpaste {
 }
 
 function fco {
-  local tags branches target
+  local tags local_branches remote_branches target
   git rev-parse HEAD &> /dev/null || return
   tags=$(git tag --sort=-v:refname | sed 's/^/ /') || return
-  branches=$(git branch -a | grep -v HEAD |
-             sed -E -e 's/.* //g' -e 's|remotes/([^/]+)/(.+)|\\e[3m\1\\e[0m\t\2|' -e 's/^/ /') || return
-  target=$((echo -e "$branches\n$tags") |
-            fzf --border --height 35% --no-hscroll --tabstop=1 -d $'\t' -n 2,3 --ansi \
+  remote_branches=$(git branch -r | sed -nE '/HEAD/!s|.* ([^/]+)/(.+)| \\e[3m\1\\e[0m \2|p') || return
+  local_branches=$(git branch | sed -E 's/.* (.+)/ \1/') || return
+  [[ -n "${remote_branches}" ]] && remote_branches="\n${remote_branches}"
+  [[ -n "${tags}" ]] && tags="\n${tags}"
+  target=$((echo -e "${local_branches}" "${remote_branches}" "${tags}") |
+            fzf --border --height 35% --no-hscroll --tabstop=1 -d ' ' -n 2.. --ansi \
                 --preview-window right:70% \
                 --preview 'git log --oneline --graph --color=always --date=short \
-                           --pretty="format:%C(auto)%cd %h%d %s" \
-                           $(sed -E -e "s/. (.+)/\1/" -e "s|\t|/|" <<< {}) -- | head -'$LINES \
-                +m -d ' ' -n 2 -q "$*") || return
-  git checkout $(sed -E -e "s/^(.+[ \t])(.+)/\2/" <<< "${target}")
+                               --pretty="format:%C(auto)%cd %h%d %s" \
+                           $(tr " " "/" <<< {2..}) -- | head -'$LINES \
+                +m -q "$*" | sed -E "s/(.+ )?(.+)/\2/") || return
+  git checkout "${target}"
 }
 
 function __awless_show {
