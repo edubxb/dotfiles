@@ -33,16 +33,15 @@ function fak {
 }
 
 function __awless_show {
-  local lock_file info
+  local lock_file
   lock_file="/tmp/awless-show.lock"
   [[ -f "${lock_file}" ]] && return
-  info="$(awless show --local --siblings --color=always $1 2> /dev/null)"
-  if [[ -n "${info}" ]]; then
-    echo "${info}"
-  else
-    touch "${lock_file}"
-    awless sync --infra
+  awless show --silent --local --siblings --color=always $1 2> /dev/null
+  if [[ "$?" -ne 0 ]]; then
+    touch "${lock_file}" &> /dev/null
+    awless sync --silent --infra 2> /dev/null
     rm -f "${lock_file}" &> /dev/null
+    awless show --silent --local --siblings --color=always $1 2> /dev/null
   fi
 }
 typeset -fx __awless_show
@@ -54,7 +53,7 @@ function ec2sh {
   else
     local target
     local ssh_command
-    target=$(awless ls instances --local --format tsv --no-headers \
+    target=$(awless ls instances --silent --format tsv --no-headers \
                     --sort name,uptime --filter state=running |
              cut -f 1,3,7 |
              fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 \
