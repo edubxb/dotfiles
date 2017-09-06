@@ -1,8 +1,8 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
-## VTE script ##
-[[ "${TILIX_ID}" ]] && source /etc/profile.d/vte-2.91.sh
+## Tilix VTE script ##
+[[ "${TILIX_ID}" ]] && source /usr/share/tilix/scripts/tilix_int.sh
 
 ## Bash-it ##
 export BASH_IT="${HOME}/.bash_it"
@@ -25,6 +25,7 @@ fi
 source "${HOME}/.travis/travis.sh"
 source <(awless completion bash)
 source <(env _PIPENV_COMPLETE="source-bash" pipenv)
+source "${HOME}/.local/lib/python2.7/site-packages/pew/shell_config/complete.bash"
 
 ## Bash options ##
 shopt -s autocd
@@ -51,7 +52,7 @@ export VISUAL="nvim-qt --nofork"
 # export VISUAL="nvr --remote-wait"
 # export NVIM_LISTEN_ADDRESS="/tmp/neovim.socket"
 export PAGER="less"
-export LESS="-F -R -X"
+export LESS="-F -R -X -x1,5"
 
 ## disable flow control key binding ##
 stty -ixon
@@ -88,8 +89,7 @@ which direnv &> /dev/null
 ## fzf config ##
 which fzf &> /dev/null
 if [[ "$?" -eq 0 ]]; then
-  source "${HOME}/.fzf.bash"
-  export FZF_DEFAULT_OPTS="--reverse --inline-info --tabstop=4 --prompt='❯ '"
+  export FZF_DEFAULT_OPTS="--filepath-word --reverse --inline-info --tabstop=4 --prompt='❯ '"
   export FZF_DEFAULT_COMMAND="rg --files"
   export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
