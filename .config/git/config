@@ -1,3 +1,5 @@
+[user]
+    name = Eduardo Bellido Bellido
 [init]
 	templatedir = ~/.config/git/template/
 [core]
