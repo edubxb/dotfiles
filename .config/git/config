@@ -51,8 +51,8 @@
 	rebaseme = "!f() { local ref=\"master\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
 	stash-all = stash save --include-untracked
 	squash = commit --squash
-	trackme = "!f() { local remote=\"origin\"; [ -n \"$1\" ] && remote=\"$1\"; git push -u \"${remote}\" $(git rev-parse --abbrev-ref HEAD); }; f"
 	trl = "!git reflog --pretty=raw | tig --pretty=raw"
+	ups = "!f() { local remote=\"origin\"; [ -n \"$1\" ] && remote=\"$1\"; git push -u \"${remote}\" $(git rev-parse --abbrev-ref HEAD); }; f"
 	wip = "!f() { git commit -m \"WIP: $1\"; }; f"
 [color "branch"]
 	current = 229 bold
