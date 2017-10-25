@@ -45,6 +45,7 @@
 [alias]
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
+	shame = blame -w -M
 	cdiff = difftool --tool cdiff
 	fixup = commit --fixup
 	icdiff = difftool --tool icdiff
