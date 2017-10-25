@@ -15,7 +15,7 @@ function fco {
   local_branches=$(git branch | sed -E 's/.* (.+)/ \1/') || return
   [[ -n "${remote_branches}" ]] && remote_branches="\n${remote_branches}"
   [[ -n "${tags}" ]] && tags="\n${tags}"
-  target=$((echo -e "${local_branches}" "${remote_branches}" "${tags}") |
+  target=$((echo -e "${local_branches}${remote_branches}${tags}") |
             fzf --border --height 35% --no-hscroll --tabstop=1 -d ' ' -n 2.. --ansi \
                 --preview-window right:70% \
                 --preview 'git log --oneline --graph --color=always --date=short \
