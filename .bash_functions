@@ -52,16 +52,26 @@ function ec2sh {
     return
   else
     local target
+    local instance_id
     local ssh_command
-    target=$(awless ls instances --silent --format tsv --no-headers \
-                    --sort name,uptime --filter state=running |
-             cut -f 1,3,7 |
-             fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 \
-                 --preview-window right:60%:wrap \
-                 --preview '__awless_show {1}' \
-                 --prompt " ${AWS_DEFAULT_PROFILE} ❯ " --ansi -q "$*" ) || return
+    local ssh_command_flags
+    target=($(awless ls instances --silent --format tsv --no-headers \
+                     --sort name,uptime --filter state=running |
+              cut -f 1,3,6,7 |
+              fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 \
+                  --expect=alt-enter \
+                  --preview-window right:60%:wrap \
+                  --preview '__awless_show {1}' \
+                  --prompt " ${AWS_DEFAULT_PROFILE} ❯ " --ansi -q "$*")) || return
+    if [[ ${target[0]} = 'alt-enter' ]]; then
+        instance_id="${target[1]}"
+        ssh_command_flags=''
+    else
+        instance_id="${target[0]}"
+        ssh_command_flags='--private'
+    fi
     ssh_command=$(awless ssh --print-cli --disable-strict-host-keychecking \
-                         --private $(cut -f 1 <<< "${target}"))
-    command $(sed 's/-o StrictHostKeyChecking=no//' <<< "${ssh_command}")
-  fi
+                  ${ssh_command_flags} $(cut -f 1 <<< "${instance_id}"))
+    command $(sed -E -e 's/( .+@)/ /' -e 's/-o StrictHostKeychecking=no//' <<< "${ssh_command}")
+fi
 }
