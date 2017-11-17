@@ -2,7 +2,7 @@
 [[ -z "$PS1" ]] && return
 
 ## Tilix VTE script ##
-[[ "${TILIX_ID}" ]] && source /usr/share/tilix/scripts/tilix_int.sh
+[[ -n "${TILIX_ID}" ]] && source /usr/share/tilix/scripts/tilix_int.sh
 
 ## Bash-it ##
 export BASH_IT="${HOME}/.bash_it"
@@ -79,16 +79,13 @@ fi
 [[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
 
 ## use time command if installed ##
-which time &> /dev/null
-[[ "$?" -eq 0 ]] && alias "time=command $(which time)"
+which time &> /dev/null && alias "time=command $(which time)"
 
 ## direnv ##
-which direnv &> /dev/null
-[[ "$?" -eq 0 ]] && eval "$(direnv hook bash)"
+which direnv &> /dev/null && eval "$(direnv hook bash)"
 
 ## fzf config ##
-which fzf &> /dev/null
-if [[ "$?" -eq 0 ]]; then
+if which fzf &> /dev/null; then
   export FZF_DEFAULT_OPTS="--filepath-word --reverse --inline-info --tabstop=4 --prompt='❯ '"
   export FZF_DEFAULT_COMMAND="rg --files"
   export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
