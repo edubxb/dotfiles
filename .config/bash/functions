@@ -1,3 +1,20 @@
+## notifications for non-focused terminals ##
+function __notify_when_no_focus {
+  LAST_EXIT_CODE=$?
+  CMD="$(fc -ln -1 | sed -nr -e 's/\t (.+)$/\1/p')"
+  xdotool getactivewindow getwindowname | grep -i 'Tilix' -q 2> /dev/null
+  if [[ $? -ne 0 ]]; then
+    if [[ ${LAST_EXIT_CODE} -eq 0 ]]; then
+      MESSAGE="Succesfully ended"
+    else
+      MESSAGE="Failed with error code ${LAST_EXIT_CODE}"
+    fi
+    notify-send --icon=terminal "${CMD}" "${MESSAGE}"
+  fi
+  return ${LAST_EXIT_CODE}
+}
+# export PROMPT_COMMAND="__notify_when_no_focus;${PROMPT_COMMAND}"
+
 function fpaste {
   gpaste-client history --zero |
   grep -v -z "\[Image, .*\]" |

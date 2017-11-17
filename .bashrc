@@ -80,11 +80,11 @@ if [[ -x /usr/bin/dircolors ]]; then
 fi
 
 ## host-dependent config ##
-[[ -f "${HOME}/.bashrc_$(hostname -s)" ]] && source "${HOME}/.bashrc_$(hostname -s)"
+[[ -f "${HOME}/.config/bash/bashrc_$(hostname -s)" ]] && source "${HOME}/.config/bash/bashrc_$(hostname -s)"
 
 ## aliases & functions ##
-[[ -f "${HOME}/.bash_functions" ]] && source "${HOME}/.bash_functions"
-[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
+[[ -f "${HOME}/.config/bash/functions" ]] && source "${HOME}/.config/bash/functions"
+[[ -f "${HOME}/.config/bash/aliases" ]] && source "${HOME}/.config/bash/aliases"
 
 ## use time command if installed ##
 which time &> /dev/null && alias "time=command $(which time)"
