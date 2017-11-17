@@ -3,6 +3,9 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+## nuke ##
+alias nuke='killall -9 '
+
 ## yank ##
 alias yank='yank-cli'
 
@@ -17,6 +20,12 @@ alias trl='git reflog --pretty=raw | tig --pretty=raw'
 
 ## neovim remote ##
 alias nvim="nvr"
+
+## typos ##
+alias awsless="awless"
+
+## python ##
+alias pylint="pylint3"
 
 ## Bash-it overrides ##
 alias ll="ls -lh"
