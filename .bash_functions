@@ -36,42 +36,66 @@ function __awless_show {
   local lock_file
   lock_file="/tmp/awless-show.lock"
   [[ -f "${lock_file}" ]] && return
-  awless show --silent --local --siblings --color=always $1 2> /dev/null
+  awless show -p $1 --silent --local --siblings --color=always $2 2> /dev/null
   if [[ "$?" -ne 0 ]]; then
     touch "${lock_file}" &> /dev/null
-    awless sync --silent --infra 2> /dev/null
+    awless sync -p $1 --silent --infra 2> /dev/null
     rm -f "${lock_file}" &> /dev/null
-    awless show --silent --local --siblings --color=always $1 2> /dev/null
+    awless sync -p $1 --silent --local --siblings --color=always $2 2> /dev/null
   fi
 }
 typeset -fx __awless_show
 
 function ec2sh {
-  if [[ -z "${AWS_DEFAULT_PROFILE}" ]]; then
+  local profile
+
+  if [[ -n "$1" ]]; then
+    profile="$1"
+  elif [[ -n "${AWS_DEFAULT_PROFILE}" ]]; then
+    profile="${AWS_DEFAULT_PROFILE}"
+  else
     echo 'No AWS credentials found in the environment!'
     return
-  else
-    local target
-    local instance_id
-    local ssh_command
-    local ssh_command_flags
-    target=($(awless ls instances --silent --format tsv --no-headers \
-                     --sort name,uptime --filter state=running |
-              cut -f 1,3,6,7 |
-              fzf --sync --no-hscroll --tabstop=1 -d $'\t' -n 1,2 \
-                  --expect=alt-enter \
-                  --preview-window right:60%:wrap \
-                  --preview '__awless_show {1}' \
-                  --prompt " ${AWS_DEFAULT_PROFILE} ❯ " --ansi -q "$*")) || return
-    if [[ ${target[0]} = 'alt-enter' ]]; then
-        instance_id="${target[1]}"
-        ssh_command_flags=''
-    else
-        instance_id="${target[0]}"
-        ssh_command_flags='--private'
-    fi
-    ssh_command=$(awless ssh --print-cli --disable-strict-host-keychecking \
-                  ${ssh_command_flags} $(cut -f 1 <<< "${instance_id}"))
-    command $(sed -E -e 's/( .+@)/ /' -e 's/-o StrictHostKeychecking=no//' <<< "${ssh_command}")
-fi
+  fi
+
+  shift
+
+  local target
+  local host
+  local instance
+  local msg
+  local address_idx=2
+
+  _IFS="${IFS}"
+  IFS=$'\n'
+  target=( $(awless ls instances -p "${profile}" --silent --format tsv --no-headers \
+                    --sort name,uptime --filter state=running |
+            fzf --sync --no-hscroll --tabstop=1 -d $'\t' --multi \
+                --with-nth=1,3,6,7 --nth 1,2 \
+                --expect=enter --expect=alt-enter \
+                --bind 'ctrl-t:toggle-all' \
+                --preview-window right:60%:wrap \
+                --preview "__awless_show ${profile} {1}" \
+                --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 6,7) ) || return
+  IFS="${_IFS}"
+
+  [[ ${target[0]} = 'alt-enter' ]] && address_idx=1
+  for instance in "${target[@]:2}"; do
+    tilix -a session-add-down -e "ssh $(cut -f ${address_idx} <<< ${instance})"
+  done
+  ssh $(cut -f ${address_idx} <<< ${target[1]})
 }
+
+function __ec2sh_comp {
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+    [[ "${COMP_CWORD}" -eq 2 ]] && return 0
+
+    local profile_list="$(__awskeys_list | grep "    ")"
+    COMPREPLY=( $(compgen -W "${profile_list}" -- ${cur}) )
+
+    return 0
+}
+complete -F __ec2sh_comp ec2sh
