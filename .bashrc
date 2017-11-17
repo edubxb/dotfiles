@@ -35,11 +35,11 @@ if [[ -d "${BASH_IT}" ]]; then
   source "${BASH_IT}/bash_it.sh"
 fi
 
-## Bash completion ##
-source "${HOME}/.travis/travis.sh"
-source <(awless completion bash)
-source <(env _PIPENV_COMPLETE="source-bash" pipenv)
-source "${HOME}/.local/lib/python2.7/site-packages/pew/shell_config/complete.bash"
+## disable flow control key binding ##
+stty -ixon
+
+## tabs expanded to 4 spaces ##
+tabs -4
 
 ## Bash options ##
 shopt -s autocd
@@ -67,12 +67,6 @@ export VISUAL="nvim-qt --nofork"
 # export NVIM_LISTEN_ADDRESS="/tmp/neovim.socket"
 export PAGER="less"
 export LESS="-F -R -X -x1,5"
-
-## disable flow control key binding ##
-stty -ixon
-
-## tabs expanded to 4 spaces ##
-tabs -4
 
 ## colors for less, man, etc. ##
 [[ -f "${HOME}/.LESS_TERMCAP" ]] && source "${HOME}/.LESS_TERMCAP"
