@@ -89,9 +89,6 @@ fi
 ## use time command if installed ##
 which time &> /dev/null && alias "time=command $(which time)"
 
-## direnv ##
-which direnv &> /dev/null && eval "$(direnv hook bash)"
-
 ## fzf config ##
 if which fzf &> /dev/null; then
   export FZF_DEFAULT_OPTS="--filepath-word --reverse --inline-info --tabstop=4 --prompt='❯ '"
