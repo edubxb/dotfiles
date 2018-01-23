@@ -24,6 +24,18 @@ function fpaste {
   cut -d ' ' -f 2-
 }
 
+function fp {
+  local directory_list="$(tr ":" " " <<< ${PROJECTS_PATH})"
+  local projects=$(
+    for path in ${directory_list}; do
+      echo ${path}/* | sed "s|$HOME/||g" | tr ' ' '\n' | sed -E 's|([^ ]+)/([^/]+)|\\e[3m\1\\e[0m \2|'
+    done
+  )
+  target=( $(echo -en "${projects}" |
+           fzf --height 35% --no-hscroll -n 2 --ansi -q "$*") ) || return
+  cd "${HOME}/${target[0]}/${target[1]}"
+}
+
 function fco {
   local tags local_branches remote_branches target
   git rev-parse HEAD &> /dev/null || return

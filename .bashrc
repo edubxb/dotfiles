@@ -96,3 +96,5 @@ if which fzf &> /dev/null; then
   export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
+
+export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
