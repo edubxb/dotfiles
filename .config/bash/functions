@@ -44,14 +44,15 @@ function fco {
   local_branches=$(git branch | sed -E 's/.* (.+)/ \1/') || return
   [[ -n "${remote_branches}" ]] && remote_branches="\n${remote_branches}"
   [[ -n "${tags}" ]] && tags="\n${tags}"
-  target=$((echo -e "${local_branches}${remote_branches}${tags}") |
-            fzf --border --height 35% --no-hscroll --tabstop=1 -d ' ' -n 2.. --ansi \
-                --preview-window right:70% \
-                --preview 'git log --oneline --graph --color=always --date=short \
-                               --pretty="format:%C(auto)%cd %h%d %s" \
-                           $(tr " " "/" <<< {2..}) -- | head -'$LINES \
-                +m -q "$*" | sed -E "s/(.+ )?(.+)/\2/") || return
-  git checkout "${target}"
+  target=$(echo -e "${local_branches}${remote_branches}${tags}" |
+           fzf --border --height 35% --no-hscroll --tabstop=1 -d ' ' -n 2.. --ansi \
+               --preview-window right:70% \
+               --preview 'git log --oneline --graph --color=always --date=short \
+                              --pretty="format:%C(auto)%cd %h%d %s" \
+                          $(tr " " "/" <<< {2..}) -- | head -'$LINES \
+               +m -q "$*") || return
+
+   git checkout $(sed -E "s/(.+ )?(.+)/\2/" <<< "${target}")
 }
 
 function fak {
@@ -105,14 +106,16 @@ function ec2sh {
                 --bind 'ctrl-t:toggle-all' \
                 --preview-window right:60%:wrap \
                 --preview "__awless_show ${profile} {1}" \
-                --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 6,7) ) || return
+                --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 6,7) )
   IFS="${_IFS}"
 
-  [[ ${target[0]} = 'alt-enter' ]] && address_idx=1
-  for instance in "${target[@]:2}"; do
-    tilix -a session-add-down -e "ssh $(cut -f ${address_idx} <<< ${instance})"
-  done
-  ssh $(cut -f ${address_idx} <<< ${target[1]})
+  if [[ -n "${target}" ]]; then
+    [[ ${target[0]} = 'alt-enter' ]] && address_idx=1
+    for instance in "${target[@]:2}"; do
+        tilix -a session-add-down -e "ssh $(cut -f ${address_idx} <<< ${instance})"
+    done
+    ssh $(cut -f ${address_idx} <<< ${target[1]})
+  fi
 }
 
 function __ec2sh_comp {
