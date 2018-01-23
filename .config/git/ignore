@@ -6,8 +6,6 @@
 *.orig
 
 ### ctags ###
-tags
-TAGS
 .tags
 .TAGS
 
