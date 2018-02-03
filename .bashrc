@@ -15,11 +15,14 @@ if [[ -d "${BASH_IT}" ]]; then
   export BATTERY_AC_CHAR=''
   export SCM_GIT_SHOW_REMOTE_INFO='true'
   export POWERLINE_SCM_GIT_CHAR=' '
+  export POWERLINE_PYTHON_VENV_CHAR='py:'
   export POWERLINE_LEFT_SEPARATOR=''
-  export POWERLINE_RIGHT_SEPARATOR=''
+  export POWERLINE_RIGHT_SEPARATOR=''
+  export POWERLINE_LEFT_END=''
+  export POWERLINE_RIGHT_END=''
   export POWERLINE_PROMPT_USER_INFO_MODE='sudo'
-  export POWERLINE_LEFT_PROMPT='cwd scm python_venv'
-  export POWERLINE_RIGHT_PROMPT='clock battery user_info'
+  export POWERLINE_LEFT_PROMPT='cwd scm'
+  export POWERLINE_RIGHT_PROMPT='python_venv clock battery user_info'
 
   source "${BASH_IT}/bash_it.sh"
 fi
