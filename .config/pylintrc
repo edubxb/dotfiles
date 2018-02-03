@@ -1,8 +1,0 @@
-[MASTER]
-init-hook="
-    from pylint_venv import inithook
-    inithook()"
-load-plugins=pylint.extensions.mccabe
-
-[DESIGN]
-max-complexity=5
