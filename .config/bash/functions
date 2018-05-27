@@ -94,23 +94,24 @@ function ec2sh {
   local host
   local instance
   local msg
-  local address_idx=2
+  local address_idx=1
 
   _IFS="${IFS}"
   IFS=$'\n'
   target=( $(awless ls instances -p "${profile}" --silent --format tsv --no-headers \
+                    --columns "id,name,private ip,public ip,state,uptime" \
                     --sort name,uptime --filter state=running |
-            fzf --sync --no-hscroll --tabstop=1 -d $'\t' --multi \
-                --with-nth=1,3,6,7 --nth 1,2 \
-                --expect=enter --expect=alt-enter \
-                --bind 'ctrl-t:toggle-all' \
-                --preview-window right:60%:wrap \
-                --preview "__awless_show ${profile} {1}" \
-                --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 6,7) )
+             fzf --sync --no-hscroll --tabstop=1 -d $'\t' --multi \
+                 --with-nth 1..4 --nth 1,2 \
+                 --expect=enter --expect=alt-enter \
+                 --bind 'ctrl-t:toggle-all' \
+                 --preview-window right:60%:wrap \
+                 --preview "__awless_show ${profile} {1}" \
+                 --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 3,4) )
   IFS="${_IFS}"
 
   if [[ -n "${target}" ]]; then
-    [[ ${target[0]} = 'alt-enter' ]] && address_idx=1
+    [[ ${target[0]} = 'alt-enter' ]] && address_idx=2
     for instance in "${target[@]:2}"; do
         tilix -a session-add-down -e "ssh $(cut -f ${address_idx} <<< ${instance})"
     done
