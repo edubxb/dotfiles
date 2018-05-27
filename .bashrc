@@ -2,7 +2,7 @@
 [[ -z "$PS1" ]] && return
 
 ## Tilix VTE script ##
-[[ -n "${TILIX_ID}" ]] && source /usr/share/tilix/scripts/tilix_int.sh
+[[ -n "${TILIX_ID}" ]] && TILIX_SILENT=1 source /usr/share/tilix/scripts/tilix_int.sh
 
 ## override travis config path ##
 export TRAVIS_CONFIG_PATH="${HOME}/.config/travis"
@@ -22,7 +22,7 @@ if [[ -d "${BASH_IT}" ]]; then
   export POWERLINE_RIGHT_END=''
   export POWERLINE_PROMPT_USER_INFO_MODE='sudo'
   export POWERLINE_LEFT_PROMPT='cwd scm'
-  export POWERLINE_RIGHT_PROMPT='python_venv clock battery user_info'
+  export POWERLINE_RIGHT_PROMPT='python_venv clock user_info'
 
   source "${BASH_IT}/bash_it.sh"
 fi
@@ -40,6 +40,7 @@ shopt -s checkjobs
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s direxpand
+shopt -s extglob
 shopt -s dirspell
 shopt -s globstar
 shopt -s histappend
@@ -54,9 +55,7 @@ HISTTIMEFORMAT='%F %T  '
 
 ## edit & view ##
 export EDITOR="nvim"
-export VISUAL="nvim-qt --nofork"
-# export VISUAL="nvr --remote-wait"
-# export NVIM_LISTEN_ADDRESS="/tmp/neovim.socket"
+export VISUAL="nvim-gtk"
 export PAGER="less"
 export LESS="-F -R -X -x1,5"
 
@@ -71,22 +70,28 @@ if [[ -x /usr/bin/dircolors ]]; then
   test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
+## Bash config path ##
+CONFIG_PATH="${HOME}/.config/bash"
+
 ## host-dependent config ##
-[[ -f "${HOME}/.config/bash/bashrc_$(hostname -s)" ]] && source "${HOME}/.config/bash/bashrc_$(hostname -s)"
+[[ -f "${CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${CONFIG_PATH}/bashrc_$(hostname -s)"
 
 ## aliases & functions ##
-[[ -f "${HOME}/.config/bash/functions" ]] && source "${HOME}/.config/bash/functions"
-[[ -f "${HOME}/.config/bash/aliases" ]] && source "${HOME}/.config/bash/aliases"
+[[ -f "${CONFIG_PATH}/aliases" ]] && source "${CONFIG_PATH}/aliases"
+[[ -f "${CONFIG_PATH}/functions" ]] && source "${CONFIG_PATH}/functions"
 
 ## use time command if installed ##
 which time &> /dev/null && alias "time=command $(which time)"
 
 ## fzf config ##
 if which fzf &> /dev/null; then
-  export FZF_DEFAULT_OPTS="--filepath-word --reverse --inline-info --tabstop=4 --prompt='❯ '"
-  export FZF_DEFAULT_COMMAND="rg --files"
-  export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
-  export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+  export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
+                           --inline-info --tabstop=4 --prompt='❯ ' \
+                           --color hl:208,hl+:208,fg:255,fg+:255,bg+:240,header:255 \
+                           --color info:46,prompt:33,spinner:108,pointer:160,marker:255"
+  export FZF_DEFAULT_COMMAND="fd --type f --exclude .git"
+  export FZF_ALT_C_COMMAND="fd --type d --exclude .git"
+  export FZF_CTRL_T_COMMAND="fd --exclude .git"
 fi
 
 export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
