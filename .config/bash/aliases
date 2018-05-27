@@ -9,6 +9,9 @@ alias nuke='killall -9 '
 ## yank ##
 alias yank='yank-cli'
 
+## colors are wonderful ##
+alias ip='ip --color'
+
 ## Better integration with GUI tools ##
 alias open='xdg-open'
 
@@ -18,9 +21,6 @@ alias rg="rg -S --colors 'path:fg:white' --colors 'path:style:bold' --colors 'ma
 ## tig reflog ##
 alias trl='git reflog --pretty=raw | tig --pretty=raw'
 
-## neovim remote ##
-alias nvim="nvr"
-
 ## typos ##
 alias awsless="awless"
 
@@ -29,3 +29,11 @@ alias pylint="pylint3"
 
 ## Bash-it overrides ##
 alias ll="ls -lh"
+
+## copy & paste ##
+alias ccopy='gpaste-client'
+alias cpaste='gpaste-client get 0'
+
+## sound
+alias mic-loop='pactl load-module module-loopback latency_msec=1'
+alias mic-unloop='pactl unload-module module-loopback'
