@@ -55,7 +55,7 @@ HISTTIMEFORMAT='%F %T  '
 
 ## edit & view ##
 export EDITOR="nvim"
-export VISUAL="nvim-gtk"
+export VISUAL="nvim-gtk --no-fork"
 export PAGER="less"
 export LESS="-F -R -X -x1,5"
 
@@ -83,7 +83,11 @@ CONFIG_PATH="${HOME}/.config/bash"
 ## use time command if installed ##
 which time &> /dev/null && alias "time=command $(which time)"
 
+## ansible ##
+export ANSIBLE_NOCOWS=1
+
 ## fzf config ##
+[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 if which fzf &> /dev/null; then
   export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
                            --inline-info --tabstop=4 --prompt='❯ ' \
