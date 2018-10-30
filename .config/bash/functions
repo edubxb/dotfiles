@@ -81,8 +81,8 @@ function ec2sh {
 
   if [[ -n "$1" ]]; then
     profile="$1"
-  elif [[ -n "${AWS_DEFAULT_PROFILE}" ]]; then
-    profile="${AWS_DEFAULT_PROFILE}"
+  elif [[ -n "${AWS_PROFILE}" ]]; then
+    profile="${AWS_PROFILE}"
   else
     echo 'No AWS credentials found in the environment!'
     return
