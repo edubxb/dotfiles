@@ -56,10 +56,10 @@ function fco {
 }
 
 function fak {
-    local target
-    target=$(__awskeys_list | grep "^ " | tr -d ' ' |
-             fzf --min-height 10 --height 15 -q "$*") || return
-    __awskeys_export "${target}"
+  local target
+  target=$(__awskeys_list | grep "^ " | tr -d ' ' |
+           fzf --min-height 10 --height 15 -q "$*") || return
+  __awskeys_export "${target}"
 }
 
 function __awless_show {
@@ -130,15 +130,15 @@ function ec2sh {
 }
 
 function __ec2sh_comp {
-    local cur prev
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
+  local cur prev
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
 
-    [[ "${COMP_CWORD}" -eq 2 ]] && return 0
+  [[ "${COMP_CWORD}" -eq 2 ]] && return 0
 
-    local profile_list="$(__awskeys_list | grep "    ")"
-    COMPREPLY=( $(compgen -W "${profile_list}" -- ${cur}) )
+  local profile_list="$(__awskeys_list | grep "    ")"
+  COMPREPLY=( $(compgen -W "${profile_list}" -- ${cur}) )
 
-    return 0
+  return 0
 }
 complete -F __ec2sh_comp ec2sh
