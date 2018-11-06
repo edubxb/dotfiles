@@ -118,13 +118,13 @@ function ec2sh {
         tilix -a session-add-down \
               -e "aws --profile ${profile} ssm start-session --target $(cut -f 1 <<< ${instance})"
       done
-      aws --profile "${profile}" ssm start-session --target $(cut -f 1 <<< ${instances[1]})
+      aws --profile "${profile}" ssm start-session --target $(cut -f 1 <<< ${instances[0]})
     else
       [[ ${key_bind} = 'alt-enter' ]] && address_idx=3
       for instance in "${instances[@]:1}"; do
           tilix -a session-add-down -e "ssh $(cut -f ${address_idx} <<< ${instance})"
        done
-      ssh $(cut -f ${address_idx} <<< ${instances[1]})
+      ssh $(cut -f ${address_idx} <<< ${instances[0]})
     fi
   fi
 }
