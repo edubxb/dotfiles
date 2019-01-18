@@ -36,6 +36,13 @@ function fp {
   cd "${HOME}/${target[0]}/${target[1]}"
 }
 
+function fev {
+  compgen -v | sort | fzf --height 11 +s --no-border \
+                          --preview-window right:80%:wrap \
+                          --preview 'printenv {}' \
+                          -q "$*"
+}
+
 function fco {
   local tags local_branches remote_branches target
   git rev-parse HEAD &> /dev/null || return
@@ -55,11 +62,35 @@ function fco {
    git checkout $(sed -E "s/(.+ )?(.+)/\2/" <<< "${target}")
 }
 
+function fas {
+  local files
+
+  git rev-parse HEAD &> /dev/null || return
+  files=$(git -c color.status=always status --short)
+  [[ -n "${files}" ]] || return
+  target=$(fzf --border --height 100% --no-hscroll -n 2.. -m --ansi \
+               --preview-window bottom:75% \
+               --preview 'FILE=$(cut -d" " -f 2 <<< {2..}); git diff --color=always --exit-code "${FILE}" && git diff --color=always --staged "${FILE}"' \
+               --bind 'ctrl-o:execute-silent(xdg-open $(cut -d" " -f 1 <<< {2..}))' \
+               --bind 'ctrl-t:execute-silent(git difftool $(cut -d" " -f 1 <<< {2..}))' \
+               <<< "${files}" | sed -E 's/^ ?. (.+)/\1/') || return
+
+  [[ -n "${target}" ]] && git add ${target}
+}
+
 function fak {
   local target
   target=$(__awskeys_list | grep "^ " | tr -d ' ' |
            fzf --min-height 10 --height 15 -q "$*") || return
   __awskeys_export "${target}"
+}
+
+function fok {
+  local target
+  local okta_file="$OKTA_CONFIG"
+  target=$(sed -nE -r "s/^\[([^DEFAULT].*)\]$/\1/p" "${okta_file}" 2> /dev/null |
+           fzf --min-height 10 --height 15 -q "$*") || return
+  gimme-aws-creds -p "${target}"
 }
 
 function __awless_show {
