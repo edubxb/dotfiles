@@ -1,16 +1,17 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
+## libVTE script ##
+[[ -f /etc/profile.d/vte-2.91.sh ]] && source /etc/profile.d/vte-2.91.sh
+
 ## Tilix VTE script ##
 [[ -n "${TILIX_ID}" ]] && TILIX_SILENT=1 source /usr/share/tilix/scripts/tilix_int.sh
-
-## override travis config path ##
-export TRAVIS_CONFIG_PATH="${HOME}/.config/travis"
 
 ## Bash-it ##
 export BASH_IT="${HOME}/.bash_it"
 
 if [[ -d "${BASH_IT}" ]]; then
+  export PS2="| "
   export BASH_IT_THEME='powerline-multiline'
   export BATTERY_AC_CHAR=''
   export SCM_GIT_SHOW_REMOTE_INFO='true'
@@ -20,9 +21,10 @@ if [[ -d "${BASH_IT}" ]]; then
   export POWERLINE_RIGHT_SEPARATOR=''
   export POWERLINE_LEFT_END=''
   export POWERLINE_RIGHT_END=''
+  export POWERLINE_AWS_PROFILE_CHAR=' '
   export POWERLINE_PROMPT_USER_INFO_MODE='sudo'
   export POWERLINE_LEFT_PROMPT='cwd scm'
-  export POWERLINE_RIGHT_PROMPT='python_venv clock user_info'
+  export POWERLINE_RIGHT_PROMPT='aws_profile python_venv clock battery user_info'
 
   source "${BASH_IT}/bash_it.sh"
 fi
@@ -70,24 +72,24 @@ if [[ -x /usr/bin/dircolors ]]; then
   test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-## Bash config path ##
-CONFIG_PATH="${HOME}/.config/bash"
+## Config paths ##
+CONFIG_PATH="${HOME}/.config"
+BASH_CONFIG_PATH="${CONFIG_PATH}/bash"
 
 ## host-dependent config ##
-[[ -f "${CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${CONFIG_PATH}/bashrc_$(hostname -s)"
+[[ -f "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)"
 
 ## aliases & functions ##
-[[ -f "${CONFIG_PATH}/aliases" ]] && source "${CONFIG_PATH}/aliases"
-[[ -f "${CONFIG_PATH}/functions" ]] && source "${CONFIG_PATH}/functions"
+[[ -f "${BASH_CONFIG_PATH}/aliases" ]] && source "${BASH_CONFIG_PATH}/aliases"
+[[ -f "${BASH_CONFIG_PATH}/functions" ]] && source "${BASH_CONFIG_PATH}/functions"
 
 ## use time command if installed ##
 which time &> /dev/null && alias "time=command $(which time)"
 
-## ansible ##
-export ANSIBLE_NOCOWS=1
+## projects paths ##
+export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
 
 ## fzf config ##
-[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 if which fzf &> /dev/null; then
   export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
                            --inline-info --tabstop=4 --prompt='❯ ' \
@@ -98,4 +100,24 @@ if which fzf &> /dev/null; then
   export FZF_CTRL_T_COMMAND="fd --exclude .git"
 fi
 
-export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
+## ripgrep ##
+export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
+
+## AWS ##
+# export AWS_DEFAULT_REGION="eu-west-1"
+# export AWS_DEFAULT_OUTPUT="text"
+export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
+
+## hub ##
+export GITHUB_PROTOCOL=ssh
+
+## travis ##
+export TRAVIS_CONFIG_PATH="${HOME}/.config/travis"
+
+## ansible ##
+export ANSIBLE_NOCOWS=1
+
+## go jira ##
+eval "$(jira --completion-script-bash)"
+export JIRA_EDITOR="nvim-gtk --no-fork"
