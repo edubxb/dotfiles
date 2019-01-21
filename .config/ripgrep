@@ -1,0 +1,6 @@
+--smart-case
+--colors=match:fg:yellow
+--colors=line:fg:white
+--colors=line:style:bold
+--colors=path:fg:white
+--colors=path:style:bold
