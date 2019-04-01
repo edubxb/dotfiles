@@ -6,6 +6,9 @@ alias rm='rm -i'
 ## cat with wings ##
 alias cat='bat -p'
 
+## fd ##
+alias fd="fdfind"
+
 ## nuke ##
 alias nuke='killall -9 '
 
@@ -18,9 +21,6 @@ alias ip='ip --color'
 ## Better integration with GUI tools ##
 alias open='xdg-open'
 
-## tig reflog ##
-alias trl='git reflog --pretty=raw | tig --pretty=raw'
-
 ## typos ##
 alias awsless="awless"
 
@@ -29,7 +29,7 @@ alias pylint="pylint3"
 
 ## ls ##
 alias ll="ls -lh"
-alias lla="ls -a"
+alias lla="ls -lha"
 
 ## copy & paste ##
 alias ccopy='gpaste-client'
