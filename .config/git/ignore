@@ -19,6 +19,9 @@ GTAGS
 ### cscope ###
 cscope.files
 
+# mypy
+.mypy_cache
+
 # pyenv
 .python-version
 
