@@ -103,6 +103,11 @@ fi
 ## ripgrep ##
 export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
 
+## gitin ##
+export GITIN_HIDEHELP=true
+export GITIN_LINESIZE=20
+export GITIN_SEARCHMODE=fuzzy
+
 ## AWS ##
 # export AWS_DEFAULT_REGION="eu-west-1"
 # export AWS_DEFAULT_OUTPUT="text"

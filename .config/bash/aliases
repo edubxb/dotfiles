@@ -3,6 +3,9 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+## cat with wings ##
+alias cat='bat -p'
+
 ## nuke ##
 alias nuke='killall -9 '
 
@@ -15,9 +18,6 @@ alias ip='ip --color'
 ## Better integration with GUI tools ##
 alias open='xdg-open'
 
-## rg default args ##
-alias rg="rg -S --colors 'path:fg:white' --colors 'path:style:bold' --colors 'match:fg:yellow' --colors 'line:fg:white' --colors 'line:style:bold'"
-
 ## tig reflog ##
 alias trl='git reflog --pretty=raw | tig --pretty=raw'
 
@@ -27,13 +27,14 @@ alias awsless="awless"
 ## python ##
 alias pylint="pylint3"
 
-## Bash-it overrides ##
+## ls ##
 alias ll="ls -lh"
+alias lla="ls -a"
 
 ## copy & paste ##
 alias ccopy='gpaste-client'
 alias cpaste='gpaste-client get 0'
 
-## sound
+## sound ##
 alias mic-loop='pactl load-module module-loopback latency_msec=1'
 alias mic-unloop='pactl unload-module module-loopback'
