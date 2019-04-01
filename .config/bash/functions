@@ -88,7 +88,7 @@ function fak {
 function fok {
   local target
   local okta_file="$OKTA_CONFIG"
-  target=$(sed -nE -r "s/^\[([^DEFAULT].*)\]$/\1/p" "${okta_file}" 2> /dev/null |
+  target=$(sed -nE "s/^\[([^DEFAULT].*)\]$/\1/p" "${okta_file}" 2> /dev/null |
            fzf --min-height 10 --height 15 -q "$*") || return
   gimme-aws-creds -p "${target}"
 }
