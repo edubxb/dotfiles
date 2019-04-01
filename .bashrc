@@ -118,7 +118,7 @@ export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 export GITHUB_PROTOCOL=ssh
 
 ## travis ##
-export TRAVIS_CONFIG_PATH="${HOME}/.config/travis"
+export TRAVIS_CONFIG_PATH="${CONFIG_PATH}/travis"
 
 ## ansible ##
 export ANSIBLE_NOCOWS=1
