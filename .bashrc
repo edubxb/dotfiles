@@ -123,6 +123,9 @@ export TRAVIS_CONFIG_PATH="${CONFIG_PATH}/travis"
 ## ansible ##
 export ANSIBLE_NOCOWS=1
 
+## psql ##
+export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
+
 ## go jira ##
 eval "$(jira --completion-script-bash)"
 export JIRA_EDITOR="nvim-gtk --no-fork"
