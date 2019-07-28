@@ -128,6 +128,7 @@ export TRAVIS_CONFIG_PATH="${CONFIG_PATH}/travis"
 export ANSIBLE_NOCOWS=1
 
 ## psql ##
+export PSQLRC="${CONFIG_PATH}/psql/psqlrc"
 export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
 
 ## go jira ##
