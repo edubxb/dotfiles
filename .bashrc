@@ -42,8 +42,8 @@ shopt -s checkjobs
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s direxpand
-shopt -s extglob
 shopt -s dirspell
+shopt -s extglob
 shopt -s globstar
 shopt -s histappend
 shopt -s hostcomplete
@@ -136,4 +136,4 @@ export TASKRC="${CONFIG_PATH}/taskrc"
 
 ## go jira ##
 eval "$(jira --completion-script-bash)"
-export JIRA_EDITOR="nvim-gtk --no-fork"
+export JIRA_EDITOR="${VISUAL}"
