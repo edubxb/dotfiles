@@ -62,20 +62,20 @@ export VISUAL="nvim-gtk --no-fork"
 export PAGER="less"
 export LESS="-F -R -X -x1,5"
 
+## Config paths ##
+CONFIG_PATH="${HOME}/.config"
+BASH_CONFIG_PATH="${CONFIG_PATH}/bash"
+
 ## colors for less, man, etc. ##
-[[ -f "${HOME}/.LESS_TERMCAP" ]] && source "${HOME}/.LESS_TERMCAP"
+[[ -f "${CONFIG_PATH}/less/TERMCAP" ]] && source "${CONFIG_PATH}/less/TERMCAP"
 
 ## make less more friendly for non-text input files ##
 [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL="/bin/sh" lesspipe)"
 
 ## enable ls color support ##
 if [[ -x /usr/bin/dircolors ]]; then
-  test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
+  test -r "${CONFIG_PATH}/dircolors" && eval "$(dircolors -b ${CONFIG_PATH}/dircolors)" || eval "$(dircolors -b)"
 fi
-
-## Config paths ##
-CONFIG_PATH="${HOME}/.config"
-BASH_CONFIG_PATH="${CONFIG_PATH}/bash"
 
 ## host-dependent config ##
 [[ -f "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)"
