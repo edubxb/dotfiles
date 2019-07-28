@@ -52,18 +52,19 @@
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
 	blobs = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | grep blob | cut -d ' ' -f3- | sort -nr | numfmt --to=iec-i --suffix=B --padding=7 --round=nearest"
-	shame = blame -w -M
+	bup = "!f() { local ref=\"master\"; [ -n \"$1\" ] && ref=\"$1\"; { git stash push --include-untracked; git checkout ${ref}; git pull --rebase; } && { git checkout -; git rebase ${ref}; git stash pop --index; } }; f"
 	cdiff = difftool --tool cdiff
 	cis = ci-status -v
-	diffu = diff @{u}
 	diffm = diff master
+	diffu = diff @{u}
 	fixup = commit --fixup=HEAD
 	icdiff = difftool --tool icdiff
-	bup = "!f() { local ref=\"master\"; [ -n \"$1\" ] && ref=\"$1\"; { git stash push --include-untracked; git checkout ${ref}; git pull --rebase; } && { git checkout -; git rebase ${ref}; git stash pop --index; } }; f"
-	rebaseme = "!f() { local ref=\"master\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
-	stash-all = stash push --include-untracked
-	squash = commit --squash=HEAD
+	ls-ignored = ls-files --others --ignored --exclude-standard
 	puf = push --force-with-lease
+	rebaseme = "!f() { local ref=\"master\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
+	shame = blame -w -M
+	squash = commit --squash=HEAD
+	stash-all = stash push --include-untracked
 	trl = "!git reflog --all --pretty=raw | tig --pretty=raw"
 	ups = "!f() { local remote=\"origin\"; [ -n \"$1\" ] && remote=\"$1\"; git push -u \"${remote}\" $(git rev-parse --abbrev-ref HEAD); }; f"
 	wip = "!f() { git commit -m \"WIP: $1\"; }; f"
