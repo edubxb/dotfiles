@@ -131,6 +131,9 @@ export ANSIBLE_NOCOWS=1
 export PSQLRC="${CONFIG_PATH}/psql/psqlrc"
 export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
 
+## taskwarrior ##
+export TASKRC="${CONFIG_PATH}/taskrc"
+
 ## go jira ##
 eval "$(jira --completion-script-bash)"
 export JIRA_EDITOR="nvim-gtk --no-fork"
