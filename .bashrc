@@ -51,8 +51,9 @@ shopt -s lithist
 
 ## Bash history ##
 HISTCONTROL='ignoreboth:erasedups'
-HISTSIZE=1000
 HISTFILESIZE=3000
+HISTIGNORE='&:[bf]g:cd:clear:exit:fd:help:history*:l[sl1]*:man*:pwd:task*'
+HISTSIZE=1000
 HISTTIMEFORMAT='%F %T  '
 
 ## edit & view ##
