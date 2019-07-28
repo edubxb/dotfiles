@@ -31,6 +31,9 @@ alias pylint="pylint3"
 alias ll="ls -lh"
 alias lla="ls -lha"
 
+## tree ##
+alias tree="tree --dirsfirst -a -I .git"
+
 ## copy & paste ##
 alias ccopy='gpaste-client'
 alias cpaste='gpaste-client get 0'
