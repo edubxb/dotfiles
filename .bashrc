@@ -133,6 +133,7 @@ export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
 
 ## taskwarrior ##
 export TASKRC="${CONFIG_PATH}/taskrc"
+export VIT_DIR="${CONFIG_PATH}/vit"
 
 ## go jira ##
 eval "$(jira --completion-script-bash)"
