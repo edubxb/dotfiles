@@ -113,8 +113,8 @@ export GITIN_LINESIZE=20
 export GITIN_SEARCHMODE=fuzzy
 
 ## AWS ##
-# export AWS_DEFAULT_REGION="eu-west-1"
-# export AWS_DEFAULT_OUTPUT="text"
+export AWS_DEFAULT_REGION="eu-west-1"
+export AWS_DEFAULT_OUTPUT="text"
 export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 
