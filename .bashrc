@@ -138,3 +138,6 @@ export VIT_DIR="${CONFIG_PATH}/vit"
 ## go jira ##
 eval "$(jira --completion-script-bash)"
 export JIRA_EDITOR="${VISUAL}"
+
+## navi ##
+export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
