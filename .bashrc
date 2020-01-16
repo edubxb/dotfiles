@@ -141,3 +141,6 @@ export JIRA_EDITOR="${VISUAL}"
 
 ## navi ##
 export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
+
+## k8s ##
+export KUBECONFIG="${CONFIG_PATH}/kube/config"
