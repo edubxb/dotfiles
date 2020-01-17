@@ -24,9 +24,6 @@ alias open='xdg-open'
 ## typos ##
 alias awsless="awless"
 
-## python ##
-alias pylint="pylint3"
-
 ## ls ##
 alias ll="ls -lh"
 alias lla="ls -lha"
