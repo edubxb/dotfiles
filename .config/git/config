@@ -21,6 +21,7 @@
 	;compactionHeuristic = true
 	indentHeuristic = true
 	tool = vimdiff
+	noprefix = true
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
@@ -37,7 +38,7 @@
 [mergetool "vimdiff"]
 	cmd = nvim-gtk --no-fork -- -d \"${BASE}\" \"${LOCAL}\" \"${REMOTE}\" \"${MERGED}\"
 [mergetool "fugitive"]
-	cmd = nvim-gtk --no-fork -- -c Gvdiff \"${MERGED}\"
+	cmd = nvim-gtk --no-fork -- -c Gvdiffsplit! \"$MERGED\"
 [log]
 	date = format:%F %R
 [pretty]
