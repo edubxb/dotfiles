@@ -1,0 +1,90 @@
+add_newline = false
+
+prompt_order = [
+    "username",
+    "hostname",
+    "directory",
+    "git_branch",
+    "git_state",
+    "git_status",
+    "package",
+    "dotnet",
+    "golang",
+    "java",
+    "nodejs",
+    "python",
+    "ruby",
+    "rust",
+    "nix_shell",
+    "conda",
+    "memory_usage",
+    "kubernetes",
+    "aws",
+    "env_var",
+    "cmd_duration",
+    "line_break",
+    "jobs",
+    "battery",
+    "time",
+    "character",
+]
+
+[character]
+style_success = "white"
+
+[cmd_duration]
+min_time = 5
+style = "bold white"
+
+[time]
+disabled = true
+style = "bold white"
+
+[directory]
+style = "bold white"
+
+[battery]
+full_symbol = "🔋"
+
+[[battery.display]]
+threshold = 25
+style = "bold red"
+
+[kubernetes]
+disabled = false
+symbol = "⚓ "
+
+[python]
+style = "bold green"
+
+[aws]
+style = "bold #ff9900"
+
+[git_branch]
+preffix = ""
+symbol = " "
+style = "bold #9E9E9E"
+
+[git_status]
+show_sync_count = true
+style = "dimmed white"
+conflicted = "="
+ahead = "↑"
+behind = " ↓"
+diverged = ""
+untracked = " ?"
+untracked_count.enabled = true
+stashed = "@"
+stashed_count.enabled = true
+modified = " !"
+modified_count.style = "cyan"
+modified_count.enabled = true
+staged.value = " +"
+staged_count.enabled = true
+staged_count.style = "green"
+renamed = " ~"
+renamed_count.style = "blue"
+renamed_count.enabled = true
+deleted = " -"
+deleted_count.enabled = true
+deleted_count.style = "red"
