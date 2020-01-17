@@ -7,25 +7,14 @@
 ## Tilix VTE script ##
 [[ -n "${TILIX_ID}" ]] && TILIX_SILENT=1 source /usr/share/tilix/scripts/tilix_int.sh
 
+## Starship prompt ##
+eval "$(starship init bash)"
+
 ## Bash-it ##
 export BASH_IT="${HOME}/.bash_it"
 
 if [[ -d "${BASH_IT}" ]]; then
   export PS2="| "
-  export BASH_IT_THEME='powerline-multiline'
-  export BATTERY_AC_CHAR=''
-  export SCM_GIT_SHOW_REMOTE_INFO='true'
-  export POWERLINE_SCM_GIT_CHAR=' '
-  export POWERLINE_PYTHON_VENV_CHAR='py:'
-  export POWERLINE_LEFT_SEPARATOR=''
-  export POWERLINE_RIGHT_SEPARATOR=''
-  export POWERLINE_LEFT_END=''
-  export POWERLINE_RIGHT_END=''
-  export POWERLINE_AWS_PROFILE_CHAR=' '
-  export POWERLINE_PROMPT_USER_INFO_MODE='sudo'
-  export POWERLINE_LEFT_PROMPT='cwd scm'
-  export POWERLINE_RIGHT_PROMPT='aws_profile python_venv clock battery user_info'
-
   source "${BASH_IT}/bash_it.sh"
 fi
 
