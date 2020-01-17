@@ -37,10 +37,12 @@ function fp {
 }
 
 function fev {
-  compgen -v | sort | fzf --height 11 +s --no-border \
-                          --preview-window right:80%:wrap \
-                          --preview 'printenv {}' \
-                          -q "$*"
+  target=$(compgen -v | sort | \
+           fzf --height 11 +s --no-border \
+               --preview-window right:80%:wrap \
+               --preview 'printenv {}' \
+               --bind 'ctrl-x:execute-silent(unset {1})')
+  xclip -selection clipboard <<< "export ${target}=${!target}"
 }
 
 function fco {
