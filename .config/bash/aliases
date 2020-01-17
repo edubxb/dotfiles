@@ -4,7 +4,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 ## cat with wings ##
-alias cat='bat -p'
+alias cat='batcat -p'
 
 ## fd ##
 alias fd="fdfind"
