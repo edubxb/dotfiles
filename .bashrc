@@ -85,9 +85,9 @@ if which fzf &> /dev/null; then
                            --inline-info --tabstop=4 --prompt='❯ ' \
                            --color hl:208,hl+:208,fg:255,fg+:255,bg+:240,header:255 \
                            --color info:46,prompt:33,spinner:108,pointer:160,marker:255"
-  export FZF_DEFAULT_COMMAND="fd --type f --exclude .git"
-  export FZF_ALT_C_COMMAND="fd --type d --exclude .git"
-  export FZF_CTRL_T_COMMAND="fd --exclude .git"
+  export FZF_DEFAULT_COMMAND="fdfind --type f --exclude .git"
+  export FZF_ALT_C_COMMAND="fdfind --type d --exclude .git"
+  export FZF_CTRL_T_COMMAND="fdfind --exclude .git"
 fi
 
 ## ripgrep ##
