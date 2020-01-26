@@ -74,13 +74,13 @@ fi
 [[ -f "${BASH_CONFIG_PATH}/functions" ]] && source "${BASH_CONFIG_PATH}/functions"
 
 ## use time command if installed ##
-which time &> /dev/null && alias "time=command $(which time)"
+command -v time &> /dev/null && alias "time=command $(command -v time)"
 
 ## projects paths ##
 export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
 
 ## fzf config ##
-if which fzf &> /dev/null; then
+if command -v fzf &> /dev/null; then
   export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
                            --inline-info --tabstop=4 --prompt='❯ ' \
                            --color hl:208,hl+:208,fg:255,fg+:255,bg+:240,header:255 \
