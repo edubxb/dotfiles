@@ -45,7 +45,7 @@ function fev {
   xclip -selection clipboard <<< "export ${target}=${!target}"
 }
 
-function fco {
+function fsb {
   local tags local_branches remote_branches target
   git rev-parse HEAD &> /dev/null || return
   tags=$(git tag --sort=-v:refname | sed 's/^/ /')
