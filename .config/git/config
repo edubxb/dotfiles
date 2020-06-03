@@ -4,6 +4,7 @@
 	templatedir = ~/.config/git/template/
 [core]
 	excludesfile = ~/.config/git/ignore
+	pager = delta --dark
 [user]
 	useconfigonly = true
 [github]
@@ -43,12 +44,6 @@
 	date = format:%F %R
 [pretty]
 	simpleline = %C(bold)%m %h%Creset %C(cyan)%ad %Creset%s
-[interactive]
-	diffFilter = /usr/share/doc/git/contrib/diff-highlight/diff-highlight
-[pager]
-	diff = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
-	log = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
-	show = /usr/share/doc/git/contrib/diff-highlight/diff-highlight | ${PAGER}
 [alias]
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
