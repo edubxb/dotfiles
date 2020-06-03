@@ -5,6 +5,7 @@ prompt_order = [
     "hostname",
     "directory",
     "git_branch",
+    "git_commit",
     "git_state",
     "git_status",
     "package",
@@ -41,6 +42,7 @@ disabled = true
 style = "bold white"
 
 [directory]
+truncation_length = 10
 style = "bold white"
 
 [battery]
@@ -63,6 +65,10 @@ style = "bold #ff9900"
 [git_branch]
 preffix = ""
 symbol = " "
+style = "bold #9E9E9E"
+
+[git_commit]
+only_detached = true
 style = "bold #9E9E9E"
 
 [git_status]
@@ -88,3 +94,6 @@ renamed_count.enabled = true
 deleted = " -"
 deleted_count.enabled = true
 deleted_count.style = "red"
+
+[jobs]
+disabled = true
