@@ -30,7 +30,7 @@
 [difftool "cdiff"]
 	cmd = cdiff --side-by-side --width=0 --color=auto \"${LOCAL}\" \"${REMOTE}\"
 [difftool "icdiff"]
-	cmd = icdiff --line-numbers --highlight --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
+	cmd = icdiff -N -H --is-git-diff --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
 [merge]
 	tool = fugitive
 [mergetool]
