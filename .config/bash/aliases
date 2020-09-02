@@ -4,7 +4,13 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 ## cat with wings ##
-alias cat='batcat -p'
+if which batcat &> /dev/null; then
+    # Debian package
+    alias cat='batcat -p'
+else
+    # Upstream package
+    alias cat='bat -p'
+fi
 
 ## fd ##
 alias fd="fdfind"
