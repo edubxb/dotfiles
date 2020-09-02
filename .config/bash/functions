@@ -24,6 +24,11 @@ function fpaste {
   cut -d ' ' -f 2-
 }
 
+function __fp_readme_preview {
+  mdcat ${1}{/docs,}/README.{md,rst,txt} 2> /dev/null || return
+}
+typeset -fx __fp_readme_preview
+
 function fp {
   local directory_list="$(tr ":" " " <<< ${PROJECTS_PATH})"
   local projects=$(
@@ -32,7 +37,8 @@ function fp {
     done
   )
   target=( $(echo -en "${projects}" |
-           fzf --height 35% --no-hscroll -n 2 --ansi -1 -q "$*") ) || return
+             fzf --height 50% --no-hscroll -n 2 --ansi -1 -q "$*" \
+                 --preview '__fp_readme_preview ${HOME}/{1}/{2}') ) || return
   cd "${HOME}/${target[0]}/${target[1]}"
 }
 
