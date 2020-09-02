@@ -31,8 +31,8 @@ alias open='xdg-open'
 alias awsless="awless"
 
 ## ls ##
-alias ll="ls -lh"
-alias lla="ls -lha"
+alias ll="ls -lh --hyperlink=auto"
+alias lla="ls -lha --hyperlink=auto"
 
 ## tree ##
 alias tree="tree --dirsfirst -a -I .git"
