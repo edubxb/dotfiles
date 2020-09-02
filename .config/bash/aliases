@@ -50,3 +50,6 @@ alias mic-unloop='pactl unload-module module-loopback'
 ## k8s ##
 alias kube="kubectl"
 alias knctx="kubectl config unset current-context"
+
+## flatpak apps ##
+alias idea="flatpak run com.jetbrains.IntelliJ-IDEA-Ultimate"
