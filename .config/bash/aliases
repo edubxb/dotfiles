@@ -42,5 +42,7 @@ alias ccopy='gpaste-client'
 alias cpaste='gpaste-client get 0'
 
 ## sound ##
+alias mic-echo='pactl load-module module-echo-cancel source_name=noechosource sink_name=noechosink'
+alias mic-noecho='pactl unload-module module-echo-cancel'
 alias mic-loop='pactl load-module module-loopback latency_msec=1'
 alias mic-unloop='pactl unload-module module-loopback'
