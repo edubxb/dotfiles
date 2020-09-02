@@ -153,7 +153,7 @@ function ec2sh {
                     --sort name,uptime --filter state=running |
              fzf --sync --no-hscroll --tabstop=1 -d $'\t' --multi \
                  --with-nth 1..4 --nth 1,2 \
-                 --expect=enter --expect=alt-enter --expect=ctrl-space\
+                 --expect=enter --expect=space --expect=ctrl-space\
                  --bind 'ctrl-t:toggle-all' \
                  --preview-window right:60%:wrap \
                  --preview "__awless_show ${profile} {1}" \
@@ -163,14 +163,14 @@ function ec2sh {
   if [[ -n "${target}" ]]; then
     key_bind="${target[0]}"
     instances=( "${target[@]:1}" )
-    if [[ ${key_bind} = 'ctrl-space' ]]; then
+    if [[ ${key_bind} = 'enter' ]]; then
       for instance in "${instances[@]:1}"; do
         tilix -a session-add-down \
               -e "aws --profile ${profile} ssm start-session --target $(cut -f 1 <<< ${instance})"
       done
       aws --profile "${profile}" ssm start-session --target $(cut -f 1 <<< ${instances[0]})
     else
-      [[ ${key_bind} = 'alt-enter' ]] && address_idx=3
+      [[ ${key_bind} = 'ctrl-space' ]] && address_idx=3
       for instance in "${instances[@]:1}"; do
           tilix -a session-add-down -e "ssh $(cut -f ${address_idx} <<< ${instance})"
        done
