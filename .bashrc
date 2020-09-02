@@ -1,9 +1,6 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
-## libVTE script ##
-[[ -f /etc/profile.d/vte-2.91.sh ]] && source /etc/profile.d/vte-2.91.sh
-
 ## Tilix VTE script ##
 [[ -n "${TILIX_ID}" ]] && TILIX_SILENT=1 source /usr/share/tilix/scripts/tilix_int.sh
 
