@@ -112,6 +112,9 @@ source "${HOME}/.asdf/completions/asdf.bash"
 # AWS cli v2 completion
 complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 
+## poetry ##
+source <(poetry completions bash)
+
 ## hub ##
 export HUB_PROTOCOL=ssh
 
