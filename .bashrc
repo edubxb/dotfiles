@@ -134,3 +134,4 @@ export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
 
 ## k8s ##
 export KUBECONFIG="${CONFIG_PATH}/kube/config"
+source <(kubectl completion bash)
