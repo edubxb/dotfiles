@@ -9,6 +9,10 @@
 	useconfigonly = true
 [github]
 	user = edubxb
+[delta]
+	features = side-by-side line-numbers
+[interactive]
+	diffFilter = delta --color-only
 [pull]
 	rebase = true
 [push]
