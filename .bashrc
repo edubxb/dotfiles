@@ -8,9 +8,9 @@
 eval "$(starship init bash)"
 
 ## Bash-it ##
-export BASH_IT="${HOME}/.bash_it"
-
+BASH_IT="${HOME}/.bash_it"
 if [[ -d "${BASH_IT}" ]]; then
+  export BASH_IT
   export PS2="| "
   source "${BASH_IT}/bash_it.sh"
 fi
