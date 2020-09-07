@@ -109,6 +109,9 @@ export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 source "${HOME}/.asdf/asdf.sh"
 source "${HOME}/.asdf/completions/asdf.bash"
 
+# AWS cli v2 completion
+complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
+
 ## hub ##
 export HUB_PROTOCOL=ssh
 
