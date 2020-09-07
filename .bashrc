@@ -122,6 +122,9 @@ export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
 export TASKRC="${CONFIG_PATH}/taskrc"
 export VIT_DIR="${CONFIG_PATH}/vit"
 
+## timewarrior ##
+export TIMEWARRIORDB="${CONFIG_PATH}/timewarrior"
+
 ## go jira ##
 eval "$(jira --completion-script-bash)"
 export JIRA_EDITOR="${VISUAL}"
