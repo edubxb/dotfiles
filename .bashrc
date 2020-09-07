@@ -115,6 +115,9 @@ complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 ## hub ##
 export HUB_PROTOCOL=ssh
 
+## GitHub cli ##
+eval "$(gh completion -s bash)"
+
 ## travis ##
 export TRAVIS_CONFIG_PATH="${CONFIG_PATH}/travis"
 
