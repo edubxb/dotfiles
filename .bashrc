@@ -106,7 +106,7 @@ export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 
 ## hub ##
-export GITHUB_PROTOCOL=ssh
+export HUB_PROTOCOL=ssh
 
 ## travis ##
 export TRAVIS_CONFIG_PATH="${CONFIG_PATH}/travis"
