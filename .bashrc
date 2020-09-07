@@ -105,6 +105,10 @@ export AWS_DEFAULT_OUTPUT="text"
 export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 
+## adsf-vm ##
+source "${HOME}/.asdf/asdf.sh"
+source "${HOME}/.asdf/completions/asdf.bash"
+
 ## hub ##
 export HUB_PROTOCOL=ssh
 
