@@ -21,6 +21,8 @@
 	verbose = true
 [rebase]
 	autoSquash = true
+[rerere]
+	enabled = true
 [diff]
 	algorithm = minimal
 	;compactionHeuristic = true
