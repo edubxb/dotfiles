@@ -4,9 +4,6 @@
 ## Tilix VTE script ##
 [[ -n "${TILIX_ID}" ]] && TILIX_SILENT=1 source /usr/share/tilix/scripts/tilix_int.sh
 
-## Starship prompt ##
-eval "$(starship init bash)"
-
 ## Bash-it ##
 BASH_IT="${HOME}/.bash_it"
 if [[ -d "${BASH_IT}" ]]; then
@@ -14,6 +11,9 @@ if [[ -d "${BASH_IT}" ]]; then
   export PS2="| "
   source "${BASH_IT}/bash_it.sh"
 fi
+
+## Starship prompt ##
+eval "$(starship init bash)"
 
 ## disable flow control key binding ##
 stty -ixon
