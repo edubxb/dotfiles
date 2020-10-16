@@ -25,7 +25,6 @@
 	enabled = true
 [diff]
 	algorithm = minimal
-	;compactionHeuristic = true
 	indentHeuristic = true
 	tool = vimdiff
 	noprefix = true
