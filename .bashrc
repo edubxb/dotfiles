@@ -115,10 +115,7 @@ complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 ## poetry ##
 source <(poetry completions bash)
 
-## hub ##
-export HUB_PROTOCOL=ssh
-
-## GitHub cli ##
+# GitHub cli ##
 eval "$(gh completion -s bash)"
 
 ## travis ##
