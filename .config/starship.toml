@@ -1,99 +1,122 @@
-add_newline = false
-
-prompt_order = [
-    "username",
-    "hostname",
-    "directory",
-    "git_branch",
-    "git_commit",
-    "git_state",
-    "git_status",
-    "package",
-    "dotnet",
-    "golang",
-    "java",
-    "nodejs",
-    "python",
-    "ruby",
-    "rust",
-    "nix_shell",
-    "conda",
-    "memory_usage",
-    "kubernetes",
-    "aws",
-    "env_var",
-    "cmd_duration",
-    "line_break",
-    "jobs",
-    "battery",
-    "time",
-    "character",
-]
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$package\
+$cmake\
+$dotnet\
+$golang\
+$helm\
+$java\
+$nim\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$terraform\
+$zig\
+$nix_shell\
+$memory_usage\
+$docker_context\
+$kubernetes\
+$aws\
+$gcloud\
+$env_var\
+$custom\
+$line_break\
+$jobs\
+$battery\
+$time\
+$cmd_duration\
+$status\
+$character"""
 
 [character]
-style_success = "white"
-
-[cmd_duration]
-min_time = 5
-style = "bold white"
-
-[time]
-disabled = true
-style = "bold white"
+success_symbol = "[](bold white)"
+error_symbol = "[](bold red)"
+vicmd_symbol = "[](bold white)"
 
 [directory]
-truncation_length = 10
 style = "bold white"
+format = "[$path]($style) "
+truncation_length = 10
+
+[status]
+style = "red"
+symbol = ""
+format = "[ $status]($style) "
+disabled = false
+
+[cmd_duration]
+style = "white"
+format = " [$duration]($style)\n"
+min_time = 30_000
+
+[time]
+style = " white"
+format = " [$time]($style)\n"
+disabled = false
 
 [battery]
-full_symbol = "🔋"
+format = "[$symbol $percentage]($style)\n"
 
 [[battery.display]]
-threshold = 25
 style = "bold red"
+threshold = 10
 
-[kubernetes]
-disabled = false
-symbol = "⚓ "
+[[battery.display]]
+style = "bold orange"
+threshold = 20
 
-[python]
-style = "bold green"
-
-[aws]
-style = "bold #ff9900"
-
-[git_branch]
-preffix = ""
-symbol = " "
-style = "bold #9E9E9E"
-
-[git_commit]
-only_detached = true
-style = "bold #9E9E9E"
-
-[git_status]
-show_sync_count = true
-style = "dimmed white"
-conflicted = "="
-ahead = "↑"
-behind = " ↓"
-diverged = ""
-untracked = " ?"
-untracked_count.enabled = true
-stashed = "@"
-stashed_count.enabled = true
-modified = " !"
-modified_count.style = "cyan"
-modified_count.enabled = true
-staged.value = " +"
-staged_count.enabled = true
-staged_count.style = "green"
-renamed = " ~"
-renamed_count.style = "blue"
-renamed_count.enabled = true
-deleted = " -"
-deleted_count.enabled = true
-deleted_count.style = "red"
+[[battery.display]]
+style = "bold yellow"
+threshold = 30
 
 [jobs]
 disabled = true
+
+[git_branch]
+style = "bold #9E9E9E"
+symbol = " "
+format = "[$symbol$branch]($style) "
+
+[git_commit]
+style = "bold #9E9E9E"
+only_detached = true
+
+[git_state]
+style = "bold #9E9E9E"
+
+[git_status]
+style = "dimmed white"
+format = "(($ahead_behind )($conflicted )($stashed )($deleted )($renamed )($modified )($staged )($untracked))($style)"
+ahead = "↑${count}"
+behind = "↓${count}"
+staged = "+${count}"
+deleted = "-${count}"
+modified = "~${count}"
+untracked = "?:${count}"
+renamed = "^${count}"
+diverged = "↑${ahead_count} ↓${behind_count}"
+
+[kubernetes]
+format = "[$symbol$context \\($namespace\\)](bold cyan) "
+disabled = false
+
+[aws]
+style = "bold #ff9900"
+symbol = "  "
+format = "[$symbol($profile )(\\($region\\) )]($style) "
+
+[package]
+symbol = " "
+format = "[$symbol$version]($style) "
+
+[python]
+style = "bold green"
+symbol = " "
