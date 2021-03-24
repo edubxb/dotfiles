@@ -87,22 +87,25 @@ format = "[$symbol$branch]($style) "
 
 [git_commit]
 style = "bold #9E9E9E"
+tag_symbol = " "
 only_detached = true
+tag_disabled = false
 
 [git_state]
 style = "bold #9E9E9E"
 
 [git_status]
-style = "dimmed white"
-format = "(($ahead_behind )($conflicted )($stashed )($deleted )($renamed )($modified )($staged )($untracked))($style)"
-ahead = "↑${count}"
-behind = "↓${count}"
-staged = "+${count}"
-deleted = "-${count}"
-modified = "~${count}"
-untracked = "?:${count}"
-renamed = "^${count}"
-diverged = "↑${ahead_count} ↓${behind_count}"
+style = "#9E9E9E"
+format = "([($ahead_behind )($conflicted )($staged )($deleted )($renamed )($modified )($stashed )($untracked )]($style))"
+conflicted = ""
+ahead = "${count}"
+behind = "${count}"
+staged = "${count}"
+deleted = "${count}"
+modified = "${count}"
+renamed = "${count}"
+untracked = "${count}"
+diverged = "${ahead_count} ${behind_count}"
 
 [kubernetes]
 symbol = " "
