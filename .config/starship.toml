@@ -49,7 +49,7 @@ truncation_length = 10
 [status]
 style = "red"
 symbol = ""
-format = "[ $status]($style) "
+format = "[$status]($style) "
 disabled = false
 
 [cmd_duration]
@@ -105,6 +105,7 @@ renamed = "^${count}"
 diverged = "↑${ahead_count} ↓${behind_count}"
 
 [kubernetes]
+symbol = " "
 format = "[$symbol$context \\($namespace\\)](bold cyan) "
 disabled = false
 
@@ -120,3 +121,21 @@ format = "[$symbol$version]($style) "
 [python]
 style = "bold green"
 symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
+
+[rust]
+symbol = " "
+format = "$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+[java]
+style = "bold purple"
+symbol = " "
+format = "[${symbol}(${version} )]($style)"
+
+[kotlin]
+symbol = "🅺 "
+format = "[$symbol($version )]($style)"
