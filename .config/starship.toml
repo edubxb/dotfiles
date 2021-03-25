@@ -106,6 +106,7 @@ modified = "${count}"
 renamed = "${count}"
 untracked = "${count}"
 diverged = "${ahead_count} ${behind_count}"
+stashed = "${count}"
 
 [kubernetes]
 symbol = " "
