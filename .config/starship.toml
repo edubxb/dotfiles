@@ -128,7 +128,7 @@ format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
 
 [rust]
 symbol = " "
-format = "$symbol($version )]($style)"
+format = "[$symbol($version )]($style)"
 
 [golang]
 symbol = " "
