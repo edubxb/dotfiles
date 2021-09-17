@@ -12,6 +12,9 @@ else
   alias cat='bat -p'
 fi
 
+## rg ##
+alias rgh='rg --hidden'
+
 ## fd ##
 alias fd='fdfind'
 
@@ -51,6 +54,12 @@ alias mic-unloop='pactl unload-module module-loopback'
 ## k8s ##
 alias kube='kubectl'
 alias kubenctx='kubectl config unset current-context'
+
+## terraform ##
+alias tf='terraform'
+
+## gnvim ##
+alias gnvim='gnvim --gtk-prefer-dark-theme'
 
 ## flatpak apps ##
 alias idea="flatpak run com.jetbrains.IntelliJ-IDEA-Ultimate"
