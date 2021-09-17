@@ -31,11 +31,12 @@ alias open='xdg-open'
 alias awsless="awless"
 
 ## ls ##
-alias ll="ls -lh --hyperlink=auto"
-alias lla="ls -lha --hyperlink=auto"
+alias ls='lsd --group-dirs first'
+alias ll='lsd -l --group-dirs first'
+alias lla='lsd -la --group-dirs first'
 
 ## tree ##
-alias tree="tree --dirsfirst -a -I .git"
+alias tree='lsd --tree'
 
 ## copy & paste ##
 alias ccopy='gpaste-client'
