@@ -84,10 +84,12 @@ disabled = true
 style = "bold #9E9E9E"
 symbol = " "
 format = "[$symbol$branch]($style) "
+only_attached = true
 
 [git_commit]
 style = "bold #9E9E9E"
 tag_symbol = " "
+format = "[($tag )\\($hash\\)]($style) "
 only_detached = true
 tag_disabled = false
 
@@ -97,7 +99,7 @@ style = "bold #9E9E9E"
 [git_status]
 style = "#9E9E9E"
 format = "([($ahead_behind )($conflicted )($staged )($deleted )($renamed )($modified )($stashed )($untracked )]($style))"
-conflicted = ""
+conflicted = ""
 ahead = "${count}"
 behind = "${count}"
 staged = "${count}"
