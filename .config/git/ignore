@@ -1,6 +1,10 @@
-### env stuff ##
+### env stuff ###
 .direnv
 .envrc
+
+### tooling ###
+# asdf
+.tool-versions
 
 ### mergetool backups ###
 *.orig
@@ -19,14 +23,19 @@ GTAGS
 ### cscope ###
 cscope.files
 
+### python ###
 # mypy
 .mypy_cache
+
+# venvs
+.venv
 
 # pyenv
 .python-version
 
-# Rope
+# rope
 .ropeproject/
 
+### editors and IDEs ###
 # IntelliJ
 .idea/
