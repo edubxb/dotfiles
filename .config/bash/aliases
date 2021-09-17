@@ -30,9 +30,6 @@ alias ip='ip --color'
 ## Better integration with GUI tools ##
 alias open='xdg-open'
 
-## typos ##
-alias awsless="awless"
-
 ## ls ##
 alias ls='lsd --group-dirs first'
 alias ll='lsd -l --group-dirs first'
