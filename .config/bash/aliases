@@ -5,15 +5,15 @@ alias rm='rm -i'
 
 ## cat with wings ##
 if which batcat &> /dev/null; then
-    # Debian package
-    alias cat='batcat -p'
+  # Debian package
+  alias cat='batcat -p'
 else
-    # Upstream package
-    alias cat='bat -p'
+  # Upstream package
+  alias cat='bat -p'
 fi
 
 ## fd ##
-alias fd="fdfind"
+alias fd='fdfind'
 
 ## nuke ##
 alias nuke='killall -9 '
@@ -49,8 +49,8 @@ alias mic-loop='pactl load-module module-loopback latency_msec=1'
 alias mic-unloop='pactl unload-module module-loopback'
 
 ## k8s ##
-alias kube="kubectl"
-alias knctx="kubectl config unset current-context"
+alias kube='kubectl'
+alias kubenctx='kubectl config unset current-context'
 
 ## flatpak apps ##
 alias idea="flatpak run com.jetbrains.IntelliJ-IDEA-Ultimate"
