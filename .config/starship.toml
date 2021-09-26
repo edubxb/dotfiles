@@ -141,3 +141,6 @@ format = "[${symbol}(${version} )]($style)"
 [kotlin]
 symbol = "🅺 "
 format = "[$symbol($version )]($style)"
+
+[terraform]
+symbol = " "
