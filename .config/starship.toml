@@ -1,7 +1,6 @@
 format = """
 $username\
 $hostname\
-$shlvl\
 $directory\
 $git_branch\
 $git_commit\
@@ -10,27 +9,20 @@ $git_status\
 $fill \
 $package\
 $cmake\
-$dotnet\
-$golang\
-$helm\
-$java\
-$nim\
-$nodejs\
 $python\
-$ruby\
 $rust\
+$golang\
+$java\
+$nodejs\
+$ruby\
 $terraform\
-$zig\
-$nix_shell\
-$memory_usage\
 $docker_context\
+$helm\
 $kubernetes\
 $aws\
 $gcloud\
 $env_var\
-$custom\
 $line_break\
-$jobs\
 $battery\
 $time\
 $cmd_duration\
