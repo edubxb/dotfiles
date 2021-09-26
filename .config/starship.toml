@@ -12,6 +12,7 @@ $cmake\
 $python\
 $rust\
 $golang\
+$lua\
 $java\
 $nodejs\
 $ruby\
@@ -141,6 +142,11 @@ format = "[${symbol}(${version} )]($style)"
 [kotlin]
 symbol = "🅺 "
 format = "[$symbol($version )]($style)"
+
+[lua]
+style = "bold blue"
+symbol = " "
+format = "[${symbol}(${version} )]($style)"
 
 [terraform]
 symbol = " "
