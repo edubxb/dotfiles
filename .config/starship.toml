@@ -7,6 +7,7 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$fill \
 $package\
 $cmake\
 $dotnet\
@@ -35,6 +36,9 @@ $time\
 $cmd_duration\
 $status\
 $character"""
+
+[fill]
+symbol = " "
 
 [character]
 success_symbol = "[](bold white)"
