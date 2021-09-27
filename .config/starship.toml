@@ -124,7 +124,7 @@ format = "[$symbol$version]($style) "
 [python]
 style = "bold green"
 symbol = " "
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
 [rust]
 symbol = " "
@@ -150,4 +150,4 @@ format = "[${symbol}(${version} )]($style)"
 
 [terraform]
 symbol = " "
-format = '[${symbol}(${version} )(\(${workspace}\))]($style)'
+format = '[${symbol}(${version} )(\(${workspace}\) )]($style)'
