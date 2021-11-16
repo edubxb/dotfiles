@@ -7,10 +7,6 @@
 [core]
 	excludesfile = ~/.config/git/ignore
 	pager = delta --dark
-[delta]
-	features = side-by-side line-numbers
-[interactive]
-	diffFilter = delta --color-only
 [pull]
 	rebase = true
 [push]
@@ -43,6 +39,10 @@
 	cmd = nvim-gtk --no-fork -- -d \"${BASE}\" \"${LOCAL}\" \"${REMOTE}\" \"${MERGED}\"
 [mergetool "fugitive"]
 	cmd = nvim-gtk --no-fork -- -c Gvdiffsplit! \"$MERGED\"
+[delta]
+	features = side-by-side line-numbers
+[interactive]
+	diffFilter = delta --color-only
 [log]
 	date = format:%F %R
 [pretty]
