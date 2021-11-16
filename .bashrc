@@ -1,9 +1,6 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
-## Tilix VTE script ##
-[[ -n "${TILIX_ID}" ]] && TILIX_SILENT=1 source /usr/share/tilix/scripts/tilix_int.sh
-
 ## Bash-it ##
 BASH_IT="${HOME}/.bash_it"
 if [[ -d "${BASH_IT}" ]]; then
