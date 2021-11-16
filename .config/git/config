@@ -1,13 +1,12 @@
 [user]
 	name = Eduardo Bellido Bellido
+	userConfigOnly = true
 [init]
 	templatedir = ~/.config/git/template/
 	defaultBranch = main
 [core]
 	excludesfile = ~/.config/git/ignore
 	pager = delta --dark
-[user]
-	useconfigonly = true
 [delta]
 	features = side-by-side line-numbers
 [interactive]
