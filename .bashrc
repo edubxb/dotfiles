@@ -88,9 +88,6 @@ fi
 ## ripgrep ##
 export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
 
-## httpie ##
-export HTTPIE_CONFIG_DIR="${CONFIG_PATH}/httpie"
-
 ## gitin ##
 export GITIN_HIDEHELP=true
 export GITIN_LINESIZE=20
