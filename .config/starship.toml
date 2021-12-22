@@ -28,6 +28,7 @@ $battery\
 $time\
 $cmd_duration\
 $status\
+$sudo\
 $character"""
 
 [fill]
@@ -47,6 +48,12 @@ truncation_length = 10
 style = "red"
 symbol = ""
 format = "[$status]($style) "
+disabled = false
+
+[sudo]
+style = "bold bright-yellow"
+format = "[$symbol]($style)"
+symbol = ""
 disabled = false
 
 [cmd_duration]
@@ -115,7 +122,7 @@ disabled = false
 [aws]
 style = "bold #ff9900"
 symbol = "  "
-format = "[$symbol($profile )(\\($region\\) )]($style) "
+format = "[$symbol($profile )(\\($region\\))]($style) "
 
 [package]
 symbol = " "
