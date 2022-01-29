@@ -2,13 +2,35 @@ if [ -d "${HOME}/.local/bin" ]; then
   PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-## ruby gems config ##
-export GEM_HOME="${HOME}/.local/lib/gem/ruby/2.3.0/"
-export GEM_PATH="${GEM_HOME}"
-export PATH="$PATH:${GEM_PATH}/bin"
+## krew ##
+if [ -d "${HOME}/.krew/bin" ]; then
+  PATH="${PATH}:${HOME}/.krew/bin"
+fi
 
-## npm config ##
+## go ##
+export GOPATH="${HOME}/.local/lib/go"
+if [ -d "${GOPATH}/bin" ]; then
+  PATH="${GOPATH}/bin:${PATH}"
+fi
+
+## rust cargo ##
+source "${HOME}/.cargo/env"
+if [ -d "${HOME}/.cargo/bin" ]; then
+  PATH="${HOME}/.cargo/bin:${PATH}"
+fi
+
+## ruby gems ##
+RUBY_VERSION="$(gem env | grep 'RUBY VERSION' | cut -d ' ' -f 6)"
+export GEM_HOME="${HOME}/.local/lib/ruby/${RUBY_VERSION}"
+export GEM_PATH="${GEM_HOME}"
+if [ -d "${GEM_PATH}/bin" ]; then
+  export PATH="${PATH}:${GEM_PATH}/bin"
+fi
+
+## npm ##
 export NPM_PACKAGES="${HOME}/.local/lib/node_modules"
 export NODE_PATH="${HOME}/.npm:${NODE_PATH}"
-export MANPATH="$(manpath):$NPM_PACKAGES/share/man"
-export PATH="$PATH:${NPM_PACKAGES}/bin"
+export MANPATH="$(manpath):${NPM_PACKAGES}/share/man"
+if [ -d "${HOME}/.local/lib/node_modules/bin" ]; then
+  export PATH="${PATH}:${NPM_PACKAGES}/bin"
+fi
