@@ -156,9 +156,9 @@ function ec2sh {
 
   _IFS="${IFS}"
   IFS=$'\n'
-  target=( $(awless ls instances -p "${profile}" --silent --format tsv --no-headers \
-                    --columns "id,name,private ip,public ip,state,uptime" \
-                    --sort name,uptime --filter state=running |
+  target=( $(aws ec2 describe-instances --profile ${profile} --output=text \
+                 --query "Reservations[].Instances[][InstanceId,PrivateIpAddress,PublicIpAddress,State.Name,LaunchTime]" \
+                 --filters Name=instance-state-name,Values=running  |
              fzf --sync --no-hscroll --tabstop=1 -d $'\t' --multi \
                  --with-nth 1..4 --nth 1,2 \
                  --expect=enter --expect=space --expect=ctrl-space\
