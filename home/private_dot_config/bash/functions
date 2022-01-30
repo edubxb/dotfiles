@@ -86,6 +86,14 @@ function fas {
   [[ -n "${target}" ]] && git add ${target}
 }
 
+function fap {
+  local target
+  target=$(grep profile ${AWS_CONFIG_FILE} |
+           sed -nr -e 's/\[profile (.+)\]/\1/p' |
+           fzf --min-height 10 --height 15 -q "$*" ) || return
+  export AWS_PROFILE="${target}"
+}
+
 function fak {
   local target
   target=$(__awskeys_list | grep "^ " | tr -d ' ' |
