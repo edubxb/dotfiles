@@ -31,6 +31,7 @@
 [difftool "icdiff"]
 	cmd = icdiff -N -H --is-git-diff --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
 [merge]
+	conflictStyle = diff3
 	tool = fugitive
 [mergetool]
 	keepBackup = false
