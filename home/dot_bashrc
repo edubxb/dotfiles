@@ -35,8 +35,7 @@ shopt -s lithist
 ## Bash history ##
 HISTCONTROL='ignoreboth:erasedups'
 HISTFILESIZE=3000
-# HISTIGNORE='&:[bf]g:cd:clear:exit:f[dp]:help?( *):history?(*):l[sl1]?( *):man?( *):pwd:task?(sh)?( *):tasksh *:timew?( *):* --help:* --version'
-HISTIGNORE='&:[bf]g:cd:clear:exit:f[dp]:help?( *):history?(*):man?( *):pwd:task?(sh)?( *):tasksh *:timew?( *):* --help:* --version'
+HISTIGNORE='&:[bf]g:cd:clear:exit:f[dp]:help?( *):history?(*):man?( *):pwd:* --help:* --version'
 HISTSIZE=1000
 HISTTIMEFORMAT='%F %T  '
 
@@ -75,14 +74,15 @@ command -v time &> /dev/null && alias "time=command $(command -v time)"
 export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
 
 ## fzf config ##
-if command -v fzf &> /dev/null; then
+if [[ -f "${HOME}/.config"/fzf/fzf.bash ]]; then
+  source "${HOME}/.config/fzf/fzf.bash"
   export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
                            --inline-info --tabstop=4 --prompt='❯ ' \
                            --color hl:208,hl+:208,fg:255,fg+:255,bg+:240,header:255 \
                            --color info:46,prompt:33,spinner:108,pointer:160,marker:255"
-  export FZF_DEFAULT_COMMAND="fdfind --type f --exclude .git"
+  export FZF_DEFAULT_COMMAND="fdfind --type f"
   export FZF_ALT_C_COMMAND="fdfind --type d --exclude .git"
-  export FZF_CTRL_T_COMMAND="fdfind --exclude .git"
+  export FZF_CTRL_T_COMMAND="fdfind"
 fi
 
 ## ripgrep ##
@@ -94,10 +94,9 @@ export GITIN_LINESIZE=20
 export GITIN_SEARCHMODE=fuzzy
 
 ## AWS ##
-export AWS_DEFAULT_REGION="eu-west-1"
 export AWS_DEFAULT_OUTPUT="text"
 export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
-export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
+# export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 
 ## adsf-vm ##
 source "${HOME}/.asdf/asdf.sh"
@@ -108,6 +107,9 @@ complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 
 ## poetry ##
 source <(poetry completions bash)
+
+## cargo ##
+source "${HOME}/.cargo/env"
 
 # GitHub cli ##
 eval "$(gh completion -s bash)"
