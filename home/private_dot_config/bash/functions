@@ -48,7 +48,7 @@ function fev {
                --preview-window right:80%:wrap \
                --preview 'printenv {}' \
                --bind 'ctrl-x:execute-silent(unset {1})')
-  xclip -selection clipboard <<< "export ${target}=${!target}"
+  gpaste-client add "export ${target}=${!target}"
 }
 
 function fsb {
