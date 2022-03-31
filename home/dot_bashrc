@@ -1,6 +1,12 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
+## kitty ##
+if test -f "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"; then
+    export KITTY_SHELL_INTEGRATION="enabled"
+    source "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"
+fi
+
 ## Bash-it ##
 BASH_IT="${HOME}/.bash_it"
 if [[ -d "${BASH_IT}" ]]; then
