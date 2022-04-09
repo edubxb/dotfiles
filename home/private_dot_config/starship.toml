@@ -119,6 +119,11 @@ symbol = " "
 format = "[$symbol$context \\($namespace\\)](bold cyan) "
 disabled = false
 
+[gcloud]
+style = "bold #1a73e8"
+symbol = "  "
+format = "[$symbol$account(@$domain) (\\($region\\))]($style) "  
+
 [aws]
 style = "bold #ff9900"
 symbol = "  "
