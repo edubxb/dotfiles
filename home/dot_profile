@@ -20,11 +20,11 @@ if [ -d "${HOME}/.cargo/bin" ]; then
 fi
 
 ## ruby gems ##
-RUBY_VERSION="$(gem env | grep 'RUBY VERSION' | cut -d ' ' -f 6)"
+RUBY_VERSION="$(gem env | grep "RUBY VERSION" | cut -d " " -f 6)"
 export GEM_HOME="${HOME}/.local/lib/ruby/${RUBY_VERSION}"
 export GEM_PATH="${GEM_HOME}"
 if [ -d "${GEM_PATH}/bin" ]; then
-  export PATH="${PATH}:${GEM_PATH}/bin"
+  export PATH="${GEM_PATH}/bin:${PATH}"
 fi
 
 ## npm ##
