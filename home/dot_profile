@@ -3,8 +3,9 @@ if [ -d "${HOME}/.local/bin" ]; then
 fi
 
 ## krew ##
-if [ -d "${HOME}/.krew/bin" ]; then
-  PATH="${PATH}:${HOME}/.krew/bin"
+export KREW_ROOT="${HOME}/.local/lib/krew"
+if [ -d "${KREW_ROOT}/bin" ]; then
+  PATH="${PATH}:${KREW_ROOT}/bin"
 fi
 
 ## go ##
