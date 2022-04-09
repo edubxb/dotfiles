@@ -87,9 +87,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[includeIf "gitdir:~/Area51/personal/"]
-	path = ~/.config/git/config.personal
-[includeIf "gitdir:~/Area51/floss/"]
+[include]
 	path = ~/.config/git/config.personal
 [includeIf "gitdir:~/Area51/work/"]
 	path = ~/.config/git/config.work
