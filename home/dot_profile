@@ -28,9 +28,9 @@ if [ -d "${GEM_PATH}/bin" ]; then
 fi
 
 ## npm ##
-export NPM_PACKAGES="${HOME}/.local/lib/node_modules"
-export NODE_PATH="${HOME}/.npm:${NODE_PATH}"
+export NPM_CONFIG_USERCONFIG="${HOME}/.config/npmrc"
+export NPM_PACKAGES="${HOME}/.local/lib/npm"
 export MANPATH="$(manpath):${NPM_PACKAGES}/share/man"
-if [ -d "${HOME}/.local/lib/node_modules/bin" ]; then
-  export PATH="${PATH}:${NPM_PACKAGES}/bin"
+if [ -d "${NPM_PACKAGES}/bin" ]; then
+  export PATH="${NPM_PACKAGES}/bin:${PATH}"
 fi
