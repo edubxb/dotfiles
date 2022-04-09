@@ -14,10 +14,11 @@ if [ -d "${GOPATH}/bin" ]; then
   PATH="${GOPATH}/bin:${PATH}"
 fi
 
-## rust cargo ##
-source "${HOME}/.cargo/env"
-if [ -d "${HOME}/.cargo/bin" ]; then
-  PATH="${HOME}/.cargo/bin:${PATH}"
+## rust ##
+export CARGO_HOME="${HOME}/.config/cargo"
+export RUSTUP_HOME="${HOME}/.config/rustup"
+if [ -d "${CARGO_HOME}/env" ]; then
+  source "${CARGO_HOME}/env"
 fi
 
 ## ruby gems ##
