@@ -1,0 +1,9 @@
+{{ $email := promptString "email" -}}
+{{ $work_email := promptString "work_email" -}}
+
+[diff]
+    pager = "delta --dark"
+
+[data]
+    email = {{ $email | quote }}
+    work_email = {{ $work_email | quote }}
