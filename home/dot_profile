@@ -17,7 +17,7 @@ fi
 ## rust ##
 export CARGO_HOME="${HOME}/.config/cargo"
 export RUSTUP_HOME="${HOME}/.config/rustup"
-if [ -d "${CARGO_HOME}/env" ]; then
+if [ -f "${CARGO_HOME}/env" ]; then
   source "${CARGO_HOME}/env"
 fi
 
