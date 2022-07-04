@@ -52,21 +52,21 @@
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
 	blobs = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | grep blob | cut -d ' ' -f3- | sort -nr | numfmt --to=iec-i --suffix=B --padding=7 --round=nearest"
-	bup = "!f() { local ref=\"$(git rev-parse --abbrev-ref origin/HEAD | cut -d/ -f2)\"; [ -n \"$1\" ] && ref=\"$1\"; { git stash push --include-untracked; git switch ${ref}; git pull --rebase; } && { git switch -; git rebase ${ref}; git stash pop --index; } }; f"
+	bup = "!f() { local ref=\"$(git default-branch"; [ -n \"$1\" ] && ref=\"$1\"; { git stash push --include-untracked; git switch ${ref}; git pull --rebase; } && { git switch -; git rebase ${ref}; git stash pop --index; } }; f"
 	cdiff = difftool --tool cdiff
-	diffm = "!git diff $(git rev-parse --abbrev-ref origin/HEAD | cut -d/ -f1)"
+	default-branch = "!git remote show origin | grep HEAD | cut -d' ' -f5"
+	diffm = "!git diff $(git default-branch)"
 	diffu = diff @{u}
 	fixup = commit --fixup=HEAD
-	icdiff = difftool --tool icdiff
 	ls-ignored = ls-files --others --ignored --exclude-standard
 	puf = push --force-with-lease
-	rebaseme = "!f() { local ref=\"$(git rev-parse --abbrev-ref origin/HEAD | cut -d/ -f1)\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
+	rebaseme = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
 	shame = blame -w -M
 	squash = commit --squash=HEAD
 	stash-all = stash push --include-untracked
 	trl = "!git reflog --all --pretty=raw | tig --pretty=raw"
 	ups = "!f() { local remote=\"origin\"; [ -n \"$1\" ] && remote=\"$1\"; git push -u \"${remote}\" $(git rev-parse --abbrev-ref HEAD); }; f"
-	wip = "!f() { git commit -m \"WIP: $1\"; }; f"
+	wip = "!f() { git commit -m \"WIP: $*\"; }; f"
 [color "branch"]
 	current = 229 bold
 	local = 229
