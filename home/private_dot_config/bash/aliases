@@ -60,3 +60,8 @@ alias gnvim='gnvim --gtk-prefer-dark-theme'
 
 ## flatpak apps ##
 alias idea="flatpak run com.jetbrains.IntelliJ-IDEA-Ultimate"
+
+## some fun ##
+alias fireworks='confetty fireworks'
+alias pipes='pipes-rs -b true -c rgb -k curved -p 25'
+alias bonsai='cbonsai -l -i'
