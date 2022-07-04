@@ -122,7 +122,12 @@ disabled = false
 [gcloud]
 style = "bold #1a73e8"
 symbol = "  "
-format = "[$symbol$account(@$domain) (\\($region\\))]($style) "  
+format = "[$symbol$active (\\($region\\))]($style) "  
+[gcloud.region_aliases]
+europe-west1 = "euw1"
+southamerica-east1 = "sae1"
+us-central1 = "usc1"
+
 
 [aws]
 style = "bold #ff9900"
