@@ -52,7 +52,7 @@
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
 	blobs = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | grep blob | cut -d ' ' -f3- | sort -nr | numfmt --to=iec-i --suffix=B --padding=7 --round=nearest"
-	bup = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; { git stash push --include-untracked; git switch ${ref}; git pull --rebase; } && { git switch -; git rebase ${ref}; git stash pop --index; } }; f"
+	bup = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; { git fetch; git stash push --include-untracked; git switch ${ref}; git pull --rebase; } && { git switch -; git rebase ${ref}; git stash pop --index; } }; f"
 	cdiff = difftool --tool cdiff
 	default-branch = "!git remote show origin | grep HEAD | cut -d' ' -f5"
 	diffm = "!git diff $(git default-branch)"
