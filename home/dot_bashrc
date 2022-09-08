@@ -3,20 +3,9 @@
 
 ## kitty ##
 if test -f "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"; then
-    export KITTY_SHELL_INTEGRATION="enabled"
-    source "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"
+  export KITTY_SHELL_INTEGRATION="enabled"
+  source "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"
 fi
-
-## Bash-it ##
-BASH_IT="${HOME}/.bash_it"
-if [[ -d "${BASH_IT}" ]]; then
-  export BASH_IT
-  export PS2="| "
-  source "${BASH_IT}/bash_it.sh"
-fi
-
-## Starship prompt ##
-eval "$(starship init bash)"
 
 ## disable flow control key binding ##
 stty -ixon
@@ -46,6 +35,9 @@ HISTSIZE=1000
 HISTTIMEFORMAT='%F %T  '
 
 ## edit & view ##
+export NVIM_GTK_NO_HEADERBAR=1
+export NVIM_GTK_NO_WINDOW_DECORATION=1
+export NVIM_GTK_PREFER_DARK_THEME=1
 export EDITOR="nvim"
 export VISUAL="nvim-gtk --no-fork"
 export PAGER="less"
@@ -65,13 +57,6 @@ BASH_CONFIG_PATH="${CONFIG_PATH}/bash"
 if [[ -x /usr/bin/dircolors ]]; then
   test -r "${CONFIG_PATH}/dircolors" && eval "$(dircolors -b ${CONFIG_PATH}/dircolors)" || eval "$(dircolors -b)"
 fi
-
-## host-dependent config ##
-[[ -f "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)"
-
-## aliases & functions ##
-[[ -f "${BASH_CONFIG_PATH}/aliases" ]] && source "${BASH_CONFIG_PATH}/aliases"
-[[ -f "${BASH_CONFIG_PATH}/functions" ]] && source "${BASH_CONFIG_PATH}/functions"
 
 ## use time command if installed ##
 command -v time &> /dev/null && alias "time=command $(command -v time)"
@@ -103,25 +88,17 @@ export GITIN_SEARCHMODE=fuzzy
 export AWS_DEFAULT_OUTPUT="text"
 export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
 # export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
+complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 
 ## adsf-vm ##
 source "${HOME}/.asdf/asdf.sh"
 source "${HOME}/.asdf/completions/asdf.bash"
 
-# AWS cli v2 completion
-complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
-
 ## poetry ##
 source <(poetry completions bash)
 
-## cargo ##
-source "${HOME}/.cargo/env"
-
 # GitHub cli ##
 eval "$(gh completion -s bash)"
-
-## travis ##
-export TRAVIS_CONFIG_PATH="${CONFIG_PATH}/travis"
 
 ## ansible ##
 export ANSIBLE_NOCOWS=1
@@ -137,13 +114,31 @@ export VIT_DIR="${CONFIG_PATH}/vit"
 ## timewarrior ##
 export TIMEWARRIORDB="${CONFIG_PATH}/timewarrior"
 
-## go jira ##
-eval "$(jira --completion-script-bash)"
-export JIRA_EDITOR="${VISUAL}"
-
 ## navi ##
 export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
 
 ## k8s ##
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export KUBECONFIG="${CONFIG_PATH}/kube/config"
 source <(kubectl completion bash)
+
+## pew ##
+source $(pew shell_config)
+
+## Bash-it ##
+BASH_IT="${HOME}/.bash_it"
+if [[ -d "${BASH_IT}" ]]; then
+  export BASH_IT
+  export PS2="| "
+  source "${BASH_IT}/bash_it.sh"
+fi
+
+## Starship prompt ##
+eval "$(starship init bash)"
+
+## host-dependent config ##
+[[ -f "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)"
+
+## aliases & functions ##
+[[ -f "${BASH_CONFIG_PATH}/aliases" ]] && source "${BASH_CONFIG_PATH}/aliases"
+[[ -f "${BASH_CONFIG_PATH}/functions" ]] && source "${BASH_CONFIG_PATH}/functions"
