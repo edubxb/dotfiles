@@ -2,14 +2,15 @@
 	name = Eduardo Bellido Bellido
 	userConfigOnly = true
 [init]
-	templatedir = ~/.config/git/template/
 	defaultBranch = main
+	templatedir = ~/.config/git/template/
 [core]
 	excludesfile = ~/.config/git/ignore
-	pager = delta --dark
+	pager = delta
 [pull]
 	rebase = true
 [push]
+	autoSetupRemote = true
 	default = simple
 [commit]
 	verbose = true
@@ -19,9 +20,10 @@
 	enabled = true
 [diff]
 	algorithm = minimal
+	colorMoved = default
 	indentHeuristic = true
-	tool = vimdiff
 	noprefix = true
+	tool = vimdiff
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
@@ -30,6 +32,8 @@
 	cmd = cdiff --side-by-side --width=0 --color=auto \"${LOCAL}\" \"${REMOTE}\"
 [difftool "icdiff"]
 	cmd = icdiff -N -H --is-git-diff --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
+[difftool "difftastic"]
+	cmd = difft \"$LOCAL\" \"$REMOTE\"
 [merge]
 	conflictStyle = diff3
 	tool = fugitive
@@ -42,6 +46,8 @@
 	cmd = nvim-gtk --no-fork -- -c Gvdiffsplit! \"$MERGED\"
 [delta]
 	features = side-by-side line-numbers
+	hyperlinks = true
+	navigate = true
 [interactive]
 	diffFilter = delta --color-only
 [log]
@@ -84,9 +90,9 @@
 	nobranch = 229 bold
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+	smudge = git-lfs smudge -- %f
 [include]
 	path = ~/.config/git/config.personal
 [includeIf "gitdir:~/Area51/work/"]
