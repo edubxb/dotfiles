@@ -1,11 +1,11 @@
 format = """
 $username\
 $hostname\
-$directory\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$directory\
 $fill \
 $package\
 $cmake\
@@ -41,13 +41,15 @@ vicmd_symbol = "[](bold white)"
 
 [directory]
 style = "bold white"
+repo_root_style = "bold dimmed"
 format = "[$path]($style) "
+repo_root_format = "[$before_root_path]($repo_root_style)[$repo_root]($style)[$path]($repo_root_style)[$read_only]($read_only_style) "
 truncation_length = 10
 
 [status]
 style = "red"
-symbol = ""
-format = "[$status]($style) "
+symbol =  ""
+format = "[($signal_name:)($status)]($style) "
 disabled = false
 
 [sudo]
@@ -67,7 +69,10 @@ format = " [$time]($style)\n"
 disabled = false
 
 [battery]
-format = "[$symbol $percentage]($style)\n"
+format = "[$symbol$percentage]($style)\n"
+# full_symbol = ""
+# charging_symbol = ""
+# discharging_symbol = ""
 
 [[battery.display]]
 style = "bold red"
@@ -85,23 +90,23 @@ threshold = 30
 disabled = true
 
 [git_branch]
-style = "bold #9E9E9E"
+style = "white bold dimmed"
 symbol = " "
 format = "[$symbol$branch]($style) "
 only_attached = true
 
 [git_commit]
-style = "bold #9E9E9E"
+style = "white bold dimmed"
 tag_symbol = " "
 format = "[($tag )\\($hash\\)]($style) "
 only_detached = true
 tag_disabled = false
 
 [git_state]
-style = "bold #9E9E9E"
+style = "white bold dimmed"
 
 [git_status]
-style = "#9E9E9E"
+style = "white bold dimmed"
 format = "([($ahead_behind )($conflicted )($staged )($deleted )($renamed )($modified )($stashed )($untracked )]($style))"
 conflicted = ""
 ahead = "${count}"
@@ -122,7 +127,7 @@ disabled = false
 [gcloud]
 style = "bold #1a73e8"
 symbol = "  "
-format = "[$symbol$active (\\($region\\))]($style) "  
+format = "[$symbol$active (\\($region\\))]($style) "
 [gcloud.region_aliases]
 europe-west1 = "euw1"
 southamerica-east1 = "sae1"
