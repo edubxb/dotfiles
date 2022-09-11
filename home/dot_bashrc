@@ -68,12 +68,16 @@ export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area5
 if [[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]]; then
   source /usr/share/doc/fzf/examples/key-bindings.bash
   export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
-                           --inline-info --tabstop=4 --prompt='❯ ' \
-                           --color hl:208,hl+:208,fg:255,fg+:255,bg+:240,header:255 \
-                           --color info:46,prompt:33,spinner:108,pointer:160,marker:255"
-  export FZF_DEFAULT_COMMAND="fdfind --type f"
-  export FZF_ALT_C_COMMAND="fdfind --type d --exclude .git"
-  export FZF_CTRL_T_COMMAND="fdfind"
+                           --inline-info --tabstop=4 \
+                           --pointer='•' --marker='‣' \
+                           --color hl:#DBC074,hl+:#C94F6D,fg:#DFDFE5,fg+:#DFDFE5,bg+:#223249 \
+                           --color prompt:#719CD6,spinner:#719CD6,pointer:#CDCECF,marker:#DFDFE5 \
+                           --color header:#DFDFE5,info:#81B29A,border:#719CD6"
+  export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always {}'"
+  export FZF_ALT_C_OPTS="--preview 'lsd --color always --tree {}'"
 fi
 
 ## ripgrep ##
