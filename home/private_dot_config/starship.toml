@@ -97,7 +97,7 @@ only_attached = true
 
 [git_commit]
 style = "white bold dimmed"
-tag_symbol = " "
+tag_symbol = " "
 format = "[($tag )\\($hash\\)]($style) "
 only_detached = true
 tag_disabled = false
@@ -126,7 +126,7 @@ disabled = false
 
 [gcloud]
 style = "bold #1a73e8"
-symbol = "  "
+symbol = "  "
 format = "[$symbol$active (\\($region\\))]($style) "
 [gcloud.region_aliases]
 europe-west1 = "euw1"
@@ -136,7 +136,7 @@ us-central1 = "usc1"
 
 [aws]
 style = "bold #ff9900"
-symbol = "  "
+symbol = "  "
 format = "[$symbol($profile )(\\($region\\))]($style) "
 
 [package]
