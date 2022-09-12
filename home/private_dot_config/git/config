@@ -19,7 +19,7 @@
 [rerere]
 	enabled = true
 [diff]
-	algorithm = minimal
+	algorithm = histogram
 	colorMoved = default
 	indentHeuristic = true
 	noprefix = true
@@ -35,7 +35,7 @@
 [difftool "difftastic"]
 	cmd = difft \"$LOCAL\" \"$REMOTE\"
 [merge]
-	conflictStyle = diff3
+	conflictStyle = zdiff3
 	tool = fugitive
 [mergetool]
 	keepBackup = false
