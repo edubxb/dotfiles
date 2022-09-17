@@ -200,3 +200,55 @@ function __ec2sh_comp {
   return 0
 }
 complete -F __ec2sh_comp ec2sh
+
+function __gce_show {
+  gcloud compute instances describe --configuration ${1} --zone ${2} --format=yaml ${3} |
+  batcat -p -f -l yaml 2> /dev/null
+}
+typeset -fx __gce_show
+
+function gcesh {
+  local configuration
+
+  if [[ -n "$1" ]]; then
+    configuration="$1"
+  elif [[ -n "${GCLOUD_CONFIGURATION}" ]]; then
+    configuration="${GCLOUD_CONFIGURATION}"
+  else
+    configuration="$(gcloud config configurations list | grep True | cut -d' ' -f1)"
+  fi
+
+  shift
+
+  local target
+  local host
+  local instance
+  local msg
+  local address_idx=2
+
+  _IFS="${IFS}"
+  IFS=$'\n'
+  target=( $(gcloud compute instances list --configuration ${configuration} \
+                    --filter="status:running" \
+                    --format="table[no-heading](name:sort=1, zone:label=zone, networkInterfaces[0].networkIP, networkInterfaces[0].accessConfigs[0].natIP)" |
+                fzf --sync --no-hscroll -d ' +' --multi \
+                    --with-nth 1..4 --nth 1,2 \
+                    --expect=enter \
+                    --bind 'ctrl-t:toggle-all' \
+                    --preview-window right:60%:wrap \
+                    --preview "__gce_show ${configuration} {2} {1}" \
+                    --prompt " ${configuration} ❯ " --ansi -q "$*" |
+                 tr -s " " | tr " " "\t" | cut -f 1,2) )
+  IFS="${_IFS}"
+
+  if [[ -n "${target}" ]]; then
+    key_bind="${target[0]}"
+    instances=( "${target[@]:1}" )
+    if [[ ${key_bind} = 'enter' ]]; then
+      for instance in "${instances[@]:1}"; do
+        kitty @ launch gcloud compute ssh --configuration ${configuration} --zone $(cut -f 2 <<< ${instance}) --tunnel-through-iap $(cut -f 1 <<< ${instance}) &> /dev/null
+      done
+      gcloud compute ssh --configuration ${configuration} --zone $(cut -f 2 <<< ${instances[0]}) --tunnel-through-iap $(cut -f 1 <<< ${instances[0]}) 2> /dev/null
+    fi
+  fi
+}
