@@ -12,12 +12,12 @@ function fp {
 }
 
 function fev {
-  target=$(compgen -v | sort | \
+  target=$(env | cut -d'=' -f 1 | sort | \
            fzf --height 11 +s --no-border \
-               --preview-window right:80%:wrap \
+               --preview-window right:60%:wrap \
                --preview 'printenv {}' \
                --bind 'ctrl-x:execute-silent(unset {1})')
-  gpaste-client add "export ${target}=${!target}"
+  wl-copy "$(printenv ${target})"
 }
 
 function fsb {
