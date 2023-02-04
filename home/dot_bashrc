@@ -1,12 +1,6 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
-## kitty ##
-if test -f "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"; then
-  export KITTY_SHELL_INTEGRATION="enabled"
-  source "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"
-fi
-
 ## disable flow control key binding ##
 stty -ixon
 
@@ -45,7 +39,7 @@ export LESS="-F -R -X -x1,5"
 
 ## Config paths ##
 CONFIG_PATH="${HOME}/.config"
-BASH_CONFIG_PATH="${CONFIG_PATH}/bash"
+SHELL_CONFIG_PATH="${CONFIG_PATH}/shell"
 
 ## colors for less, man, etc. ##
 [[ -f "${CONFIG_PATH}/less/TERMCAP" ]] && source "${CONFIG_PATH}/less/TERMCAP"
@@ -83,15 +77,10 @@ fi
 ## ripgrep ##
 export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
 
-## gitin ##
-export GITIN_HIDEHELP=true
-export GITIN_LINESIZE=20
-export GITIN_SEARCHMODE=fuzzy
-
 ## AWS ##
 export AWS_DEFAULT_OUTPUT="text"
 export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
-# export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
+export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 
 ## adsf-vm ##
@@ -126,23 +115,12 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export KUBECONFIG="${CONFIG_PATH}/kube/config"
 source <(kubectl completion bash)
 
-## pew ##
-source $(pew shell_config)
-
-## Bash-it ##
-BASH_IT="${HOME}/.bash_it"
-if [[ -d "${BASH_IT}" ]]; then
-  export BASH_IT
-  export PS2="| "
-  source "${BASH_IT}/bash_it.sh"
-fi
-
-## Starship prompt ##
-eval "$(starship init bash)"
-
 ## host-dependent config ##
-[[ -f "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${BASH_CONFIG_PATH}/bashrc_$(hostname -s)"
+[[ -f "${SHELL_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${SHELL_CONFIG_PATH}/bashrc_$(hostname -s)"
 
 ## aliases & functions ##
-[[ -f "${BASH_CONFIG_PATH}/aliases" ]] && source "${BASH_CONFIG_PATH}/aliases"
-[[ -f "${BASH_CONFIG_PATH}/functions" ]] && source "${BASH_CONFIG_PATH}/functions"
+[[ -f "${SHELL_CONFIG_PATH}/aliases.sh" ]] && source "${SHELL_CONFIG_PATH}/aliases.sh"
+[[ -f "${SHELL_CONFIG_PATH}/functions.sh" ]] && source "${SHELL_CONFIG_PATH}/functions.sh"
+
+## Oh My Posh ##
+eval "$(oh-my-posh init bash --config ${SHELL_CONFIG_PATH}/edubxb.omp.json)"
