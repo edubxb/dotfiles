@@ -40,10 +40,10 @@ $endif
 "\C-w": unix-filename-rubout
 
 # Flip through autocompletion matches
-"\e[1;2A": menu-complete
-"\e[1;2B": menu-complete-backward
-"\C-b": menu-complete
-"\C-f": menu-complete-backward
+Tab: menu-complete
+"\e[Z": menu-complete-backward
+# "\e[1;2A": menu-complete
+# "\e[1;2B": menu-complete-backward
 
 # Filtered history search
 "\e[A": history-search-backward
