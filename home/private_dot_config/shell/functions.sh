@@ -214,3 +214,14 @@ function gcesh {
     fi
   fi
 }
+
+function tfsb {
+  local resources
+  resources=$(terraform state list) || return
+
+  terraform state list | \
+  fzf --sync --no-hscroll -d ' +' \
+      --preview-window down:70%:wrap \
+      --preview "terraform state show -no-color {1} | batcat -f -p -l hcl" \
+      --ansi -q "$*"
+}
