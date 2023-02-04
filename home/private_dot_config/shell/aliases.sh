@@ -30,23 +30,11 @@ alias ip='ip --color'
 ## Better integration with GUI tools ##
 alias open='xdg-open'
 
-## ls ##
+## lsd ##
 alias ls='lsd --group-dirs first'
 alias ll='lsd -l --group-dirs first'
 alias lla='lsd -la --group-dirs first'
-
-## tree ##
 alias tree='lsd --tree'
-
-## copy & paste ##
-alias ccopy='gpaste-client'
-alias cpaste='gpaste-client get 0'
-
-## sound ##
-alias mic-ec='pactl load-module module-echo-cancel aec_method=webrtc source_name=noechosource sink_name=noechosink'
-alias mic-noec='pactl unload-module module-echo-cancel'
-alias mic-loop='pactl load-module module-loopback latency_msec=1000'
-alias mic-noloop='pactl unload-module module-loopback'
 
 ## k8s ##
 alias kube='kubectl'
@@ -55,13 +43,24 @@ alias kubenctx='kubectl config unset current-context'
 ## terraform ##
 alias tf='terraform'
 
-## gnvim ##
-alias gnvim='gnvim --gtk-prefer-dark-theme'
-
 ## useful ##
 alias myip='curl https://api.ipify.org/'
 
+## git ##
+alias gb='git branch'
+alias gc='git commit -v'
+alias gcm='git commit -v -m'
+alias gsb='git switch'
+alias gsc='git switch -c'
+alias gl='git pull'
+alias gf='git fetch --all --prune'
+alias gft='git fetch --all --prune --tags'
+alias gs='git status'
+alias gss='git status -s'
+alias ghm='cd "$(git rev-parse --show-toplevel)"'
+
 ## some fun ##
-alias fireworks='confetty fireworks'
-alias pipes='pipes-rs -b true -c rgb -k curved -p 25'
 alias bonsai='cbonsai -l -i'
+alias fireworks='confetty fireworks'
+alias matrix='neo -D --speed=12 --density=3 --lingerms=1,1 --rippct=0'
+alias pipes='pipes-rs -b true -c rgb -k curved -p 25'
