@@ -2,10 +2,6 @@
 .direnv
 .envrc
 
-### tooling ###
-# asdf
-.tool-versions
-
 ### mergetool backups ###
 *.orig
 
