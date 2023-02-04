@@ -1,34 +1,3 @@
-## notifications for non-focused terminals ##
-function __notify_when_no_focus {
-  LAST_EXIT_CODE=$?
-  CMD="$(fc -ln -1 | sed -nr -e 's/\t (.+)$/\1/p')"
-  xdotool getactivewindow getwindowname | grep -i 'Tilix' -q 2> /dev/null
-  if [[ $? -ne 0 ]]; then
-    if [[ ${LAST_EXIT_CODE} -eq 0 ]]; then
-      MESSAGE="Succesfully ended"
-    else
-      MESSAGE="Failed with error code ${LAST_EXIT_CODE}"
-    fi
-    notify-send --icon=terminal "${CMD}" "${MESSAGE}"
-  fi
-  return ${LAST_EXIT_CODE}
-}
-# export PROMPT_COMMAND="__notify_when_no_focus;${PROMPT_COMMAND}"
-
-function fpaste {
-  gpaste-client history --zero |
-  grep -v -z "\[Image, .*\]" |
-  fzf --border --height 14 --no-hscroll --read0 -d ' ' -n 2.. \
-      --preview-window right:50%:wrap --preview 'echo {2..}' \
-      --bind 'ctrl-x:execute-silent(gpaste-client delete {1})' |
-  cut -d ' ' -f 2-
-}
-
-function __fp_readme_preview {
-  mdcat ${1}{/docs,}/README.{md,rst,txt} 2> /dev/null || return
-}
-typeset -fx __fp_readme_preview
-
 function fp {
   local directory_list="$(tr ":" " " <<< ${PROJECTS_PATH})"
   local projects=$(
@@ -132,8 +101,6 @@ function __awless_show {
     awless sync -p $1 --silent --local --siblings --color=always $2 2> /dev/null
   fi
 }
-typeset -fx __awless_show
-
 function ec2sh {
   local profile
 
@@ -201,11 +168,6 @@ function __ec2sh_comp {
 }
 complete -F __ec2sh_comp ec2sh
 
-function __gce_show {
-  gcloud compute instances describe --configuration ${1} --zone ${2} --format=yaml ${3} |
-  batcat -p -f -l yaml 2> /dev/null
-}
-typeset -fx __gce_show
 
 function gcesh {
   local configuration
