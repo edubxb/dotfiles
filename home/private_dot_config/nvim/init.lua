@@ -2,7 +2,7 @@ require("options")
 
 projects_path = vim.split(os.getenv("PROJECTS_PATH"), ":")
 
-my_colorscheme = "nighfox"
+my_colorscheme = "nightfox"
 
 window_filetypes = {
   "alpha",
