@@ -52,11 +52,12 @@ return {
         }
       )
 
-      fidget.setup {
+      fidget.setup({
         text = {
           spinner = "dots_pulse"
         }
-      }
+      })
+
       inlayhints.setup()
       trouble.setup()
 
@@ -246,7 +247,7 @@ return {
           if servers[server_name] == nil then
             vim.notify("LSP server \"" .. server_name .. "\" installed but no config defined")
           else
-            config = vim.tbl_deep_extend("force", {
+            local config = vim.tbl_deep_extend("force", {
               -- on_init = custom_on_init,
               on_attach = custom_on_attach,
               capabilities = updated_capabilities,
