@@ -1,26 +1,53 @@
 return {
-  "rhysd/committia.vim",
   "tpope/vim-fugitive",
-  "tpope/vim-git",
-  {
-    "rhysd/git-messenger.vim",
-    config = function()
-      vim.g.git_messenger_extra_blame_args = "-w -M"
-      vim.g.git_messenger_floating_win_opts = {
-        border = "single"
-      }
-      vim.g.git_messenger_popup_content_margins = false
-    end,
-  },
   {
     "lewis6991/gitsigns.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    config = function()
-      require("gitsigns").setup()
+    opts = {
+      _extmark_signs = true,
+      _signs_staged_enable = true,
+      _threaded_diff = true,
+      trouble = true,
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
 
-      vim.api.nvim_set_keymap("n", "<Leader>ga", "<cmd>Gitsigns get_actions<CR>", keymap_opts)
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        map("n", "]c", function()
+          if vim.wo.diff then return "]c" end
+          vim.schedule(function() gs.next_hunk() end)
+          return "<Ignore>"
+        end, {expr=true})
+
+        map("n", "[c", function()
+          if vim.wo.diff then return "[c" end
+          vim.schedule(function() gs.prev_hunk() end)
+          return "<Ignore>"
+        end, {expr=true})
+
+        map({"n", "v"}, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+        map({"n", "v"}, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+        map("n", "<leader>hS", gs.stage_buffer)
+        map("n", "<leader>hu", gs.undo_stage_hunk)
+        map("n", "<leader>hR", gs.reset_buffer)
+        map("n", "<leader>hp", gs.preview_hunk)
+        map("n", "<leader>hb", function() gs.blame_line{full = true, ignore_whitespace = true} end)
+        map("n", "<leader>hd", gs.diffthis)
+        map("n", "<leader>hD", function() gs.diffthis("~") end)
+        map("n", "<leader>td", gs.toggle_deleted)
+
+        map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+      end
+    },
+    config = function(_, opts)
+      local gitsigns = require("gitsigns")
+      gitsigns.setup(opts)
     end,
   },
   {
@@ -28,11 +55,22 @@ return {
     ft = "gitrebase",
   },
   {
+    "rhysd/committia.vim",
+    ft = "gitcommit",
+  },
+  {
     "sindrets/diffview.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
     },
+    opts = {
+      show_help_hints = false,
+    },
+    config = function(_, opts)
+      local diffview = require("diffview")
+      diffview.setup(opts)
+    end
   },
   {
     "pwntester/octo.nvim",

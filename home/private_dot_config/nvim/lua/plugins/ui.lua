@@ -104,6 +104,9 @@ return {
   },
   {
     "hoob3rt/lualine.nvim",
+    dependencies = {
+      "lewis6991/gitsigns.nvim",
+    },
     config = function()
       local colors = {
         bg      = "#131A24",
@@ -148,12 +151,18 @@ return {
         hide_in_width = function()
           return vim.fn.winwidth(0) > 80
         end,
-        check_git_workspace = function()
-          local filepath = vim.fn.expand('%:p:h')
-          local gitdir = vim.fn.finddir('.git', filepath .. ';')
-          return gitdir and #gitdir > 0 and #gitdir < #filepath
-        end,
       }
+
+      local function diff_source()
+        local gitsigns = vim.b.gitsigns_status_dict
+        if gitsigns then
+          return {
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed
+          }
+        end
+      end
 
       local config = {
         extensions = {
@@ -248,9 +257,13 @@ return {
       }
 
       ins_left {
-        "branch",
+        function ()
+          return vim.b.gitsigns_head
+        end,
         icon = "",
-        condition = conditions.check_git_workspace,
+        cond = function ()
+          return vim.b.gitsigns_head ~= nil
+        end,
         color = {
           fg = colors.fg,
         }
@@ -264,6 +277,7 @@ return {
           modified = { fg = colors.orange },
           removed = { fg = colors.red },
         },
+        source = diff_source,
         cond = conditions.hide_in_width,
       }
 

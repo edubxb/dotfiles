@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd(
       "gitcommit",
       "gitrebase",
     },
-    command = "setlocal noswapfile",
+    command = "set nonumber noswapfile",
     group = git_ag
   }
 )
