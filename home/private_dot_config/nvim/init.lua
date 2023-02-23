@@ -56,5 +56,5 @@ require("lazy").setup("plugins", {
 })
 
 require("filetypes")
-require("mappings")
+require("keymaps")
 require("gui")
