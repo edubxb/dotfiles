@@ -300,7 +300,7 @@ return {
 
       ins_right {
         "filename",
-        condition = conditions.buffer_not_empty,
+        cond = conditions.buffer_not_empty,
         path = 1,
         symbols = {
           modified = "",
@@ -327,7 +327,6 @@ return {
       ins_right {
         "filetype",
         icons_enabled = true,
-        condition = conditions.buffer_not_empty,
         padding = {
           left = 0,
           right = 1
