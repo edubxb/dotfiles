@@ -309,6 +309,18 @@ return {
       }
 
       ins_right {
+        function()
+          return ""
+        end,
+        cond = function()
+          return vim.g.persisting
+        end,
+        padding = {
+          right = 2
+        },
+      }
+
+      ins_right {
         "filename",
         cond = conditions.buffer_not_empty,
         path = 1,
