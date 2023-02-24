@@ -75,16 +75,11 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
   "Filetype",
   {
-    pattern = "bash",
+    pattern = {
+      "bash",
+      "zsh",
+    },
     command = "let $SHELLCHECK_OPTS='--shell=bash'",
-    group = shell_ag
-  }
-)
-vim.api.nvim_create_autocmd(
-  "Filetype",
-  {
-    pattern = "zsh",
-    command = "let $SHELLCHECK_OPTS='--shell=zsh'",
     group = shell_ag
   }
 )
