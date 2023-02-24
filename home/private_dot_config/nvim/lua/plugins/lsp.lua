@@ -24,6 +24,7 @@ return {
       local lightbulb = require("nvim-lightbulb")
       local mason = require("mason")
       local mason_lspconfig = require("mason-lspconfig")
+      local mason_null_ls = require("mason-null-ls")
       local lspconfig = require("lspconfig")
       local null_ls = require("null-ls")
       local schemastore = require("schemastore")
@@ -263,14 +264,42 @@ return {
         end,
       }
 
+      mason_null_ls.setup({
+        automatic_setup = true,
+        ensure_installed = {
+          -- formatters
+          "markdownlint",
+          "stylua",
+          "yamlfmt",
+          -- linters
+          "actionlint",
+          "ansible-lint",
+          "commitlint",
+          "editorconfig-checker",
+          "gitlint",
+          "jsonlint",
+          "luacheck",
+          "markdownlint",
+          "shellcheck",
+          "tflint",
+          "yamllint",
+        },
+      })
+
+      mason_null_ls.setup_handlers({
+        function(source_name, methods)
+          require("mason-null-ls.automatic_setup")(source_name, methods)
+        end,
+        shellcheck = function(source_name, methods)
+            null_ls.register(null_ls.builtins.diagnostics.shellcheck.with({
+               filetypes = { "bash", "zsh", "sh" },
+            }))
+        end,
+      })
+
       null_ls.setup({
         sources = {
           null_ls.builtins.diagnostics.trail_space,
-          null_ls.builtins.diagnostics.shellcheck.with({
-            filetypes = { "bash", "zsh", "sh" },
-          }),
-          null_ls.builtins.formatting.markdownlint,
-          null_ls.builtins.formatting.stylua,
         },
         should_attach = function(bufnr)
           for _, filetype in pairs(window_filetypes) do
@@ -286,6 +315,7 @@ return {
           return true
         end,
       })
+
     end,
   }
 }
