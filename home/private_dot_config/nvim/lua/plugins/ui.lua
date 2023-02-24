@@ -168,8 +168,9 @@ return {
         extensions = {
           "fugitive",
           "neo-tree",
+          "nvim-dap-ui",
           "quickfix",
-          "symbols-outline"
+          "symbols-outline",
         },
         options = {
           component_separators = " ",
@@ -266,7 +267,10 @@ return {
         end,
         color = {
           fg = colors.fg,
-        }
+        },
+        padding = {
+          left = 2
+        },
       }
 
       ins_left {
@@ -279,6 +283,9 @@ return {
         },
         source = diff_source,
         cond = conditions.hide_in_width,
+        padding = {
+          right = 0
+        },
       }
 
       ins_left {
@@ -289,6 +296,9 @@ return {
           color_error = { fg = colors.red },
           color_warn = { fg = colors.yellow },
           color_info = { fg = colors.cyan },
+        },
+        padding = {
+          left = 2
         },
       }
 
