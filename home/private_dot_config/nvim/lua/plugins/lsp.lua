@@ -143,6 +143,12 @@ return {
         },
         dockerls = {},
         docker_compose_language_service = {},
+        groovyls = {
+          filetypes = {
+            "groovy",
+            "Jenkinsfile",
+          },
+        },
         gopls = {
           settings = {
             gopls = {
