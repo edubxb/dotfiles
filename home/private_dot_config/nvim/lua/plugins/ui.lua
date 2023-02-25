@@ -303,6 +303,14 @@ return {
       }
 
       ins_left {
+        "searchcount",
+        icon = "",
+        padding = {
+          left = 2
+        }
+      }
+
+      ins_left {
         function()
           return "%="
         end
