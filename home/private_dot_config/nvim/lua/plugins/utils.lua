@@ -10,9 +10,10 @@ return {
   },
   {
     "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end
+    opts = {
+      "*",
+      "!alpha",
+    },
   },
   {
     "numToStr/Comment.nvim",
