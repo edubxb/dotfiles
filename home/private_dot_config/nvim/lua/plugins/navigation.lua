@@ -26,17 +26,15 @@ return {
       "nvim-tree/nvim-web-devicons",
       "muniftanjim/nui.nvim",
     },
+    cmd = "Neotree",
+    keys = {
+      { "<leader>tt", "<cmd>Neotree float<CR>", desc = "NeoTree", remap = true },
+    },
     opts = {
       source_selector = {
         winbar = true,
       }
     },
-    config = function (_, opts)
-      local neotree = require("neo-tree")
-      neotree.setup(opts)
-
-      vim.api.nvim_set_keymap("n", "<Leader>tt", "<cmd>NeoTreeFloat<CR>", keymap_opts)
-    end
   },
   {
     "folke/trouble.nvim",
