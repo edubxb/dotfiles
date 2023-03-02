@@ -45,10 +45,6 @@ return {
         map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
       end
     },
-    config = function(_, opts)
-      local gitsigns = require("gitsigns")
-      gitsigns.setup(opts)
-    end,
   },
   {
     "hotwatermorning/auto-git-diff",
@@ -67,10 +63,6 @@ return {
     opts = {
       show_help_hints = false,
     },
-    config = function(_, opts)
-      local diffview = require("diffview")
-      diffview.setup(opts)
-    end
   },
   {
     "pwntester/octo.nvim",
