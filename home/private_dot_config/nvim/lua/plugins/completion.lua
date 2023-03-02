@@ -1,6 +1,7 @@
 return {
   {
     "l3mon4d3/luasnip",
+    build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets"
     },
@@ -21,12 +22,13 @@ return {
       "simrat39/symbols-outline.nvim",
       "windwp/nvim-autopairs",
     },
-    config = function(_, opts)
+    config = function()
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      local lsp = require("lspconfig")
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
+
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
