@@ -106,7 +106,7 @@ return {
       vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymap_opts)
 
-      local custom_on_attach = function(client, bufnr)
+      local on_attach = function(client, bufnr)
         illuminate.on_attach(client, bufnr)
         inlayhints.on_attach(client, bufnr)
 
@@ -131,7 +131,7 @@ return {
           keymap_opts)
       end
 
-      local updated_capabilities = cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = cmp_lsp.default_capabilities()
 
       local servers = {
         ansiblels = {},
@@ -255,9 +255,8 @@ return {
             vim.notify("LSP server \"" .. server_name .. "\" installed but no config defined")
           else
             local config = vim.tbl_deep_extend("force", {
-              -- on_init = custom_on_init,
-              on_attach = custom_on_attach,
-              capabilities = updated_capabilities,
+              on_attach = on_attach,
+              capabilities = capabilities,
               flags = {
                 -- debounce_text_changes = 150,
                 debounce_text_changes = nil,
