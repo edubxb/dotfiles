@@ -11,23 +11,20 @@ return {
   },
   {
     "b0o/incline.nvim",
-    config = function()
-      local incline = require("incline")
-      incline.setup {
-        hide = {
-          cursorline = false,
-          focused_win = true,
-          only_win = false
-        },
-        ignore = {
-          buftypes = "special",
-          filetypes = window_filetypes,
-          floating_wins = true,
-          unlisted_buffers = true,
-          wintypes = "special"
-        },
-      }
-    end
+    opts = {
+      hide = {
+        cursorline = false,
+        focused_win = true,
+        only_win = false
+      },
+      ignore = {
+        buftypes = "special",
+        filetypes = window_filetypes,
+        floating_wins = true,
+        unlisted_buffers = true,
+        wintypes = "special"
+      },
+    },
   },
   {
     "folke/zen-mode.nvim",
