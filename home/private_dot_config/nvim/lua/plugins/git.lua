@@ -60,7 +60,14 @@ return {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
     },
+    cmd = {
+      "DiffviewOpen"
+    },
+    keys = {
+      { "<leader>fh", "<cmd>DiffviewFileHistory %<CR>", desc = "Show current file git history", remap = true },
+    },
     opts = {
+      diff_binaries = true,
       show_help_hints = false,
     },
   },
