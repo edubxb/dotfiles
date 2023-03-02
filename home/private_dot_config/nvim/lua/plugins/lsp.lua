@@ -152,6 +152,10 @@ return {
         gopls = {
           settings = {
             gopls = {
+              analyses = {
+                unusedparams = true,
+                shadow = true,
+              },
               hints = {
                 assignVariableTypes = true,
                 compositeLiteralFields = true,
@@ -161,6 +165,9 @@ return {
                 parameterNames = true,
                 rangeVariableTypes = true,
               },
+              experimentalPostfixCompletions = true,
+              staticcheck = true,
+              usePlaceholders = true,
             },
           },
         },
