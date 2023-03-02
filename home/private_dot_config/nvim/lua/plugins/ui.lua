@@ -314,18 +314,6 @@ return {
       }
 
       ins_right {
-        function()
-          return ""
-        end,
-        cond = function()
-          return vim.g.persisting
-        end,
-        padding = {
-          right = 2
-        },
-      }
-
-      ins_right {
         "filename",
         cond = conditions.buffer_not_empty,
         path = 1,
@@ -515,7 +503,7 @@ return {
         button("f", "  · Find file", "<cmd>Telescope find_files<CR>"),
         button("r", "  · Recent files", "<cmd>Telescope oldfiles cwd_only=true<CR>"),
         button("p", "  · Projects", "<cmd>Neotree float dir=~/Area51/<CR>"),
-        button("s", "  · Sessions", "<cmd>Telescope persisted<CR>"),
+        button("s", "  · Sessions", "<cmd>Telescope persisted<CR>"),
         { type = "padding", val = 1 },
         button("u", "  · Update plugins", ":Lazy sync<CR>"),
         button("q", "  · Quit", ":qa<CR>"),
