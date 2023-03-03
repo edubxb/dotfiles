@@ -23,6 +23,9 @@ return {
       { "<leader>tt", "<cmd>Neotree float<CR>", desc = "NeoTree", remap = true },
     },
     opts = {
+      window = {
+        position = "right",
+      },
       source_selector = {
         winbar = true,
       }

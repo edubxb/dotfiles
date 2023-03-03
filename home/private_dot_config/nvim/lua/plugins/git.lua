@@ -69,6 +69,11 @@ return {
     opts = {
       diff_binaries = true,
       show_help_hints = false,
+      file_panel = {
+        win_config = {
+          position = "right",
+        },
+      },
     },
   },
   {
