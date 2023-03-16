@@ -27,13 +27,7 @@
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
-	cmd = nvim-gtk --no-fork -- -d \"${LOCAL}\" \"${REMOTE}\"
-[difftool "cdiff"]
-	cmd = cdiff --side-by-side --width=0 --color=auto \"${LOCAL}\" \"${REMOTE}\"
-[difftool "icdiff"]
-	cmd = icdiff -N -H --is-git-diff --tabsize=4 \"${LOCAL}\" \"${REMOTE}\" | ${PAGER}
-[difftool "difftastic"]
-	cmd = difft \"$LOCAL\" \"$REMOTE\"
+	cmd = nvim -d \"${LOCAL}\" \"${REMOTE}\"
 [merge]
 	conflictStyle = zdiff3
 	tool = fugitive
@@ -41,9 +35,9 @@
 	keepBackup = false
 	prompt = false
 [mergetool "vimdiff"]
-	cmd = nvim-gtk --no-fork -- -d \"${BASE}\" \"${LOCAL}\" \"${REMOTE}\" \"${MERGED}\"
+	cmd = nvim -d \"${BASE}\" \"${LOCAL}\" \"${REMOTE}\" \"${MERGED}\"
 [mergetool "fugitive"]
-	cmd = nvim-gtk --no-fork -- -c Gvdiffsplit! \"$MERGED\"
+	cmd = nvim -c Gvdiffsplit! \"${MERGED}\"
 [delta]
 	features = side-by-side line-numbers
 	hyperlinks = true
