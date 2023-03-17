@@ -280,7 +280,8 @@ return {
         automatic_setup = true,
         ensure_installed = {
           -- formatters
-          "markdownlint",
+          "pettrier",
+          "shfmt",
           "stylua",
           "yamlfmt",
           -- linters
@@ -291,8 +292,8 @@ return {
           "gitlint",
           "jsonlint",
           "luacheck",
-          "markdownlint",
           "shellcheck",
+          "shellharden",
           "tflint",
           "yamllint",
         },
