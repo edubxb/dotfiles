@@ -280,7 +280,7 @@ return {
         automatic_setup = true,
         ensure_installed = {
           -- formatters
-          "pettrier",
+          "prettier",
           "shfmt",
           "stylua",
           "yamlfmt",
