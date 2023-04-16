@@ -4,7 +4,6 @@ return {
     ft = "markdown",
     config = function()
       vim.g["pandoc#syntax#conceal#urls"] = 1
-      vim.g["pandoc#syntax#conceal#urls"] = 1
     end
   },
   {
