@@ -28,6 +28,10 @@ return {
       auto_load = false,
       theme = "light",
     },
+    filetype = {
+      "markdown",
+      "markdown.pandoc",
+    },
     config = function(_, opts)
       require("peek").setup(opts)
       vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
