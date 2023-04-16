@@ -297,17 +297,19 @@ return {
           "tflint",
           "yamllint",
         },
-      })
-
-      mason_null_ls.setup_handlers({
-        function(source_name, methods)
-          require("mason-null-ls.automatic_setup")(source_name, methods)
-        end,
-        shellcheck = function(source_name, methods)
+        handlers = {
+          function(source_name, methods)
+            require("mason-null-ls.automatic_setup")(source_name, methods)
+          end,
+          stylua = function(source_name, methods)
+            null_ls.register(null_ls.builtins.formatting.stylua)
+          end,
+          shellcheck = function(source_name, methods)
             null_ls.register(null_ls.builtins.diagnostics.shellcheck.with({
                filetypes = { "bash", "zsh", "sh" },
             }))
-        end,
+          end,
+        },
       })
 
       null_ls.setup({
