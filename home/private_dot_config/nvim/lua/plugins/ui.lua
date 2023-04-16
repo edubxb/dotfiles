@@ -257,6 +257,12 @@ return {
       ins_left {
         function ()
           return vim.b.gitsigns_head
+        --   local tag = vim.api.nvim_cmd("Git describe --tags --exact-match", true)
+        --   if vim.v.shell_error then
+        --     return " " .. vim.b.gitsigns_head
+        --   else
+        --     return " " .. tag
+        --   end
         end,
         icon = "",
         cond = function ()
@@ -410,6 +416,7 @@ return {
           filter = {
             event = "msg_show",
             kind = "",
+            -- find = "written",
           },
           opts = { skip = true },
         },
