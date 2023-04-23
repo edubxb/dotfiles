@@ -40,32 +40,27 @@ return {
     },
   },
   {
-    "narutoxy/silicon.lua",
-    dependencies = {
-      "nvim-lua/plenary.nvim"
-    },
-    cond = function() return vim.fn.executable("silicon") == 1 end,
+    "krivahtoo/silicon.nvim",
+    build = "./install.sh build",
     opts = {
-      theme = "auto",
-      output = vim.fn.expand("~/Pictures/Screenshots/neovim_${year}${month}${date}_${time}.png"),
-      bgColor = "#FFF0",
-      windowControls = false,
-      font = "JetBrains Mono Medium",
-      lineOffset = 1,
-      linePad = 2,
-      padHoriz = 40,
-      padVert = 40,
-      shadowBlurRadius = 10,
-      shadowColor = "#000000",
-      shadowOffsetX = 2,
-      shadowOffsetY = 6,
-    },
-    config = function(_, opts)
-      silicon = require("silicon")
-      silicon.setup(opts)
-
-      vim.keymap.set("v", "<Leader>ss", function() silicon.visualise_api({to_clip = true}) end)
-      vim.keymap.set("v", '<Leader>sb', function() silicon.visualise_api({to_clip = true, show_buf = true}) end)
-    end
+      output = {
+        path = vim.fn.expand("~/Pictures/Screenshots/"),
+        format = "neovim_[year][month][day]_[hour][minute][second].png",
+      },
+      font = "JetBrainsMono=11",
+      theme = "Nord",
+      background = "#FFF0",
+      shadow = {
+        blur_radius = 10,
+        offset_x = 2,
+        offset_y = 6,
+        color = "#000"
+      },
+      pad_horiz = 40,
+      pad_vert = 40,
+      line_number = true,
+      round_corner = true,
+      window_controls = false,
+    }
   }
 }
