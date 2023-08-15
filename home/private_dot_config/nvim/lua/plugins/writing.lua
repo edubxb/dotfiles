@@ -25,7 +25,7 @@ return {
     build = "deno task --quiet build:fast",
     ft = "markdown",
     opts = {
-      auto_load = false,
+      auto_load = true,
       theme = "light",
     },
     filetype = {
