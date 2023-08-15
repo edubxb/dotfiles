@@ -83,10 +83,6 @@ export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
 
-## adsf-vm ##
-source "${HOME}/.asdf/asdf.sh"
-source "${HOME}/.asdf/completions/asdf.bash"
-
 ## poetry ##
 source <(poetry completions bash)
 
@@ -103,9 +99,6 @@ export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
 ## taskwarrior ##
 export TASKRC="${CONFIG_PATH}/taskrc"
 export VIT_DIR="${CONFIG_PATH}/vit"
-
-## timewarrior ##
-export TIMEWARRIORDB="${CONFIG_PATH}/timewarrior"
 
 ## navi ##
 export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
