@@ -1,6 +1,11 @@
+### git ###
+# worktrees
+wkts
+
 ### env stuff ###
 .direnv
 .envrc
+.rtx.local.toml
 
 ### mergetool backups ###
 *.orig
@@ -25,9 +30,6 @@ cscope.files
 
 # venvs
 .venv
-
-# pyenv
-.python-version
 
 # rope
 .ropeproject/
