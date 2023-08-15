@@ -1,1 +1,1 @@
-VIRTUAL_ENV="${PWD}/.venv/$(basename ${PWD})"
+VIRTUAL_ENV="$(git rev-parse --show-toplevel)/.venv/$(basename ${PWD})"
