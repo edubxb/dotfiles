@@ -1,6 +1,4 @@
 return {
-  "direnv/direnv.vim",
-  "editorconfig/editorconfig-vim",
   "tpope/vim-repeat",
   {
     "kylechui/nvim-surround",

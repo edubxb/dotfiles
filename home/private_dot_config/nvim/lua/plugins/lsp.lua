@@ -283,7 +283,6 @@ return {
           "prettier",
           "shfmt",
           "stylua",
-          "yamlfmt",
           -- linters
           "actionlint",
           "ansible-lint",
