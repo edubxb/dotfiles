@@ -38,27 +38,27 @@ return {
     },
   },
   {
-    "krivahtoo/silicon.nvim",
-    build = "./install.sh build",
+    "michaelrommel/nvim-silicon",
     opts = {
-      output = {
-        path = vim.fn.expand("~/Pictures/Screenshots/"),
-        format = "neovim_[year][month][day]_[hour][minute][second].png",
-      },
-      font = "JetBrainsMono=11",
+      to_clipboard = true,
+      font = "JetBrainsMono Nerd Font=15",
       theme = "Nord",
       background = "#FFF0",
-      shadow = {
-        blur_radius = 10,
-        offset_x = 2,
-        offset_y = 6,
-        color = "#000"
-      },
-      pad_horiz = 40,
-      pad_vert = 40,
-      line_number = true,
-      round_corner = true,
-      window_controls = false,
+	  shadow_blur_radius = 10,
+	  shadow_offset_x = 4,
+	  shadow_offset_y = 8,
+	  shadow_color = "#000",
+      pad_horiz = 20,
+      pad_vert = 20,
+	  no_line_number = false,
+      no_round_corner = false,
+	  no_window_controls = true,
+	  gobble = true,
+
+	  output = function()
+        return vim.fn.expand("~/Pictures/Screenshots/neovim_") .. os.date("!%Y-%m-%dT%H-%M-%S") .. ".png"
+	  end,
+      window_title = nil,
     }
   }
 }
