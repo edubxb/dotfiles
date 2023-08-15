@@ -513,6 +513,7 @@ return {
         button("s", "  · Sessions", "<cmd>Telescope persisted<CR>"),
         { type = "padding", val = 1 },
         button("u", "  · Update plugins", ":Lazy sync<CR>"),
+        button("i", "  · Update tools", ":Mason<CR>"),
         button("q", "  · Quit", ":qa<CR>"),
       }
 
@@ -525,7 +526,7 @@ return {
       dashboard.section.footer.opts.hl = "Character"
 
       dashboard.config.layout = {
-        { type = "padding", val = 10 },
+        { type = "padding", val = 8 },
         dashboard.section.header,
         { type = "padding", val = 3 },
         dashboard.section.buttons,
