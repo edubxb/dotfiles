@@ -1,6 +1,8 @@
 function fp {
-  local directory_list="$(tr ':' '\n' <<< ${PROJECTS_PATH})"
-  local projects=$(
+  local directory_list projects target
+
+  directory_list="$(tr ':' '\n' <<< ${PROJECTS_PATH})"
+  projects=$(
     for ppath in ${=directory_list}; do
       echo ${ppath}/* | sed "s|$HOME/||g" | tr ' ' '\n' | sed -E 's|([^ ]+)/([^/]+)|\\e[3m\1\\e[0m \2|'
     done
@@ -116,13 +118,12 @@ function ec2sh {
   shift
 
   local target
-  local host
   local instance
-  local msg
   local address_idx=2
 
   _IFS="${IFS}"
   IFS=$'\n'
+
   target=( $(aws ec2 describe-instances --profile ${profile} --output=text \
                  --query "Reservations[].Instances[][InstanceId,PrivateIpAddress,PublicIpAddress,State.Name,LaunchTime]" \
                  --filters Name=instance-state-name,Values=running  |
@@ -180,37 +181,38 @@ function gcesh {
     configuration="$(gcloud config configurations list | grep True | cut -d' ' -f1)"
   fi
 
-  shift
+  shift $#
 
-  local target
-  local host
-  local instance
-  local msg
-  local address_idx=2
+  local instance instances name target zone
 
   _IFS="${IFS}"
   IFS=$'\n'
-  target=( $(gcloud compute instances list --configuration ${configuration} \
+  target=( $(gcloud compute instances list --configuration "${configuration}" \
                     --filter="status:running" \
                     --format="table[no-heading](name:sort=1, zone:label=zone, networkInterfaces[0].networkIP, networkInterfaces[0].accessConfigs[0].natIP)" |
                 fzf --sync --no-hscroll -d ' +' --multi \
-                    --with-nth 1..4 --nth 1,2 \
+                    --with-nth 1..4 --nth 1 \
                     --expect=enter \
                     --bind 'ctrl-t:toggle-all' \
-                    --preview-window right:60%:wrap \
+                    --preview-window right:50%:wrap \
                     --preview "__gce_show ${configuration} {2} {1}" \
-                    --prompt " ${configuration} ❯ " --ansi -q "$*" |
-                 tr -s " " | tr " " "\t" | cut -f 1,2) )
+                    --preview "gcloud compute instances describe --configuration ${configuration} --zone {2} --format='yaml(id,tags,labels,networkInterfaces)' {1} | bat -f -p -l yaml" \
+                    --prompt " ${configuration} > " --ansi -q "$*") )
   IFS="${_IFS}"
 
   if [[ -n "${target}" ]]; then
-    key_bind="${target[0]}"
+    key_bind="${target[@]:0:1}"
     instances=( "${target[@]:1}" )
     if [[ ${key_bind} = 'enter' ]]; then
+      name=$((tr -s " " | cut -d " " -f 1) <<< ${instances[1]})
+      zone=$((tr -s " " | cut -d " " -f 2) <<< ${instances[1]})
+      kitty @ launch --type tab --tab-title "gcloud_ssh" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
+      kitty @ goto-layout --match "title:gcloud_ssh" grid
       for instance in "${instances[@]:1}"; do
-        kitty @ launch gcloud compute ssh --configuration ${configuration} --zone $(cut -f 2 <<< ${instance}) --tunnel-through-iap $(cut -f 1 <<< ${instance}) &> /dev/null
+        name=$((tr -s " " | cut -d " " -f 1) <<< ${instance})
+        zone=$((tr -s " " | cut -d " " -f 2) <<< ${instance})
+        kitty @ launch --match "title:gcloud_ssh" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
       done
-      gcloud compute ssh --configuration ${configuration} --zone $(cut -f 2 <<< ${instances[0]}) --tunnel-through-iap $(cut -f 1 <<< ${instances[0]}) 2> /dev/null
     fi
   fi
 }
@@ -219,9 +221,8 @@ function tfsb {
   local resources
   resources=$(terraform state list) || return
 
-  terraform state list | \
   fzf --sync --no-hscroll -d ' +' \
       --preview-window down:70%:wrap \
       --preview "terraform state show -no-color {1} | batcat -f -p -l hcl" \
-      --ansi -q "$*"
+      --ansi -q "$*" <<< ${resources}
 }
