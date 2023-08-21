@@ -27,7 +27,7 @@ window_filenames = {
 
 keymap_opts = {
   noremap = true,
-  silent = false
+  silent = false,
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -50,8 +50,8 @@ require("lazy").setup("plugins", {
   },
   install = {
     colorscheme = {
-      my_colorscheme
-    }
+      my_colorscheme,
+    },
   },
 })
 
