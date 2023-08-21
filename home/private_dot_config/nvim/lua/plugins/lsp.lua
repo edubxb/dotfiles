@@ -6,7 +6,6 @@ return {
       "folke/trouble.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/nvim-cmp",
-      "j-hui/fidget.nvim",
       "jay-babu/mason-null-ls.nvim",
       "jose-elias-alvarez/null-ls.nvim",
       "kosayoda/nvim-lightbulb",
@@ -18,7 +17,6 @@ return {
     },
     config = function()
       local cmp_lsp = require("cmp_nvim_lsp")
-      local fidget = require("fidget")
       local illuminate = require("illuminate")
       local inlayhints = require("lsp-inlayhints")
       local lightbulb = require("nvim-lightbulb")
@@ -52,12 +50,6 @@ return {
           group = illuminate_visual_ag,
         }
       )
-
-      fidget.setup({
-        text = {
-          spinner = "dots_pulse"
-        }
-      })
 
       inlayhints.setup()
       trouble.setup()
