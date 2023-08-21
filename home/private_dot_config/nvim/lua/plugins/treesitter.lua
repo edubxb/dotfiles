@@ -1,9 +1,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "hiphish/nvim-ts-rainbow2",
-    },
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
@@ -11,12 +8,32 @@ return {
       highlight = {
         enable = true
       },
-      rainbow = {
-        enable = true,
+      illuminate = {
+        enable = true
       },
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
-  }
+  },
+  {
+    "hiphish/rainbow-delimiters.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      local rainbow_delimiters = require("rainbow-delimiters")
+      vim.g.rainbow_delimiters = {
+        highlight = {
+          "TSRainbowRed",
+          "TSRainbowYellow",
+          "TSRainbowBlue",
+          "TSRainbowOrange",
+          "TSRainbowGreen",
+          "TSRainbowViolet",
+          "TSRainbowCyan",
+        },
+      }
+    end,
+  },
 }
