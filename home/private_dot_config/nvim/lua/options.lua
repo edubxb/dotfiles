@@ -108,4 +108,3 @@ vim.o.virtualedit = "onemore"
 vim.o.wildignore = "*.swp,.*bak,.*pyc,*.class,.*jar,*.o"
 
 vim.o.background = "dark"
-vim.api.nvim_command("syntax enable")
