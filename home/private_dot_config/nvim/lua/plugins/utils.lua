@@ -60,5 +60,9 @@ return {
 	  end,
       window_title = nil,
     }
-  }
+  },
+  {
+    "mvaldes14/terraform.nvim",
+    ft = "terraform",
+  },
 }
