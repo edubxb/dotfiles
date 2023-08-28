@@ -59,7 +59,6 @@ vim.o.cpoptions = "aABceFsn_"
 vim.o.ignorecase = true
 vim.o.magic = true
 vim.o.smartcase = true
-vim.o.cscopetag = true
 
 -- Insert mode completion
 vim.o.completeopt = "menu,menuone,noselect"
@@ -98,7 +97,6 @@ vim.o.foldnestmax = 2
 -- Other Settings
 vim.g.localmapleader = " "
 vim.g.mapleader = " "
-vim.o.pastetoggle = "F2"
 vim.o.autochdir = false
 vim.o.backup = false
 vim.o.hidden = true
