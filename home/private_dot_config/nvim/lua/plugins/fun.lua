@@ -1,5 +1,10 @@
 return {
-  "eandrju/cellular-automaton.nvim",
+  {
+    "eandrju/cellular-automaton.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    }
+  },
   {
     "giusgad/pets.nvim",
     dependencies = {
