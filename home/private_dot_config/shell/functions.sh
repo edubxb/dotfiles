@@ -4,11 +4,11 @@ function fp {
   directory_list="$(tr ':' '\n' <<< ${PROJECTS_PATH})"
   projects=$(
     for ppath in ${=directory_list}; do
-      echo ${ppath}/* | sed "s|$HOME/||g" | tr ' ' '\n' | sed -E 's|([^ ]+)/([^/]+)|\\e[3m\1\\e[0m \2|'
+      fdfind -t d --exact-depth 1 --search-path ${ppath} | sed -E -e "s|$HOME/||g" -e 's|([^ ]+)/([^/]+)/|\\e[3m\1\\e[0m \2|'
     done
   )
   target=( $(echo -en "${projects}" |
-             fzf --height 50% --no-hscroll -n 2 --ansi -1 -q "$*" \
+             fzf --height 50% --no-hscroll -n 2 --ansi -1 \
              --preview 'echo; clear; glow --style dark $(fdfind README.{md,rst,txt} ${HOME}/{1}/{2} 2> /dev/null | tail -n1)') ) || return
   cd "${HOME}/${target[1]}/${target[2]}"
 }
