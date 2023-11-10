@@ -1,6 +1,12 @@
 require("options")
 
+-- for finding luarocks packages --
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+--
+
 projects_path = vim.split(os.getenv("PROJECTS_PATH"), ":")
+pkb_home = os.getenv("PKB_HOME")
 
 my_colorscheme = "nightfox"
 
@@ -58,3 +64,4 @@ require("lazy").setup("plugins", {
 require("filetypes")
 require("keymaps")
 require("gui")
+
