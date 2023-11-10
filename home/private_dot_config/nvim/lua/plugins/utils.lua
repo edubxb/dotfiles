@@ -4,7 +4,7 @@ return {
     "kylechui/nvim-surround",
     config = function()
       require("nvim-surround").setup()
-    end
+    end,
   },
   {
     "norcalli/nvim-colorizer.lua",
@@ -17,19 +17,19 @@ return {
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
-    end
+    end,
   },
   {
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup()
-    end
+    end,
   },
   {
     "folke/todo-comments.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-    }
+    },
   },
   {
     "rest-nvim/rest.nvim",
@@ -44,22 +44,21 @@ return {
       font = "JetBrainsMono Nerd Font=15",
       theme = "Nord",
       background = "#FFF0",
-	  shadow_blur_radius = 10,
-	  shadow_offset_x = 4,
-	  shadow_offset_y = 8,
-	  shadow_color = "#000",
+      shadow_blur_radius = 10,
+      shadow_offset_x = 4,
+      shadow_offset_y = 8,
+      shadow_color = "#000",
       pad_horiz = 20,
       pad_vert = 20,
-	  no_line_number = false,
+      no_line_number = false,
       no_round_corner = false,
-	  no_window_controls = true,
-	  gobble = true,
-
-	  output = function()
+      no_window_controls = true,
+      gobble = true,
+      output = function()
         return vim.fn.expand("~/Pictures/Screenshots/neovim_") .. os.date("!%Y-%m-%dT%H-%M-%S") .. ".png"
-	  end,
+      end,
       window_title = nil,
-    }
+    },
   },
   {
     "mvaldes14/terraform.nvim",

@@ -4,7 +4,7 @@ return {
     ft = "markdown",
     config = function()
       vim.g["pandoc#syntax#conceal#urls"] = 1
-    end
+    end,
   },
   {
     "mzlogin/vim-markdown-toc",
@@ -18,7 +18,7 @@ return {
       vim.g.vim_markdown_frontmatter = 1
       vim.g.vim_markdown_new_list_item_indent = 2
       vim.g.vim_markdown_strikethrough = 1
-    end
+    end,
   },
   {
     "toppair/peek.nvim",
