@@ -51,19 +51,23 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     opts = {
-      bufname_exclude = window_filetypes,
-      filetype_exclude = window_filetypes,
-      buftype_exclude = {"terminal"},
-      char = "┊",
-      char_highligh_list = {"SpecialKey"},
-      show_current_context = true,
-      show_end_of_line = true,
-      show_trailing_blankline_indent = true,
-      space_char_blankline = " ",
+      exclude = {
+        filetypes = window_filetypes,
+        buftypes = { "terminal" },
+      },
+      indent = {
+        char = "┊",
+        tab_char = "┊",
+        highlight = { "SpecialKey" },
+      },
+      scope = {
+        show_end = true,
+      },
     },
     config = function (_, opts)
-      require("indent_blankline").setup(opts)
+      require("ibl").setup(opts)
 
       vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { link = "IndentBlanklineSpaceChar" })
     end
