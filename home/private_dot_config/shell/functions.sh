@@ -4,11 +4,11 @@ function fp {
   directory_list="$(tr ':' '\n' <<< ${PROJECTS_PATH})"
   projects=$(
     for ppath in ${=directory_list}; do
-      fdfind -t d --exact-depth 1 --search-path ${ppath} | sed -E -e "s|$HOME/||g" -e 's|([^ ]+)/([^/]+)/|\\e[3m\1\\e[0m \2|'
+      echo ${ppath}/* | sed "s|$HOME/||g" | tr ' ' '\n' | sed -E 's|([^ ]+)/([^/]+)|\\e[3m\1\\e[0m \2|'
     done
   )
   target=( $(echo -en "${projects}" |
-             fzf --height 50% --no-hscroll -n 2 --ansi -1 \
+             fzf --height 50% --no-hscroll -n 2 --ansi -1 -q "$*" \
              --preview 'echo; clear; glow --style dark $(fdfind README.{md,rst,txt} ${HOME}/{1}/{2} 2> /dev/null | tail -n1)') ) || return
   cd "${HOME}/${target[1]}/${target[2]}"
 }
@@ -183,7 +183,7 @@ function gcesh {
 
   shift $#
 
-  local instance instances name target zone
+  local instance instances name target zone session
 
   _IFS="${IFS}"
   IFS=$'\n'
@@ -206,23 +206,29 @@ function gcesh {
     if [[ ${key_bind} = 'enter' ]]; then
       name=$((tr -s " " | cut -d " " -f 1) <<< ${instances[1]})
       zone=$((tr -s " " | cut -d " " -f 2) <<< ${instances[1]})
-      kitty @ launch --type tab --tab-title "gcloud_ssh" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
-      kitty @ goto-layout --match "title:gcloud_ssh" grid
+      session="gcloud_ssh#$(((RANDOM % 99) + 1))"
+      kitty @ launch --type tab --tab-title "${session}" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
+      kitty @ goto-layout --match "title:${session}" grid
       for instance in "${instances[@]:1}"; do
         name=$((tr -s " " | cut -d " " -f 1) <<< ${instance})
         zone=$((tr -s " " | cut -d " " -f 2) <<< ${instance})
-        kitty @ launch --match "title:gcloud_ssh" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
+        kitty @ launch --match "title:${session}" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
       done
     fi
   fi
 }
 
 function tfsb {
-  local resources
-  resources=$(terraform state list) || return
+  local resources state_file
+
+  state_file="$(mktemp /tmp/tfstate.XXXXX)"
+  terraform state pull > "${state_file}" || return
+  resources=$(jq -r '.resources[] | [.module // empty, .type, .name] | join(".") | sort' < "${state_file}") || return
 
   fzf --sync --no-hscroll -d ' +' \
       --preview-window down:70%:wrap \
-      --preview "terraform state show -no-color {1} | batcat -f -p -l hcl" \
+      --preview "jq -r {1} < "${state_file}" | batcat -f -p -l json" \
       --ansi -q "$*" <<< ${resources}
+
+  rm -f "${state_file}"
 }

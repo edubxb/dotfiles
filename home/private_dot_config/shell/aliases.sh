@@ -25,7 +25,7 @@ alias nuke='killall -9 '
 alias yank='yank-cli'
 
 ## yarn ##
-alias yarm='yarnpkg'
+alias yarn='yarnpkg'
 
 ## colors are wonderful ##
 alias ip='ip --color'
