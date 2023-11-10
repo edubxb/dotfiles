@@ -24,6 +24,9 @@ alias nuke='killall -9 '
 ## yank ##
 alias yank='yank-cli'
 
+## yarn ##
+alias yarm='yarnpkg'
+
 ## colors are wonderful ##
 alias ip='ip --color'
 
@@ -34,7 +37,7 @@ alias open='xdg-open'
 alias ls='lsd --group-dirs first'
 alias ll='lsd -l --group-dirs first'
 alias lla='lsd -la --group-dirs first'
-alias tree='lsd --tree'
+alias tree='lsd --tree --group-directories-first'
 
 ## k8s ##
 alias kube='kubectl'
