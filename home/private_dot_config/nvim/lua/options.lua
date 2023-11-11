@@ -49,6 +49,7 @@ vim.o.showtabline = 2
 vim.o.signcolumn = "yes"
 vim.o.statuscolumn = "%=%l %s%C"
 vim.o.splitbelow = true
+vim.o.splitkeep = "screen"
 vim.o.splitright = true
 vim.o.title = true
 vim.o.wrap = true
