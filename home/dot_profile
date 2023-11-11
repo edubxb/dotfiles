@@ -21,18 +21,20 @@ if [ -d "${CARGO_HOME}/bin" ]; then
   PATH="${CARGO_HOME}/bin:${PATH}"
 fi
 
-## ruby gems ##
-RUBY_VERSION="$(gem env | grep "RUBY VERSION" | cut -d " " -f 6)"
-export GEM_HOME="${HOME}/.local/lib/ruby/${RUBY_VERSION}"
-export GEM_PATH="${GEM_HOME}"
-if [ -d "${GEM_PATH}/bin" ]; then
-  export PATH="${GEM_PATH}/bin:${PATH}"
+## ruby ##
+if type gem > /dev/null; then
+  RUBY_VERSION="$(gem env | grep "RUBY VERSION" | cut -d " " -f 6)"
+  export GEM_HOME="${HOME}/.local/lib/ruby/${RUBY_VERSION}"
+  export GEM_PATH="${GEM_HOME}"
+  if [ -d "${GEM_PATH}/bin" ]; then
+    export PATH="${GEM_PATH}/bin:${PATH}"
+  fi
 fi
 
 ## npm ##
 export NPM_CONFIG_USERCONFIG="${HOME}/.config/npmrc"
 export NPM_PACKAGES="${HOME}/.local/lib/npm"
-export MANPATH="$(manpath):${NPM_PACKAGES}/share/man"
+export MANPATH="$(manpath -q):${NPM_PACKAGES}/share/man"
 if [ -d "${NPM_PACKAGES}/bin" ]; then
   export PATH="${NPM_PACKAGES}/bin:${PATH}"
 fi
