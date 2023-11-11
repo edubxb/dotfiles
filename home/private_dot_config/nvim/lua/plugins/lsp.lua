@@ -63,7 +63,7 @@ return {
           enabled = true,
         }
       })
-      vim.fn.sign_define("LightBulbSign", { text = "襁", texthl = "", linehl = "", numhl = "" })
+      vim.fn.sign_define("LightBulbSign", { text = "󰖷 ", texthl = "", linehl = "", numhl = "" })
 
       vim.g.symbols_outline = {
         highlight_hovered_item = false,
@@ -72,8 +72,7 @@ return {
         auto_preview = false,
       }
 
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-      -- local signs = {Error = "", Warn = "", Hint = "", Info = ""}
+      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = "󰋽 " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

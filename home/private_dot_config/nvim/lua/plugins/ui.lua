@@ -298,7 +298,7 @@ return {
       ins_left {
         "diagnostics",
         sources = { "nvim_diagnostic" },
-        symbols = { error = " ", warn = " ", hint = " ", info = " " },
+        symbols = { error = " ", warn = " ", hint = "󰌵 ", info = " " },
         diagnostics_color = {
           color_error = { fg = colors.red },
           color_warn = { fg = colors.yellow },
@@ -311,7 +311,7 @@ return {
 
       ins_left {
         "searchcount",
-        icon = "",
+        icon = "󰍉",
         padding = {
           left = 2
         }
@@ -509,16 +509,17 @@ return {
       }
 
       dashboard.section.buttons.val = {
-        button("e", "  · New file" , "<cmd>ene<BAR> startinsert<CR>"),
+        button("e", "󰃉  · New file" , "<cmd>ene<BAR> startinsert<CR>"),
         { type = "padding", val = 1 },
-        button("f", "  · Find file", "<cmd>Telescope find_files<CR>"),
-        button("r", "  · Recent files", "<cmd>Telescope oldfiles cwd_only=true<CR>"),
-        button("p", "  · Projects", "<cmd>Neotree float dir=~/Area51/<CR>"),
-        button("s", "  · Sessions", "<cmd>Telescope persisted<CR>"),
+        button("f", "󰍉  · Find file", "<cmd>Telescope find_files<CR>"),
+        button("r", "󰋚  · Recent files", "<cmd>Telescope oldfiles cwd_only=true<CR>"),
+        button("p", "󰙴  · Projects", "<cmd>Neotree float dir=~/Area51/<CR>"),
+        button("s", "󰉓  · Sessions", "<cmd>Telescope persisted<CR>"),
         { type = "padding", val = 1 },
-        button("u", "  · Update plugins", ":Lazy sync<CR>"),
-        button("i", "  · Update tools", ":Mason<CR>"),
-        button("q", "  · Quit", ":qa<CR>"),
+        button("u", "󰁪  · Update plugins", ":Lazy sync<CR>"),
+        button("t", "󰁪  · Update tools", ":Mason<CR>"),
+        { type = "padding", val = 1 },
+        button("q", "󰍃  · Quit", ":qa<CR>"),
       }
 
       local handle = io.popen("/usr/games/fortune bofh-excuses")
