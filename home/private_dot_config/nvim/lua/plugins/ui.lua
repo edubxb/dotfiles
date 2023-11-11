@@ -516,8 +516,8 @@ return {
         button("p", "󰙴  · Projects", "<cmd>Neotree float dir=~/Area51/<CR>"),
         button("s", "󰉓  · Sessions", "<cmd>Telescope persisted<CR>"),
         { type = "padding", val = 1 },
-        button("u", "󰁪  · Update plugins", ":Lazy sync<CR>"),
-        button("t", "󰁪  · Update tools", ":Mason<CR>"),
+        button("u", "󱑠  · Update plugins", ":Lazy sync<CR>"),
+        button("t", "󱁤  · Manage external tools", ":Mason<CR>"),
         { type = "padding", val = 1 },
         button("q", "󰍃  · Quit", ":qa<CR>"),
       }
