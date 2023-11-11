@@ -17,8 +17,8 @@ fi
 ## rust ##
 export CARGO_HOME="${HOME}/.config/cargo"
 export RUSTUP_HOME="${HOME}/.config/rustup"
-if [ -f "${CARGO_HOME}/env" ]; then
-  source "${CARGO_HOME}/env"
+if [ -d "${CARGO_HOME}/bin" ]; then
+  PATH="${CARGO_HOME}/bin:${PATH}"
 fi
 
 ## ruby gems ##
