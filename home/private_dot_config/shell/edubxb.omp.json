@@ -13,14 +13,18 @@
         {
           "foreground": "white",
           "properties": {
+            "branch_ahead_icon": "󰁝",
+            "branch_behind_icon": "󰁅",
+            "branch_gone_icon": "",
             "branch_icon": " ",
-            "fetch_status": true,
-            "fetch_stash_count": true,
+            "branch_identical_icon": "",
             "commit_icon": "",
+            "fetch_stash_count": true,
+            "fetch_status": true,
             "tag_icon": " "
           },
           "style": "plain",
-          "template": "<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
+          "template": "<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} [{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }} ]{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} ",
           "type": "git"
         },
         {
@@ -42,7 +46,7 @@
           "type": "project",
           "style": "plain",
           "foreground": "yellow",
-          "template": "<b> {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b> "
+          "template": "<b>󰏗 {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b> "
         }
       ],
       "type": "prompt"
@@ -53,7 +57,7 @@
         {
           "style": "plain",
           "foreground": "yellow",
-          "template": "<b> {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b> ",
+          "template": "<b>󰇧 {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b> ",
           "properties": {
             "fetch_version": true
           },
@@ -68,7 +72,7 @@
         {
           "style": "plain",
           "foreground": "green",
-          "template": "<b> {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b> ",
+          "template": "<b>󰌠 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b> ",
           "properties": {
             "display_mode": "context"
           },
@@ -84,7 +88,7 @@
         {
           "style": "plain",
           "foreground": "white",
-          "template": " {{ .FormattedMs }}",
+          "template": "󰅒 {{ .FormattedMs }}",
           "properties": {
             "threshold": 30000,
             "style": "round"
@@ -154,7 +158,7 @@
   ],
   "transient_prompt": {
     "foreground": "white",
-    "template": " {{ now | date \"15:04:05\" }}  "
+    "template": " {{ now | date \"15:04:05\" }}  "
   },
   "final_space": true,
   "version": 2
