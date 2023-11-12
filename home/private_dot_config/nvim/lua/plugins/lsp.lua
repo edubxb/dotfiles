@@ -2,7 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "b0o/schemastore.nvim",
       "folke/trouble.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/nvim-cmp",
@@ -25,7 +24,6 @@ return {
       local mason_null_ls = require("mason-null-ls")
       local lspconfig = require("lspconfig")
       local null_ls = require("null-ls")
-      local schemastore = require("schemastore")
       local trouble = require("trouble")
 
       illuminate.configure({
@@ -227,7 +225,20 @@ return {
               hover = true,
               completion = true,
               validate = true,
-              schemas = schemastore.json.schemas(),
+              schemaStore = {
+                 enable = true,
+                 url = "https://www.schemastore.org/api/json/catalog.json",
+              },
+              schemas = {
+                kubernetes = {
+                    "configmap.y*ml",
+                    "cronjob.y*ml",
+                    "deployment.y*ml",
+                    "hpa.y*ml",
+                    "ingress.y*ml",
+                    "service.y*ml",
+                },
+            },
             },
           },
           filetypes = {
