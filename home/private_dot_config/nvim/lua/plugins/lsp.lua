@@ -65,12 +65,12 @@ return {
         sign = {
           enabled = true,
           priority = 10,
+          text = "󰖷 ",
         },
         autocmd = {
           enabled = true,
         }
       })
-      vim.fn.sign_define("LightBulbSign", { text = "󰖷 ", texthl = "", linehl = "", numhl = "" })
 
       vim.g.symbols_outline = {
         highlight_hovered_item = false,
