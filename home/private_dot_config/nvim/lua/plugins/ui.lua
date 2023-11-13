@@ -167,7 +167,6 @@ return {
 
       local config = {
         extensions = {
-          "fugitive",
           "neo-tree",
           "nvim-dap-ui",
           "quickfix",
