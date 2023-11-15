@@ -1,14 +1,5 @@
 return {
   {
-    "wansmer/symbol-usage.nvim",
-    event = "LspAttach",
-    config = function()
-    require("symbol-usage").setup({
-      vt_position = "textwidth"
-    })
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "folke/trouble.nvim",
