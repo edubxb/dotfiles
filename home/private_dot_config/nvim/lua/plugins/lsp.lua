@@ -77,20 +77,19 @@ return {
       end
 
       vim.diagnostic.config({
-        virtual_text = {
-          source = "always",
-        },
         float = {
+          border = "rounded",
           source = "always",
         },
+        severity_sort = false,
         signs = true,
         underline = false,
         update_in_insert = true,
-        severity_sort = false,
+        virtual_text = false, 
       })
 
       vim.api.nvim_set_keymap("n", "<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", keymap_opts)
-      vim.api.nvim_set_keymap("n", "<Leader>et", "<cmd>TroubleToggle<CR>", keymap_opts)
+      vim.api.nvim_set_keymap("n", "<Leader>et", "<cmd>TroubleToggle document_diagnostics<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymap_opts)
