@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd(
   },
   {
     pattern = "*.md",
-    command = "setlocal ft=markdown.pandoc textwidth=100",
+    command = "setlocal textwidth=100",
     group = filetypes_ag
   }
 )
@@ -60,6 +60,15 @@ vim.api.nvim_create_autocmd(
     group = git_ag
   }
 )
+vim.api.nvim_create_autocmd(
+  "Filetype",
+  {
+    pattern = "gitconfig",
+    command = "setlocal ts=4 sts=4 sw=4 noexpandtab",
+    group = git_ag
+  }
+)
+
 
 local shell_ag = vim.api.nvim_create_augroup("shell", {})
 vim.api.nvim_create_autocmd(
@@ -83,16 +92,6 @@ vim.api.nvim_create_autocmd(
     },
     command = "let $SHELLCHECK_OPTS='--shell=bash'",
     group = shell_ag
-  }
-)
-
-local git_config_ag = vim.api.nvim_create_augroup("git_config", {})
-vim.api.nvim_create_autocmd(
-  "Filetype",
-  {
-    pattern = "gitconfig",
-    command = "setlocal ts=4 sts=4 sw=4 noexpandtab",
-    group = filetypes_ag
   }
 )
 
