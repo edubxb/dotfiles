@@ -1,10 +1,5 @@
 return {
   {
-    "vim-pandoc/vim-pandoc-syntax",
-    ft = "markdown",
-    config = function()
-      vim.g["pandoc#syntax#conceal#urls"] = 1
-    end,
   },
   {
     "mzlogin/vim-markdown-toc",
