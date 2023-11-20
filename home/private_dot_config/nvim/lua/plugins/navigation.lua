@@ -55,6 +55,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
+      "nvim-telescope/telescope-github.nvim",
       "olimorris/persisted.nvim",
       "rcarriga/nvim-notify",
     },
