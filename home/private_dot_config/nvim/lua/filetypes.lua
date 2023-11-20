@@ -51,10 +51,12 @@ vim.api.nvim_create_autocmd(
   "Filetype",
   {
     pattern = {
+      "diff",
+      "git.nvim",
       "gitcommit",
       "gitrebase",
     },
-    command = "set nonumber noswapfile",
+    command = "setlocal nonumber noswapfile nolist signcolumn=no",
     group = git_ag
   }
 )
