@@ -56,6 +56,7 @@ return {
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
       "nvim-telescope/telescope-github.nvim",
+      "nvim-telescope/telescope-media-files.nvim",
       "olimorris/persisted.nvim",
       "rcarriga/nvim-notify",
     },
@@ -66,6 +67,7 @@ return {
 
       telescope.load_extension("dap")
       telescope.load_extension("fzf")
+      telescope.load_extension("media_files")
       telescope.load_extension("notify")
       telescope.load_extension("persisted")
 
@@ -137,6 +139,7 @@ return {
       vim.api.nvim_set_keymap("n", "<Leader>cc", "<cmd>Telescope commands<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Telescope find_files<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>gg", "<cmd>Telescope live_grep<CR>", keymap_opts)
+      vim.api.nvim_set_keymap("n", "<Leader>mm", "<cmd>Telescope mefia_files<CR>", keymap_opts)
     end
   }
 }
