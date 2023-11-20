@@ -35,7 +35,6 @@ return {
     },
     filetype = {
       "markdown",
-      "markdown.pandoc",
     },
     config = function(_, opts)
       require("peek").setup(opts)
