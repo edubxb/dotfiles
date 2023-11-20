@@ -135,10 +135,10 @@ return {
       end
 
       vim.api.nvim_set_keymap("n", "<Leader>bb", "<cmd>Telescope buffers<CR>", keymap_opts)
-      vim.api.nvim_set_keymap("n", "<Leader>ll", "<cmd>Telescope current_buffer_fuzzy_find<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>cc", "<cmd>Telescope commands<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Telescope find_files<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>gg", "<cmd>Telescope live_grep<CR>", keymap_opts)
+      vim.api.nvim_set_keymap("n", "<Leader>ll", "<cmd>Telescope current_buffer_fuzzy_find<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>mm", "<cmd>Telescope mefia_files<CR>", keymap_opts)
     end
   }
