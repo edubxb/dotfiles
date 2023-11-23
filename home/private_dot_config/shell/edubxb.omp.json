@@ -46,7 +46,7 @@
           "type": "project",
           "style": "plain",
           "foreground": "yellow",
-          "template": "<b>󰏗 {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b> "
+          "template": " <b>󰏗 {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b>"
         }
       ],
       "type": "prompt"
@@ -57,7 +57,7 @@
         {
           "style": "plain",
           "foreground": "yellow",
-          "template": "<b>󰇧 {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b> ",
+          "template": " <b>󰇧 {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b>",
           "properties": {
             "fetch_version": true
           },
@@ -72,7 +72,7 @@
         {
           "style": "plain",
           "foreground": "green",
-          "template": "<b>󰌠 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b> ",
+          "template": " <b>󰌠 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b>",
           "properties": {
             "display_mode": "context"
           },
@@ -125,7 +125,7 @@
     {
       "foreground": "#3381e3",
       "style": "plain",
-      "template": " <i>{{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }}</i>",
+      "template": "󱃾 <i>{{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }}</i>",
       "tips": [
         "kube",
         "kubectl",
@@ -139,7 +139,7 @@
       "properties": {
         "display_default": true
       },
-      "template": "  <i>{{ .Profile }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>",
+      "template": "󰅟 <i>{{ .Profile }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>",
       "tips": [
         "aws"
       ],
@@ -148,7 +148,7 @@
     {
       "foreground": "#1A73E8",
       "style": "plain",
-      "template": "  <i>{{ .Account }} :: {{ .Project }} :: {{ .Region }}</i>",
+      "template": "󰅟 <i>{{ .Account }} :: {{ .Project }} :: {{ .Region }}</i>",
       "tips": [
         "gcloud",
         "gsutil"
