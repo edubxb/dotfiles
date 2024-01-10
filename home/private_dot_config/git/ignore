@@ -5,7 +5,7 @@ wkts
 ### env stuff ###
 .direnv
 .envrc
-.rtx.local.toml
+.mise.local.toml
 
 ### mergetool backups ###
 *.orig
