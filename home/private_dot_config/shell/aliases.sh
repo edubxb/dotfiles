@@ -67,3 +67,6 @@ alias bonsai='cbonsai -l -i'
 alias fireworks='confetty fireworks'
 alias matrix='neo -D --speed=12 --density=3 --lingerms=1,1 --rippct=0'
 alias pipes='pipes-rs -b true -c rgb -k curved -p 25'
+
+## desktop ##
+alias dnd='gsettings set org.gnome.desktop.notifications show-banners $(if [ "$(gsettings get org.gnome.desktop.notifications show-banners)" = "true" ]; then echo "false"; else echo "true"; fi)'
