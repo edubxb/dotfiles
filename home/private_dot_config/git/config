@@ -31,14 +31,10 @@
 	cmd = nvim -d \"${LOCAL}\" \"${REMOTE}\"
 [merge]
 	conflictStyle = zdiff3
-	tool = fugitive
+	tool = meld
 [mergetool]
 	keepBackup = false
 	prompt = false
-[mergetool "vimdiff"]
-	cmd = nvim -d \"${BASE}\" \"${LOCAL}\" \"${REMOTE}\" \"${MERGED}\"
-[mergetool "fugitive"]
-	cmd = nvim -c Gvdiffsplit! \"${MERGED}\"
 [delta]
 	features = side-by-side line-numbers
 	hyperlinks = true
