@@ -15,6 +15,7 @@
 [commit]
 	verbose = true
 [rebase]
+	autoStash = true
 	autoSquash = true
 [rerere]
 	enabled = true
