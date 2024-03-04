@@ -290,9 +290,7 @@ return {
           "commitlint",
           "editorconfig-checker",
           "gitlint",
-          "jsonlint",
-          "luacheck",
-          "shellcheck",
+          "selene",
           "shellharden",
           "tflint",
           "yamllint",
@@ -303,11 +301,6 @@ return {
           end,
           stylua = function(source_name, methods)
             null_ls.register(null_ls.builtins.formatting.stylua)
-          end,
-          shellcheck = function(source_name, methods)
-            null_ls.register(null_ls.builtins.diagnostics.shellcheck.with({
-               filetypes = { "bash", "zsh", "sh" },
-            }))
           end,
         },
       })
@@ -330,7 +323,6 @@ return {
           return true
         end,
       })
-
     end,
   }
 }
