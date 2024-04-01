@@ -5,6 +5,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-neotest/neotest-go",
       "nvim-neotest/neotest-python",
+      "nvim-neotest/nvim-nio",
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
