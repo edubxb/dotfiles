@@ -79,4 +79,3 @@ require("lazy").setup("plugins", {
 require("filetypes")
 require("keymaps")
 require("gui")
-
