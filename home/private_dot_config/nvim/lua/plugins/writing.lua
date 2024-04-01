@@ -35,11 +35,42 @@ return {
     },
     filetype = {
       "markdown",
+      "telekasten",
     },
     config = function(_, opts)
       require("peek").setup(opts)
       vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
-    end
+    end,
+  },
+  {
+    "renerocksai/telekasten.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    opts = {
+      home = pkb_home,
+      auto_set_filetype = true,
+      close_after_yanking = false,
+      command_palette_theme = "dropdown",
+      insert_after_inserting = true,
+      new_note_location = "smart",
+      show_tags_theme = "dropdown",
+      subdirs_in_links = true,
+      tag_notation = "#tag",
+      take_over_my_home = true,
+    },
+    keys = {
+      { "<leader>z",  "<cmd>Telekasten panel<CR>" },
+      { "<leader>zb", "<cmd>Telekasten show_backlinks<CR>" },
+      { "<leader>zc", "<cmd>Telekasten show_calendar<CR>" },
+      { "<leader>zd", "<cmd>Telekasten goto_today<CR>" },
+      { "<leader>zf", "<cmd>Telekasten find_notes<CR>" },
+      { "<leader>zg", "<cmd>Telekasten search_notes<CR>" },
+      { "<leader>zi", "<cmd>Telekasten insert_img_link<CR>" },
+      { "<leader>zn", "<cmd>Telekasten new_note<CR>" },
+      { "<leader>zz", "<cmd>Telekasten follow_link<CR>" },
+    },
   },
 }

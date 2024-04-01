@@ -161,7 +161,12 @@ return {
         },
         grammarly = {},
         jsonls = {},
-        marksman = {},
+        marksman = {
+          filetypes = {
+            "markdown",
+            "telekasten",
+          },
+        },
         pylsp = {
           settings = {
             pylsp = {

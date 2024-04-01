@@ -5,6 +5,9 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets"
     },
+    config = function()
+      require("luasnip").filetype_extend("telekasten", { "markdown" })
+    end
   },
   {
     "hrsh7th/nvim-cmp",
