@@ -1,4 +1,8 @@
 return {
+  {
+    "nvim-neorocks/rocks.nvim",
+    priority = 1000,
+  },
   "tpope/vim-repeat",
   {
     "kylechui/nvim-surround",
@@ -33,8 +37,9 @@ return {
   },
   {
     "rest-nvim/rest.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
+      ft = "http",
+      dependencies = {
+        "nvim-neorocks/rocks.nvim",
     },
   },
   {
