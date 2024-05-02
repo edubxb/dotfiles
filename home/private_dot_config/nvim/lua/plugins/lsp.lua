@@ -228,6 +228,9 @@ return {
             yaml = {
               hover = true,
               completion = true,
+              format = {
+                enable = false,
+              },
               validate = true,
               schemaStore = {
                  enable = true,
@@ -242,14 +245,14 @@ return {
                     "ingress.y*ml",
                     "service.y*ml",
                 },
+              },
             },
+            filetypes = {
+              "yaml.ansible",
+              "yaml",
             },
           },
-          filetypes = {
-            "yaml.ansible",
-            "yaml",
-          },
-        }
+        },
       }
 
       local servers_ensure_installed = {}
@@ -286,9 +289,9 @@ return {
         automatic_setup = true,
         ensure_installed = {
           -- formatters
-          "prettier",
           "shfmt",
           "stylua",
+          "yamlfmt",
           -- linters
           "actionlint",
           "ansible-lint",

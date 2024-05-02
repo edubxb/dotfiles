@@ -28,14 +28,14 @@ return {
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
-    ft = "markdown",
+    event = { "VeryLazy" },
+    ft = {
+      "markdown",
+      "telekasten",
+    },
     opts = {
       auto_load = true,
       theme = "light",
-    },
-    filetype = {
-      "markdown",
-      "telekasten",
     },
     config = function(_, opts)
       require("peek").setup(opts)
