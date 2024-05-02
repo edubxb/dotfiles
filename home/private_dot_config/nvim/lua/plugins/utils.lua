@@ -1,5 +1,10 @@
 return {
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1001,
+    config = true,
+  },
+  {
     "nvim-neorocks/rocks.nvim",
     priority = 1000,
   },
@@ -39,12 +44,18 @@ return {
     "rest-nvim/rest.nvim",
       ft = "http",
       dependencies = {
-        "nvim-neorocks/rocks.nvim",
+        "luarocks.nvim",
     },
+    config = function()
+      require("rest-nvim").setup()
+    end,
   },
   {
     "3rd/image.nvim",
     event = "VeryLazy",
+    dependencies = {
+      "luarocks.nvim",
+    },
     opts = {
       backend = "kitty",
       integrations = {
