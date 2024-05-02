@@ -203,6 +203,10 @@ return {
             },
           },
         },
+        basedpyright = {},
+        pylyzer = {},
+        -- pyre = {},
+        -- pyright = {},
         rust_analyzer = {},
         lua_ls = {
           settings = {
