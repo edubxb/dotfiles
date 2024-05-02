@@ -81,4 +81,13 @@ return {
       },
     },
   },
+  {
+    "FabijanZulj/blame.nvim",
+    opts = {
+      date_format = "%Y-%m-%d",
+      views = {
+        default = virtual_view,
+      },
+    }
+  }
 }
