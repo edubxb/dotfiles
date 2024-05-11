@@ -73,6 +73,7 @@ return {
 
       telescope.setup {
         defaults = {
+          borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
           prompt_prefix = "   ",
           selection_caret = "  ",
           entry_prefix = "  ",
@@ -96,43 +97,6 @@ return {
           },
         },
       }
-
-      local colors = {
-        black  = "#131A24",
-        gray   = "#d6d6d7",
-      }
-
-      local TelescopePrompt = {
-        TelescopeBorder = {
-          fg = colors.black,
-          bg = colors.black,
-        },
-        TelescopePromptBorder = {
-          fg = colors.black,
-          bg = colors.black,
-        },
-        TelescopePromptNormal = {
-          bg = colors.black,
-        },
-        TelescopePromptTitle = {
-          fg = colors.black,
-          bg = colors.gray,
-        },
-        TelescopeNormal = {
-          bg = colors.black
-        },
-        TelescopePreviewTitle = {
-          fg = colors.black,
-          bg = colors.gray,
-        },
-        TelescopeResultsTitle = {
-          fg = colors.black,
-          bg = colors.gray,
-        },
-      }
-      for hl, col in pairs(TelescopePrompt) do
-        vim.api.nvim_set_hl(0, hl, col)
-      end
 
       vim.api.nvim_set_keymap("n", "<Leader>bb", "<cmd>Telescope buffers<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>cc", "<cmd>Telescope commands<CR>", keymap_opts)

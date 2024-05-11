@@ -2,7 +2,6 @@ return {
   {
     "edeneast/nightfox.nvim",
     lazy = false,
-    priority = 1000,
     opts = {
       options = {
         styles = {
@@ -11,10 +10,17 @@ return {
           functions = "bold"
         },
       },
+      groups = {
+        all = {
+          TelescopeBorder = { fg = "bg0", bg = "bg0" },
+          TelescopeNormal = { bg = "bg0" },
+          TelescopeTitle ={ fg = "bg0", bg = "fg0" },
+        },
+      },
     },
     config = function(_, opts)
       require("nightfox").setup(opts)
-      vim.cmd([[colorscheme nightfox]])
+      vim.cmd("colorscheme nightfox")
     end,
   },
 }
