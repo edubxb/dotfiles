@@ -1,7 +1,7 @@
 require("options")
 
-projects_path = vim.split(os.getenv("PROJECTS_PATH"), ":")
 pkb_home = os.getenv("PKB_HOME")
+projects_root = os.getenv("PROJECTS_ROOT")
 
 my_colorscheme = "nightfox"
 

@@ -48,7 +48,7 @@ return {
     opts = {
       autoload = true,
       autosave = true,
-      allowed_dirs = projects_path,
+      allowed_dirs = { projects_root },
       use_git_branch = true,
       on_autoload_no_session = function()
         vim.notify("No existing session to load.")
