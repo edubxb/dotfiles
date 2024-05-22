@@ -1,9 +1,8 @@
 function fp {
-  local directory_list projects target
+  local projects target
 
-  directory_list="$(tr ':' '\n' <<< ${PROJECTS_PATH})"
   projects=$(
-    for ppath in ${=directory_list}; do
+    for ppath in ${PROJECTS_ROOT}/*(/); do
       echo ${ppath}/* | sed "s|$HOME/||g" | tr ' ' '\n' | sed -E 's|([^ ]+)/([^/]+)|\\e[3m\1\\e[0m \2|'
     done
   )
