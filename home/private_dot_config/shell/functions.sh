@@ -18,7 +18,8 @@ function fev {
                --preview-window right:60%:wrap \
                --preview 'printenv {}' \
                --bind 'ctrl-x:execute-silent(unset {1})')
-  wl-copy "$(printenv ${target})"
+
+  [[ -n "${target}" ]] && wl-copy "$(printenv ${target})"
 }
 
 function fsb {
@@ -37,7 +38,7 @@ function fsb {
                           $(tr " " "/" <<< {2..}) -- | head -'$LINES \
                +m -q "$*") || return
 
-   git checkout $(sed -E "s/(.+ )?(.+)/\2/" <<< "${target}")
+  [[ -n "${target}" ]] && git checkout $(sed -E "s/(.+ )?(.+)/\2/" <<< "${target}")
 }
 
 function fas {
