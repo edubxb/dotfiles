@@ -85,13 +85,10 @@ return {
         signs = true,
         underline = false,
         update_in_insert = true,
-        virtual_text = false, 
+        virtual_text = false,
       })
 
-      vim.api.nvim_set_keymap("n", "<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", keymap_opts)
-      vim.api.nvim_set_keymap("n", "<Leader>et", "<cmd>TroubleToggle document_diagnostics<CR>", keymap_opts)
-      vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", keymap_opts)
-      vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", keymap_opts)
+      vim.api.nvim_set_keymap("n", "<Leader>d", "<cmd>TroubleToggle document_diagnostics<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymap_opts)
 
       local on_attach = function(client, bufnr)
