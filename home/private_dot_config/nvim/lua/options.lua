@@ -102,6 +102,8 @@ vim.o.autochdir = false
 vim.o.backup = false
 vim.o.hidden = true
 vim.o.mouse = "a"
+vim.cmd("aunmenu PopUp.How-to\\ disable\\ mouse")
+vim.cmd("aunmenu PopUp.-1-")
 vim.o.swapfile = true
 vim.o.virtualedit = "onemore"
 vim.o.wildignore = "*.swp,.*bak,.*pyc,*.class,.*jar,*.o"
