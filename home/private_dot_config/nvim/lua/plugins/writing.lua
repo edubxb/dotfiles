@@ -1,15 +1,37 @@
 return {
   {
-    "lukas-reineke/headlines.nvim",
+    "MeanderingProgrammer/markdown.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter"
     },
+    ft = { 
+      "markdown",
+      "telekasten",
+     },
     opts = {
-      markdown = {
-        headline_highlights = { "HeadlineReverse" },
-        fat_headlines = false,
+      file_types = { 
+        "markdown",
+        "telekasten",
+      },
+      headings = { "Ⅰ. ", "Ⅱ. ", "Ⅲ. ", "Ⅳ. ", "Ⅴ. ", "Ⅵ. " },
+      bullets = { "•", "◦", "▪", "▫" },
+      highlights = {
+        heading = {
+          backgrounds = { 
+            "DiffChange",
+          },
+          foregrounds = {
+            "DiffChange",
+          },
+        },
+        table = {
+          head = "Normal",
+        },
       },
     },
+    config = function(_, opts)
+      require("render-markdown").setup(opts)
+    end,
   },
   {
     "mzlogin/vim-markdown-toc",
