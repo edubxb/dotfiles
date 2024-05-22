@@ -413,7 +413,7 @@ return {
           filter = {
             event = "msg_show",
             kind = "",
-            -- find = "written",
+            find = nil,
           },
           opts = { skip = true },
         },
@@ -462,6 +462,7 @@ return {
     config = function()
       local alpha = require("alpha")
       local dashboard = require("alpha.themes.dashboard")
+      require("alpha.term")
 
       local function button(sc, txt, keybind)
         local leader = "SPC"
@@ -494,11 +495,16 @@ return {
       end
 
       dashboard.section.header.val = {
-        [[░░░    ░░ ░░░░░░░  ░░░░░░  ░░    ░░ ░░ ░░░    ░░░]],
-        [[▒▒▒▒   ▒▒ ▒▒      ▒▒    ▒▒ ▒▒    ▒▒ ▒▒ ▒▒▒▒  ▒▒▒▒]],
-        [[▒▒ ▒▒  ▒▒ ▒▒▒▒▒   ▒▒    ▒▒ ▒▒    ▒▒ ▒▒ ▒▒ ▒▒▒▒ ▒▒]],
-        [[▓▓  ▓▓ ▓▓ ▓▓      ▓▓    ▓▓  ▓▓  ▓▓  ▓▓ ▓▓  ▓▓  ▓▓]],
-        [[██   ████ ███████  ██████    ████   ██ ██      ██]],
+        [[                                                                       ]],
+        [[                                                                     ]],
+        [[       ████ ██████           █████      ██                     ]],
+        [[      ███████████             █████                             ]],
+        [[      █████████ ███████████████████ ███   ███████████   ]],
+        [[     █████████  ███    █████████████ █████ ██████████████   ]],
+        [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+        [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+        [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+        [[                                                                       ]],
       }
 
       dashboard.section.buttons.val = {
@@ -506,7 +512,7 @@ return {
         { type = "padding", val = 1 },
         button("f", "󰍉  · Find file", "<cmd>Telescope find_files<CR>"),
         button("r", "󰋚  · Recent files", "<cmd>Telescope oldfiles cwd_only=true<CR>"),
-        button("p", "󰙴  · Projects", "<cmd>Neotree float dir=~/Area51/<CR>"),
+        button("p", "󰙴  · Projects", ":lua require('yazi').yazi(nil, projects_root)<CR>"),
         button("s", "󰉓  · Sessions", "<cmd>Telescope persisted<CR>"),
         { type = "padding", val = 1 },
         button("u", "󱑠  · Update plugins", ":Lazy sync<CR>"),
