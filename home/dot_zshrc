@@ -1,0 +1,215 @@
+## ZSH options ##
+# setopt APPEND_HISTORY
+setopt auto_cd
+# setopt BANG_HIST
+# setopt extendedglob
+setopt extended_history       # record timestamp of command in HISTFILE
+# setopt HIST_FIND_NO_DUPS
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+# setopt HIST_NO_STORE
+# setopt HIST_REDUCE_BLANKS
+# setopt HIST_SAVE_NO_DUPS
+setopt hist_verify
+setopt share_history
+
+# shopt -s cdspell
+# shopt -s checkjobs
+# shopt -s checkwinsize
+# shopt -s cmdhist
+# shopt -s direxpand
+# shopt -s dirspell
+# shopt -s extglob
+# shopt -s globstar
+# shopt -s hostcomplete
+# shopt -s lithistet
+
+## disable flow control key binding ##
+stty -ixon
+
+## tabs expanded to 4 spaces ##
+tabs -4
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
+
+## Enable completion
+fpath+=${HOME}/.zfunc
+
+## Enable bash completion compatibility
+autoload -Uz bashcompinit
+bashcompinit
+
+# autoload -Uz compinit
+
+## Command history ##
+# export HISTORY_IGNORE="([bf]g|cd|clear|exit|f[dp]|man#( *)#|pwd|*help|*version)"
+export HISTFILE="${HOME}/.zsh_history"
+export HISTSIZE=1000
+export SAVEHIST=1000
+
+## edit & view ##
+export NVIM_GTK_NO_HEADERBAR=1
+export NVIM_GTK_NO_WINDOW_DECORATION=1
+export NVIM_GTK_PREFER_DARK_THEME=1
+export EDITOR="nvim"
+# export VISUAL="nvim-gtk --no-fork"
+export PAGER="less"
+export LESS="-F -R -X -x1,5"
+
+## Config paths ##
+CONFIG_PATH="${HOME}/.config"
+SHELL_CONFIG_PATH="${CONFIG_PATH}/shell"
+
+## zinit ##
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
+if [[ ! -f "${ZINIT_HOME}/zinit.zsh" ]]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone git@github.com:zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
+
+## enable ls color support ##
+if [[ -x /usr/bin/dircolors ]]; then
+  test -r "${CONFIG_PATH}/dircolors" && eval "$(dircolors -b ${CONFIG_PATH}/dircolors)" || eval "$(dircolors -b)"
+fi
+
+## colors for less, man, etc. ##
+[[ -f "${CONFIG_PATH}/less/TERMCAP" ]] && source "${CONFIG_PATH}/less/TERMCAP"
+
+## make less more friendly for non-text input files ##
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL="/bin/sh" lesspipe)"
+
+## use time command if installed ##
+command -v time &> /dev/null && alias "time=command $(command -v time)"
+
+## pkb ##
+export PKB_HOME="${HOME}/Documents/PKB"
+
+## projects ##
+export PROJECTS_ROOT="${HOME}/Area51"
+
+## git-extras ##
+if [[ -f /usr/share/zsh/vendor-completions/_git-extras ]]; then
+  source /usr/share/zsh/vendor-completions/_git-extras
+fi
+
+## fzf config ##
+if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
+  source /usr/share/doc/fzf/examples/completion.zsh
+fi
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
+                           --inline-info --tabstop=4 \
+                           --pointer='‣' --marker='•' \
+                           --color hl:#DBC074,hl+:#C94F6D,fg:#DFDFE5,fg+:#DFDFE5,bg+:#223249 \
+                           --color prompt:#719CD6,spinner:#719CD6,pointer:#CDCECF,marker:#DFDFE5 \
+                           --color header:#DFDFE5,info:#81B29A,border:#719CD6"
+  export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always {}'"
+  export FZF_ALT_C_OPTS="--preview 'lsd --color always --tree {}'"
+fi
+
+## ripgrep ##
+export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME}/zsh/.zcompcache"
+# zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' menu select=2 interactive search
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+# zstyle ':completion:*' menu select=long
+zstyle ':completion:*' menu select
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+## AWS ##
+export AWS_DEFAULT_OUTPUT="text"
+export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
+
+## GCP ##
+source /usr/share/google-cloud-sdk/completion.zsh.inc
+
+## direnv ##
+eval "$(direnv hook zsh)"
+
+## mise ##
+eval "$(mise activate zsh)"
+eval "$(mise completion zsh)"
+
+## ansible ##
+export ANSIBLE_NOCOWS=1
+
+## psql ##
+export PSQLRC="${CONFIG_PATH}/psql/psqlrc"
+export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
+
+## navi ##
+export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
+
+## k8s ##
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export KUBECONFIG="${CONFIG_PATH}/kube/config"
+
+## host-dependent config ##
+# [[ -f "${SHELL_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${SHELL_CONFIG_PATH}/bashrc_$(hostname -s)"
+#
+## aliases & functions ##
+[[ -f "${SHELL_CONFIG_PATH}/aliases.sh" ]] && source "${SHELL_CONFIG_PATH}/aliases.sh"
+[[ -f "${SHELL_CONFIG_PATH}/functions.sh" ]] && source "${SHELL_CONFIG_PATH}/functions.sh"
+
+## Oh My Posh ##
+eval "$(oh-my-posh init zsh --config ${SHELL_CONFIG_PATH}/edubxb.omp.json)"
+
+## kitty integration ##
+if test -n "${KITTY_INSTALLATION_DIR}"; then
+    export KITTY_SHELL_INTEGRATION="enabled"
+    autoload -Uz -- "${KITTY_INSTALLATION_DIR}"/shell-integration/zsh/kitty-integration
+    kitty-integration
+    unfunction kitty-integration
+fi
+
+autoload -U select-word-style
+select-word-style bash
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+## ZSH plugins ##
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+# zinit light marlonrichert/zsh-autocomplete
+zinit light zsh-users/zsh-syntax-highlighting
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[alias]="none"
+ZSH_HIGHLIGHT_STYLES[builtin]="none"
+ZSH_HIGHLIGHT_STYLES[command]="none"
+ZSH_HIGHLIGHT_STYLES[function]="none"
+ZSH_HIGHLIGHT_STYLES[precommand]="none"
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+complete -C aws_completer aws
+
+compinit
