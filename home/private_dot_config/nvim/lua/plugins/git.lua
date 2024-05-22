@@ -54,6 +54,9 @@ return {
   {
     "hotwatermorning/auto-git-diff",
     ft = "gitrebase",
+    config = function()
+      vim.g.auto_git_diff_show_window_at_right = 1
+    end
   },
   {
     "rhysd/committia.vim",
