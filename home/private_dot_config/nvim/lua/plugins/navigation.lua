@@ -56,26 +56,6 @@ return {
     },
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "muniftanjim/nui.nvim",
-    },
-    cmd = "Neotree",
-    keys = {
-      { "<leader>tt", "<cmd>Neotree float<CR>", desc = "NeoTree", remap = true },
-    },
-    opts = {
-      window = {
-        position = "right",
-      },
-      source_selector = {
-        winbar = true,
-      }
-    },
-  },
-  {
     "folke/trouble.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons"

@@ -82,12 +82,6 @@ return {
         separator_style = "slant",
         offsets = {
           {
-            filetype = "NeoTree",
-            text = "",
-            highlight = "",
-            padding = 0,
-          },
-          {
             filetype = "Outline",
             text = "",
             highlight = "",
