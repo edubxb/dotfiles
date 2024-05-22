@@ -1,5 +1,43 @@
 return {
   {
+    "mikavilpas/yazi.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>-",
+        function()
+          require("yazi").yazi()
+        end,
+        desc = "Open the file manager",
+      },
+      {
+        "<leader>cw",
+        function()
+          require("yazi").yazi(nil, vim.fn.getcwd())
+        end,
+        desc = "Open the file manager in nvim's working directory",
+      },
+    },
+    opts = {
+      open_for_directories = true,
+      floating_window_scaling_factor = 0.85,
+      yazi_floating_window_winblend = 15,
+    },
+    config = function(_, opts)
+      require("yazi").setup(opts)
+      vim.api.nvim_create_autocmd(
+        "Filetype",
+        {
+          pattern = "yazi",
+          command = "tunmap <Esc>",
+        }
+      )
+    end
+  },
+  {
     "simrat39/symbols-outline.nvim",
      config = function ()
        require("symbols-outline").setup()
