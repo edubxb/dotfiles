@@ -5,7 +5,7 @@ This repo contains the configuration files (aka
 
 My workflow relay mainly in these three tools:
 
-- [Bash](https://www.gnu.org/software/bash/)
+- [Zsh](https://www.zsh.org/)
 - [Kitty](https://sw.kovidgoyal.net/kitty/)
 - [Neovim](https://neovim.io/)
 
@@ -17,4 +17,4 @@ probably my setup will work in other distros too.
 Feel free to use, copy, modify, or do whatever you want with these files, but
 please, use them with care because there's no warranty :sweat_smile:.
 
-Powered by [`chezmoi`](https://www.chezmoi.io/).
+_Powered by [`chezmoi`](https://www.chezmoi.io/)_.
