@@ -8,7 +8,7 @@ function fp {
   )
   target=( $(echo -en "${projects}" |
              fzf --height 50% --no-hscroll -n 2 --ansi -1 -q "$*" \
-             --preview 'echo; clear; glow --style dark $(fdfind README.{md,rst,txt} ${HOME}/{1}/{2} 2> /dev/null | tail -n1)') ) || return
+             --preview 'echo; clear; glow --style dark $(fdfind README.{md,rst,txt} ${HOME}/{1}/{2} 2> /dev/null | head -n1)') ) || return
   cd "${HOME}/${target[1]}/${target[2]}"
 }
 
