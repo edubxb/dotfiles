@@ -88,7 +88,6 @@ return {
         virtual_text = false,
       })
 
-      vim.api.nvim_set_keymap("n", "<Leader>d", "<cmd>TroubleToggle document_diagnostics<CR>", keymap_opts)
       vim.api.nvim_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymap_opts)
 
       local on_attach = function(client, bufnr)

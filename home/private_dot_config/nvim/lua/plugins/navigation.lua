@@ -60,6 +60,12 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons"
     },
+    keys = {
+      {
+        "<leader>d",
+        "<cmd>Trouble diagnostics toggle<CR>"
+      },
+    }
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -81,7 +87,7 @@ return {
     config = function()
       local telescope = require("telescope")
       local telescope_actions = require("telescope.actions")
-      local trouble = require("trouble.providers.telescope")
+      local trouble = require("trouble.sources.telescope")
 
       telescope.load_extension("dap")
       telescope.load_extension("fzf")
