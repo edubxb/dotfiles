@@ -11,8 +11,6 @@ return {
       "nvim-lua/plenary.nvim",
     },
     opts = {
-      _extmark_signs = true,
-      _signs_staged_enable = true,
       _threaded_diff = true,
       trouble = true,
       on_attach = function(bufnr)
