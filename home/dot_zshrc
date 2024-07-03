@@ -191,7 +191,7 @@ if which aws &> /dev/null; then
 fi
 
 ## GCP ##
-if which gcp &> /dev/null; then
+if which gcloud &> /dev/null; then
   export USE_GKE_GCLOUD_AUTH_PLUGIN=True
   source /usr/share/google-cloud-sdk/completion.zsh.inc
 fi
