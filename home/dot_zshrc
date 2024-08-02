@@ -139,9 +139,9 @@ if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
                            --color hl:#DBC074,hl+:#C94F6D,fg:#DFDFE5,fg+:#DFDFE5,bg+:#223249 \
                            --color prompt:#719CD6,spinner:#719CD6,pointer:#CDCECF,marker:#DFDFE5 \
                            --color header:#DFDFE5,info:#81B29A,border:#719CD6"
-  export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --exclude .git --strip-cwd-prefix"
-  export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --exclude .git --strip-cwd-prefix"
-  export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --exclude .git --strip-cwd-prefix"
+  export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --strip-cwd-prefix"
+  export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --strip-cwd-prefix"
+  export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --strip-cwd-prefix"
   export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always {}'"
   export FZF_ALT_C_OPTS="--preview 'lsd --color always --tree {}'"
 fi
