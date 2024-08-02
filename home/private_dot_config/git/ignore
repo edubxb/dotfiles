@@ -1,4 +1,5 @@
 ### git ###
+.git/
 # worktrees
 wkts
 
@@ -34,6 +35,12 @@ cscope.files
 # rope
 .ropeproject/
 
+### nodejs ###
+node_modules/
+
 ### editors and IDEs ###
 # IntelliJ
 .idea/
+
+# VS Code
+.vscode/
