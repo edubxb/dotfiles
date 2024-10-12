@@ -1,0 +1,176 @@
+{
+	"os": "linux",
+	"arch": "amd64",
+	"packages": [
+		{
+			"source": "github",
+			"owner": "jandedobbeleer",
+			"repo": "oh-my-posh",
+			"tag": "v23.19.0",
+			"asset": "posh-linux-amd64",
+			"binary": "oh-my-posh",
+			"url": "https://api.github.com/repos/JanDeDobbeleer/oh-my-posh/releases/assets/198495542",
+			"binaryHash": "b126620a1dae707e33407ba6fb26bc9e5b43ed0cd6e02fc32c25e2953a4f2952"
+		},
+		{
+			"source": "github",
+			"owner": "denisidoro",
+			"repo": "navi",
+			"tag": "v2.23.0",
+			"asset": "navi-v2.23.0-x86_64-unknown-linux-musl.tar.gz",
+			"binary": "navi",
+			"url": "https://api.github.com/repos/denisidoro/navi/releases/assets/139913731",
+			"binaryHash": "9acac0f558647aa6791ef9d5af1c5aaae4c026d18591a4ba9fdaa83efca1bd8b"
+		},
+		{
+			"source": "github",
+			"owner": "Aloxaf",
+			"repo": "silicon",
+			"tag": "v0.5.2",
+			"asset": "silicon-v0.5.2-x86_64-unknown-linux-gnu.tar.gz",
+			"binary": "silicon",
+			"url": "https://api.github.com/repos/Aloxaf/silicon/releases/assets/136850017",
+			"binaryHash": "41808820e194ec6d175500dcb7f5bc476c60d3acb63d9a37f33369735d53899c"
+		},
+		{
+			"source": "github",
+			"owner": "Wilfred",
+			"repo": "difftastic",
+			"tag": "0.60.0",
+			"asset": "difft-x86_64-unknown-linux-gnu.tar.gz",
+			"binary": "difft",
+			"url": "https://api.github.com/repos/Wilfred/difftastic/releases/assets/183239152",
+			"binaryHash": "385b0f0834a7b1eb05589dd414ff435b262ff143f385a119817a6958b26696e9"
+		},
+		{
+			"source": "github",
+			"owner": "Skyscanner",
+			"repo": "turbolift",
+			"tag": "3.1.1",
+			"asset": "turbolift_3.1.1_Linux_x86_64.tar.gz",
+			"binary": "turbolift",
+			"url": "https://api.github.com/repos/Skyscanner/turbolift/releases/assets/188385719",
+			"binaryHash": "497060993f485f8f35c6936bcbe8dfd93d7db0df74dd134df5145b35ab11d052"
+		},
+		{
+			"source": "github",
+			"owner": "swsnr",
+			"repo": "mdcat",
+			"tag": "mdcat-2.5.0",
+			"asset": "mdcat-2.5.0-x86_64-unknown-linux-musl.tar.gz",
+			"binary": "mdcat",
+			"url": "https://api.github.com/repos/swsnr/mdcat/releases/assets/195155056",
+			"binaryHash": "97e6534491912ce86c632dd4ff9d8ed596f8112970ac5d75d858b285f5105a51"
+		},
+		{
+			"source": "github",
+			"owner": "derailed",
+			"repo": "k9s",
+			"tag": "v0.32.5",
+			"asset": "k9s_Linux_amd64.tar.gz",
+			"binary": "k9s",
+			"url": "https://api.github.com/repos/derailed/k9s/releases/assets/173986617",
+			"binaryHash": "bd8361679b7796e1aad7d106268aba54684c08bd04ff160a5ea66bcea0d145f2"
+		},
+		{
+			"source": "github",
+			"owner": "ankitpokhrel",
+			"repo": "jira-cli",
+			"tag": "v1.5.2",
+			"asset": "jira_1.5.2_linux_x86_64.tar.gz",
+			"binary": "jira",
+			"url": "https://api.github.com/repos/ankitpokhrel/jira-cli/releases/assets/194150759",
+			"binaryHash": "bfbd5f4a47e69e381efe792c6d9d0569cd431b37be54460c07d8fac90f0bbb06"
+		},
+		{
+			"source": "github",
+			"owner": "johnkerl",
+			"repo": "miller",
+			"tag": "v6.13.0",
+			"asset": "miller-6.13.0-linux-amd64.tar.gz",
+			"binary": "mlr",
+			"url": "https://api.github.com/repos/johnkerl/miller/releases/assets/197066116",
+			"binaryHash": "84353942b36656e6288f770991271a9f6e60036c66e2493bf81ba571f782edf0"
+		},
+		{
+			"source": "github",
+			"owner": "adevinta",
+			"repo": "maiao",
+			"tag": "1.2.0",
+			"asset": "git-review-Linux-amd64",
+			"binary": "git-review",
+			"url": "https://api.github.com/repos/adevinta/maiao/releases/assets/135858169",
+			"binaryHash": "159bc3f46ff6b3b14e2483f569305bcc62606439c6bd2ab310fe6b2859e107fd"
+		},
+		{
+			"source": "github",
+			"owner": "antonmedv",
+			"repo": "fx",
+			"tag": "35.0.0",
+			"asset": "fx_linux_amd64",
+			"binary": "fx",
+			"url": "https://api.github.com/repos/antonmedv/fx/releases/assets/176251943",
+			"binaryHash": "7a7e8202a97a2059f22a95522eb8a0d08520bba57cd4fe9796c7ac30aac35dd9"
+		},
+		{
+			"source": "github",
+			"owner": "tmccombs",
+			"repo": "hcl2json",
+			"tag": "v0.6.4",
+			"asset": "hcl2json_linux_amd64",
+			"binary": "hcl2json",
+			"url": "https://api.github.com/repos/tmccombs/hcl2json/releases/assets/182702914",
+			"binaryHash": "8da5a86b3caff977067c62dd190bfdf296842191b0282c7e3a7019d6cf0f6657"
+		},
+		{
+			"source": "github",
+			"owner": "ynqa",
+			"repo": "jnv",
+			"tag": "v0.4.1",
+			"asset": "jnv-x86_64-unknown-linux-gnu.tar.xz",
+			"binary": "jnv",
+			"url": "https://api.github.com/repos/ynqa/jnv/releases/assets/194816771",
+			"binaryHash": "e3481535f0d9c795b66b40bf663b248342608adc2d9e18a175f20ebb67352ed6"
+		},
+		{
+			"source": "github",
+			"owner": "wagoodman",
+			"repo": "dive",
+			"tag": "v0.12.0",
+			"asset": "dive_0.12.0_linux_amd64.tar.gz",
+			"binary": "dive",
+			"url": "https://api.github.com/repos/wagoodman/dive/releases/assets/149421417",
+			"binaryHash": "32c6b1cccc13201cd2d9ad6d748a29125615d11d5126a03f698caf3b69c55179"
+		},
+		{
+			"source": "github",
+			"owner": "argoproj",
+			"repo": "argo-cd",
+			"tag": "v2.13.0-rc3",
+			"asset": "argocd-linux-amd64",
+			"binary": "argocd",
+			"url": "https://api.github.com/repos/argoproj/argo-cd/releases/assets/197441245",
+			"binaryHash": "cfc1f2d9243d6e92c7489969c1c940a98779dbd17f0df4360abbfc291a81f3d1"
+		},
+		{
+			"source": "github",
+			"owner": "cloudflare",
+			"repo": "cloudflare-go",
+			"tag": "v0.107.0",
+			"asset": "flarectl_0.107.0_linux_amd64.tar.gz",
+			"binary": "flarectl",
+			"url": "https://api.github.com/repos/cloudflare/cloudflare-go/releases/assets/197799085",
+			"binaryHash": "eedb6869b33d17c62faa2ca0b9d297835649d2b130f300a69dfdb0863ef69352"
+		},
+		{
+			"source": "github",
+			"owner": "kdash-rs",
+			"repo": "kdash",
+			"tag": "v0.6.1",
+			"asset": "kdash-linux.tar.gz",
+			"binary": "kdash",
+			"url": "https://api.github.com/repos/kdash-rs/kdash/releases/assets/188890107",
+			"binaryHash": "1435db76624f48184b56cd4149ab69273f47ca1a23cc6e67602c42edb00291a1"
+		}
+	]
+}
