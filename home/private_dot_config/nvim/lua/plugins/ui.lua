@@ -194,13 +194,13 @@ return {
         n = colors.fg,
         i = colors.green,
         v = colors.blue,
-        [''] = colors.blue,
+        [""] = colors.blue,
         V = colors.blue,
         c = colors.fg,
         no = colors.red,
         s = colors.orange,
         S = colors.orange,
-        [''] = colors.orange,
+        [""] = colors.orange,
         ic = colors.yellow,
         R = colors.magenta,
         Rv = colors.magenta,
@@ -208,14 +208,14 @@ return {
         ce = colors.red,
         r = colors.cyan,
         rm = colors.cyan,
-        ['r?'] = colors.cyan,
-        ['!'] = colors.red,
+        ["r?"] = colors.cyan,
+        ["!"] = colors.red,
         t = colors.red,
       }
 
       local conditions = {
         buffer_not_empty = function()
-          return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+          return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
         end,
         hide_in_width = function()
           return vim.fn.winwidth(0) > 80
@@ -327,12 +327,12 @@ return {
       ins_left {
         function ()
           return vim.b.gitsigns_head
-        --   local tag = vim.api.nvim_cmd("Git describe --tags --exact-match", true)
-        --   if vim.v.shell_error then
-        --     return " " .. vim.b.gitsigns_head
-        --   else
-        --     return " " .. tag
-        --   end
+          --   local tag = vim.api.nvim_cmd("Git describe --tags --exact-match", true)
+          --   if vim.v.shell_error then
+            --     return " " .. vim.b.gitsigns_head
+          --   else
+            --     return " " .. tag
+          --   end
         end,
         icon = "",
         cond = function ()
@@ -520,12 +520,12 @@ return {
         end
       end, { silent = true, expr = true })
 
-      vim.keymap.set("n", "<c-b>", function()
-        if not noice.lsp.scroll(-4) then
-          return "<c-b>"
-        end
-      end, { silent = true, expr = true })
-    end
+    vim.keymap.set("n", "<c-b>", function()
+      if not noice.lsp.scroll(-4) then
+        return "<c-b>"
+      end
+    end, { silent = true, expr = true })
+end
   },
   {
     "goolord/alpha-nvim",

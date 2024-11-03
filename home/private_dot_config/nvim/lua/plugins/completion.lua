@@ -100,11 +100,11 @@ return {
             winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
             col_offset = -3,
             side_padding = 0,
-            border = 'rounded',
+            border = "rounded",
           },
           documentation = {
             winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
-            border = 'rounded',
+            border = "rounded",
           }
         },
         formatting = {
@@ -117,8 +117,8 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
