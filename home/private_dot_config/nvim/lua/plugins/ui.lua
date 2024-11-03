@@ -50,26 +50,59 @@ return {
     },
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {
-      exclude = {
-        filetypes = window_filetypes,
-        buftypes = { "terminal" },
-      },
-      indent = {
-        char = "┊",
-        tab_char = "┊",
-        highlight = { "SpecialKey" },
-      },
-      scope = {
-        show_end = true,
-      },
+    "hiphish/rainbow-delimiters.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
     },
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    dependencies = {
+      "hiphish/rainbow-delimiters.nvim",
+    },
+    main = "ibl",
     config = function (_, opts)
-      require("ibl").setup(opts)
+      local ibl = require("ibl")
+      local hooks = require("ibl.hooks")
 
-      vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { link = "IndentBlanklineSpaceChar" })
+      local highlight = {
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
+      }
+
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed", { link = "TSRainbowRed" })
+        vim.api.nvim_set_hl(0, "RainbowYellow", { link = "TSRainbowYellow" })
+        vim.api.nvim_set_hl(0, "RainbowBlue", { link = "TSRainbowBlue" })
+        vim.api.nvim_set_hl(0, "RainbowOrange", { link = "TSRainbowOrange" })
+        vim.api.nvim_set_hl(0, "RainbowGreen", { link = "TSRainbowGreen" })
+        vim.api.nvim_set_hl(0, "RainbowViolet", { link = "TSRainbowViolet" })
+        vim.api.nvim_set_hl(0, "RainbowCyan", { link = "TSRainbowCyan" })
+      end)
+
+      vim.g.rainbow_delimiters = { highlight = highlight }
+      ibl.setup({
+        exclude = {
+          filetypes = window_filetypes,
+          buftypes = buffer_types,
+        },
+        indent = {
+          char = "┊",
+          tab_char = "┊",
+        },
+        scope = {
+          highlight = highlight,
+          show_start = false,
+          show_end = false,
+        },
+      })
+
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end
   },
   "nvim-tree/nvim-web-devicons",

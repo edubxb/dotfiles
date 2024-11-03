@@ -25,13 +25,13 @@ return {
       local rainbow_delimiters = require("rainbow-delimiters")
       vim.g.rainbow_delimiters = {
         highlight = {
-          "TSRainbowRed",
-          "TSRainbowYellow",
-          "TSRainbowBlue",
-          "TSRainbowOrange",
-          "TSRainbowGreen",
-          "TSRainbowViolet",
-          "TSRainbowCyan",
+          "RainbowRed",
+          "RainbowYellow",
+          "RainbowBlue",
+          "RainbowOrange",
+          "RainbowGreen",
+          "RainbowViolet",
+          "RainbowCyan",
         },
       }
     end,
