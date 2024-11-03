@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "b0o/schemastore.nvim",
       "folke/trouble.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/nvim-cmp",
@@ -226,18 +227,15 @@ return {
               },
               validate = true,
               schemaStore = {
-                 enable = true,
-                 url = "https://www.schemastore.org/api/json/catalog.json",
+                enable = false,
+                url = "",
               },
-              schemas = {
-                kubernetes = {
-                    "configmap.y*ml",
-                    "cronjob.y*ml",
-                    "deployment.y*ml",
-                    "hpa.y*ml",
-                    "ingress.y*ml",
-                    "service.y*ml",
-                },
+              schemas = require("schemastore").yaml.schemas {
+                 extra = {
+                   url = 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/argoproj.io/application_v1alpha1.json',
+                     name = 'Argo CD Application',
+                     fileMatch = 'argocd-application.yaml'
+                 }
               },
             },
             filetypes = {
