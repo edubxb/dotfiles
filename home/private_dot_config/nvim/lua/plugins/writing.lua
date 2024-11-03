@@ -1,6 +1,6 @@
 return {
   {
-    "MeanderingProgrammer/markdown.nvim",
+    "MeanderingProgrammer/render-markdown.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter"
     },
@@ -9,24 +9,16 @@ return {
       "telekasten",
      },
     opts = {
-      file_types = { 
+      file_types = {
         "markdown",
         "telekasten",
       },
-      headings = { "Ⅰ. ", "Ⅱ. ", "Ⅲ. ", "Ⅳ. ", "Ⅴ. ", "Ⅵ. " },
-      bullets = { "•", "◦", "▪", "▫" },
-      highlights = {
-        heading = {
-          backgrounds = { 
-            "DiffChange",
-          },
-          foregrounds = {
-            "DiffChange",
-          },
-        },
-        table = {
-          head = "Normal",
-        },
+      heading = {
+        icons = {"Ⅰ.", "Ⅱ.", "Ⅲ.", "Ⅳ.", "Ⅴ.", "Ⅵ." },
+        position = "inline",
+      },
+      bullet = {
+        icons = { "•", "◦", "▪", "▫" },
       },
     },
     config = function(_, opts)
