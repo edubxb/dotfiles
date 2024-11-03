@@ -6,22 +6,22 @@ vim.o.termguicolors = true
 vim.wo.colorcolumn = "+1"
 vim.o.cursorline = true
 vim.opt.fillchars = {
+  diff = " ",
+  eob = " ",
+  fold = " ",
+  foldclose = "",
+  foldopen = "",
+  foldsep = " ",
+  horiz = "━",
+  horizdown = "┳",
+  horizup = "┻",
+  msgsep = " ",
   stl = " ",
   stlnc = " ",
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
   vert = "┃",
+  verthoriz = "╋",
   vertleft = "┫",
   vertright = "┣",
-  verthoriz = "╋",
-  fold = "─",
-  eob = " ",
-  diff = " ",
-  msgsep = " ",
-  foldopen = "▾",
-  foldsep = "│",
-  foldclose = "▸",
 }
 vim.o.inccommand = "split"
 vim.o.laststatus = 3
@@ -89,11 +89,14 @@ vim.o.tabstop = 4
 vim.o.textwidth = 0
 
 -- Folding
-vim.o.foldlevel = 20
-vim.o.foldlevelstart = 20
-vim.o.foldnestmax = 2
--- vim.o.foldmethod = "indent"
--- vim.o.foldenable = false
+vim.o.foldcolumn = "1"
+vim.o.foldenable = true
+-- vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldnestmax = 1
+vim.o.foldmethod="expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldtext = ""
 
 -- Other Settings
 vim.g.localmapleader = " "
