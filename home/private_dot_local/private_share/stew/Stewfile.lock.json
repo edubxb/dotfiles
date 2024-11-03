@@ -6,11 +6,11 @@
 			"source": "github",
 			"owner": "jandedobbeleer",
 			"repo": "oh-my-posh",
-			"tag": "v23.19.0",
+			"tag": "v23.20.3",
 			"asset": "posh-linux-amd64",
 			"binary": "oh-my-posh",
-			"url": "https://api.github.com/repos/JanDeDobbeleer/oh-my-posh/releases/assets/198495542",
-			"binaryHash": "b126620a1dae707e33407ba6fb26bc9e5b43ed0cd6e02fc32c25e2953a4f2952"
+			"url": "https://api.github.com/repos/JanDeDobbeleer/oh-my-posh/releases/assets/201187315",
+			"binaryHash": "18064bb0b9e01c12b57e7eb0aa831f5df4ed1797c3bb376c7d479dc0f97d2df1"
 		},
 		{
 			"source": "github",
@@ -36,11 +36,11 @@
 			"source": "github",
 			"owner": "Wilfred",
 			"repo": "difftastic",
-			"tag": "0.60.0",
+			"tag": "0.61.0",
 			"asset": "difft-x86_64-unknown-linux-gnu.tar.gz",
 			"binary": "difft",
-			"url": "https://api.github.com/repos/Wilfred/difftastic/releases/assets/183239152",
-			"binaryHash": "385b0f0834a7b1eb05589dd414ff435b262ff143f385a119817a6958b26696e9"
+			"url": "https://api.github.com/repos/Wilfred/difftastic/releases/assets/201376904",
+			"binaryHash": "abd5552f62d2b7d73f9f0770eea9108dfea14629c5f4f8be0ef7ec9fd94bce75"
 		},
 		{
 			"source": "github",
@@ -156,11 +156,11 @@
 			"source": "github",
 			"owner": "cloudflare",
 			"repo": "cloudflare-go",
-			"tag": "v0.107.0",
-			"asset": "flarectl_0.107.0_linux_amd64.tar.gz",
+			"tag": "v0.108.0",
+			"asset": "flarectl_0.108.0_linux_amd64.tar.gz",
 			"binary": "flarectl",
-			"url": "https://api.github.com/repos/cloudflare/cloudflare-go/releases/assets/197799085",
-			"binaryHash": "eedb6869b33d17c62faa2ca0b9d297835649d2b130f300a69dfdb0863ef69352"
+			"url": "https://api.github.com/repos/cloudflare/cloudflare-go/releases/assets/201081121",
+			"binaryHash": "51af2cad630e9fd0f7aee293924709a3226aba9c37063a2d0ccdf7fe7b5b34b4"
 		},
 		{
 			"source": "github",
@@ -171,6 +171,26 @@
 			"binary": "kdash",
 			"url": "https://api.github.com/repos/kdash-rs/kdash/releases/assets/188890107",
 			"binaryHash": "1435db76624f48184b56cd4149ab69273f47ca1a23cc6e67602c42edb00291a1"
+		},
+		{
+			"source": "github",
+			"owner": "cycloidio",
+			"repo": "inframap",
+			"tag": "v0.7.0",
+			"asset": "inframap-linux-amd64.tar.gz",
+			"binary": "inframap-linux-amd64",
+			"url": "https://api.github.com/repos/cycloidio/inframap/releases/assets/172827943",
+			"binaryHash": "e989d48bd437147795c6d464781e8d7c483dbd5a571cac421946575ab2bf8e0c"
+		},
+		{
+			"source": "github",
+			"owner": "abhinav",
+			"repo": "git-spice",
+			"tag": "v0.7.1",
+			"asset": "git-spice.Linux-x86_64.tar.gz",
+			"binary": "gs",
+			"url": "https://api.github.com/repos/abhinav/git-spice/releases/assets/201946373",
+			"binaryHash": "83203c6c3c65fbbad114f5395d708921ec57a7d9445622071d8cb63cb957b6cf"
 		}
 	]
 }
