@@ -46,6 +46,7 @@
 [pretty]
 	simpleline = %C(bold)%m %h%Creset %C(cyan)%ad %Creset%s
 [alias]
+	again = "!f() { git commit --amend --reuse-message=HEAD; git push --force-with-lease; }; f"
 	aliases = config --get-regexp alias
 	amend = commit --amend --reuse-message=HEAD
 	bcl = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; git log --no-merges --oneline --boundary --left-right $(git branch --show-current)...${ref}; }; f"
