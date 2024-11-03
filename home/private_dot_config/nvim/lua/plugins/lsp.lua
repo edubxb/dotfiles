@@ -7,7 +7,6 @@ return {
       "hrsh7th/nvim-cmp",
       "jay-babu/mason-null-ls.nvim",
       "kosayoda/nvim-lightbulb",
-      "lvimuser/lsp-inlayhints.nvim",
       "nvimtools/none-ls.nvim",
       "rrethy/vim-illuminate",
       "weilbith/nvim-code-action-menu",
@@ -17,7 +16,6 @@ return {
     config = function()
       local cmp_lsp = require("cmp_nvim_lsp")
       local illuminate = require("illuminate")
-      local inlayhints = require("lsp-inlayhints")
       local lightbulb = require("nvim-lightbulb")
       local mason = require("mason")
       local mason_lspconfig = require("mason-lspconfig")
@@ -49,7 +47,6 @@ return {
         }
       )
 
-      inlayhints.setup()
       trouble.setup()
 
       lightbulb.setup({
@@ -85,7 +82,10 @@ return {
 
       local on_attach = function(client, bufnr)
         illuminate.on_attach(client, bufnr)
-        inlayhints.on_attach(client, bufnr)
+
+        if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
 
         vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
