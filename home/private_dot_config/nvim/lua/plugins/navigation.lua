@@ -102,7 +102,18 @@ return {
               fuzzy = true,
               override_file_sorter = true,
               override_generic_sorter = true,
-            }
+            },
+          },
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--column",
+            "--follow",
+            "--hidden",
+            "--line-number",
+            "--no-heading",
+            "--smart-case",
+            "--with-filename",
           },
           mappings = {
             i = {
@@ -113,6 +124,20 @@ return {
               ["<c-t>"] = trouble.open_with_trouble
             },
           },
+        },
+        pickers = {
+          find_files = {
+            find_command = {
+              "fdfind",
+              ".",
+              "--type",
+              "file",
+              "--color",
+              "never",
+              "--hidden",
+              "--strip-cwd-prefix"
+            }
+          }
         },
       }
 
