@@ -22,7 +22,6 @@ return {
       "neovim/nvim-lspconfig",
       "onsails/lspkind-nvim",
       "saadparwaiz1/cmp_luasnip",
-      "simrat39/symbols-outline.nvim",
       "windwp/nvim-autopairs",
     },
     config = function()

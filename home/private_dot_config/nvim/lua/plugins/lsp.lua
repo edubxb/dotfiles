@@ -63,13 +63,6 @@ return {
         }
       })
 
-      vim.g.symbols_outline = {
-        highlight_hovered_item = false,
-        relative_width = false,
-        width = 50,
-        auto_preview = false,
-      }
-
       local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = "󰋽 " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type

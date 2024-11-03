@@ -82,12 +82,6 @@ return {
         separator_style = "slant",
         offsets = {
           {
-            filetype = "Outline",
-            text = "",
-            highlight = "",
-            padding = 0,
-          },
-          {
             filetype = "DiffviewFiles",
             text = "",
             highlight = "",
@@ -164,7 +158,6 @@ return {
           "neo-tree",
           "nvim-dap-ui",
           "quickfix",
-          "symbols-outline",
         },
         options = {
           component_separators = " ",
