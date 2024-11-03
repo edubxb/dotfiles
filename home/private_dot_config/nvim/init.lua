@@ -5,16 +5,28 @@ projects_root = os.getenv("PROJECTS_ROOT")
 
 my_colorscheme = "nightfox"
 
+buffer_types = {
+  "nofile",
+  "prompt",
+  "quickfix",
+  "terminal",
+}
+
 window_filetypes = {
-  "alpha",
-  "neo-tree",
-  "Outline",
+  "",
+  "TelescopePrompt",
+  "TelescopeResults",
   "Trouble",
   "UltestSummary",
+  "alpha",
+  "checkhealth",
   "dashboard",
   "fidget",
   "fugitive",
+  "gitcommit",
   "help",
+  "lspinfo",
+  "man",
   "mason",
   "notify",
   "octo",
