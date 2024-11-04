@@ -10,7 +10,6 @@ return {
       "kosayoda/nvim-lightbulb",
       "nvimtools/none-ls.nvim",
       "rrethy/vim-illuminate",
-      "weilbith/nvim-code-action-menu",
       "williamboman/mason-lspconfig.nvim",
       "williamboman/mason.nvim",
     },
@@ -97,7 +96,7 @@ return {
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", keymap_opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", keymap_opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", keymap_opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>ca", "<cmd>CodeActionMenu<CR>", keymap_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", keymap_opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>f", "<cmd>lua vim.lsp.buf.format{ async = true }<CR>",
           keymap_opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", keymap_opts)
