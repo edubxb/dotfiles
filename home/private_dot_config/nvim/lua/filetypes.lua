@@ -94,6 +94,18 @@ vim.api.nvim_create_autocmd(
     group = shell_ag
   }
 )
+local yaml_ag = vim.api.nvim_create_augroup("yaml", {})
+vim.api.nvim_create_autocmd(
+  "Filetype",
+  {
+    pattern = {
+      "ansible",
+      "yaml",
+    },
+    command = "setlocal foldnestmax=10",
+    group = yaml_ag
+  }
+)
 
 local ssh_ag = vim.api.nvim_create_augroup("ssh", {})
 vim.api.nvim_create_autocmd(
