@@ -29,10 +29,10 @@ bindkey "^[[1;5D" backward-word
 bindkey "^X^E" edit-command-line
 
 ## Enable completion
-fpath+=${HOME}/.zfunc
+fpath+="${HOME}/.zfunc"
 autoload -Uz compinit
-compinit
 autoload -Uz bashcompinit # Bash completion compatibility
+compinit
 bashcompinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -155,7 +155,7 @@ fi
 ## mise ##
 if which mise &> /dev/null; then
   eval "$(mise activate zsh)"
-  eval "$(mise completion zsh)"
+  mise completion zsh > "${HOME}/.zfunc/_mise"
 fi
 
 ## ansible ##
@@ -169,10 +169,10 @@ export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
 export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
 
 ## k8s ##
-export KUBECONFIG="${CONFIG_PATH}/kube/config"
-
-## Oh My Posh ##
-eval "$(oh-my-posh init zsh --config ${SHELL_CONFIG_PATH}/edubxb.omp.json)"
+if which kubectl &> /dev/null; then
+  export KUBECONFIG="${CONFIG_PATH}/kube/config"
+  kubectl completion zsh > "${HOME}/.zfunc/_kubectl"
+fi
 
 ## AWS ##
 if which aws &> /dev/null; then
@@ -194,3 +194,6 @@ fi
 
 ## host-dependent config ##
 # [[ -f "${SHELL_CONFIG_PATH}/zshrc_$(hostname -s)" ]] && source "${SHELL_CONFIG_PATH}/zshrc_$(hostname -s)"
+
+## Oh My Posh ##
+eval "$(oh-my-posh init zsh --config ${SHELL_CONFIG_PATH}/edubxb.omp.json)"
