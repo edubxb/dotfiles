@@ -20,7 +20,7 @@ return {
     },
     config = function(_, opts)
       require("nightfox").setup(opts)
-      vim.cmd("colorscheme nightfox")
+      vim.cmd("colorscheme carbonfox")
     end,
   },
 }
