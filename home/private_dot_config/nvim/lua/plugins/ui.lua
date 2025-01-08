@@ -172,307 +172,92 @@ return {
     }
   },
   {
-    "hoob3rt/lualine.nvim",
+    "nvim-lualine/lualine.nvim",
     dependencies = {
       "lewis6991/gitsigns.nvim",
+      "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      local colors = {
-        bg      = "#131A24",
-        fg      = "#cdcecf",
-        blue    = "#719cd6",
-        cyan    = "#63cdcf",
-        green   = "#81b29a",
-        magenta = "#9d79d6",
-        orange  = "#f4a261",
-        pink    = "#d67ad2",
-        red     = "#c94f6d",
-        yellow  = "#dbc074",
-      }
-
-      local mode_color = {
-        n = colors.fg,
-        i = colors.green,
-        v = colors.blue,
-        [""] = colors.blue,
-        V = colors.blue,
-        c = colors.fg,
-        no = colors.red,
-        s = colors.orange,
-        S = colors.orange,
-        [""] = colors.orange,
-        ic = colors.yellow,
-        R = colors.magenta,
-        Rv = colors.magenta,
-        cv = colors.red,
-        ce = colors.red,
-        r = colors.cyan,
-        rm = colors.cyan,
-        ["r?"] = colors.cyan,
-        ["!"] = colors.red,
-        t = colors.red,
-      }
-
-      local conditions = {
-        buffer_not_empty = function()
-          return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-        end,
-        hide_in_width = function()
-          return vim.fn.winwidth(0) > 80
-        end,
-      }
-
-      local function diff_source()
-        local gitsigns = vim.b.gitsigns_status_dict
-        if gitsigns then
-          return {
-            added = gitsigns.added,
-            modified = gitsigns.changed,
-            removed = gitsigns.removed
-          }
-        end
-      end
-
-      local config = {
-        extensions = {
-          "neo-tree",
-          "nvim-dap-ui",
-          "quickfix",
-        },
-        options = {
-          component_separators = " ",
-          section_separators = " ",
-          disabled_filetypes = window_filetypes,
-          theme = {
-            normal = { c = { fg = colors.fg, bg = colors.bg } },
-            inactive = { c = { fg = colors.fg, bg = colors.bg } },
+    opts = {
+      options = {
+        component_separators = { left = " ", right = " "},
+        section_separators = { left = " ", right = " "},
+      },
+      sections = {
+        lualine_a = {
+          {
+            "mode",
+             fmt = function(str) return str:sub(1,1) end,
           },
         },
-        sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_y = {},
-          lualine_z = {},
-          lualine_c = {},
-          lualine_x = {},
+        lualine_b = {
+          {
+            "b:gitsigns_head",
+            icon = "",
+            color = "lualine_c_normal",
+          },
+          {
+            "diff",
+            source = function()
+              local gitsigns = vim.b.gitsigns_status_dict
+              if gitsigns then
+                return {
+                  added = gitsigns.added,
+                  modified = gitsigns.changed,
+                  removed = gitsigns.removed
+                }
+              end
+            end,
+            color = "lualine_c_normal",
+          },
+          {
+            "diagnostics",
+            color = "lualine_c_normal",
+          },
         },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_y = {},
-          lualine_z = {},
-          lualine_c = {},
-          lualine_x = {},
+        lualine_c = {},
+        lualine_x = {
+          {
+            "filename",
+            path = 3,
+            color = function()
+              local hl = "lualine_c_normal"
+              if vim.bo.modified then
+                hl = "lualine_x_filename_insert"
+              elseif vim.bo.modifiable == false or vim.bo.readonly == true then
+                hl = "lualine_x_filename_replace"
+              end
+              return {
+                fg = vim.api.nvim_get_hl_by_name(hl, true).fg
+              }
+            end
+          },
+          "filetype",
+          "location",
+          "progress",
         },
-      }
-
-      local function ins_left(component)
-        table.insert(config.sections.lualine_c, component)
-      end
-
-      local function ins_right(component)
-        table.insert(config.sections.lualine_x, component)
-      end
-
-      ins_left {
-        function ()
-          local mode_map = {
-            ["n"]     = "N",
-            ["no"]    = "OP",
-            ["nov"]   = "OP",
-            ["noV"]   = "OP",
-            ["no\22"] = "OP",
-            ["niI"]   = "N",
-            ["niR"]   = "N",
-            ["niV"]   = "N",
-            ["nt"]    = "N",
-            ["v"]     = "V",
-            ["vs"]    = "V",
-            ["V"]     = "VL",
-            ["Vs"]    = "VL",
-            ["\22"]   = "VB",
-            ["\22s"]  = "VB",
-            ["s"]     = "S",
-            ["S"]     = "SL",
-            ["\19"]   = "SB",
-            ["i"]     = "I",
-            ["ic"]    = "I",
-            ["ix"]    = "I",
-            ["R"]     = "R",
-            ["Rc"]    = "R",
-            ["Rx"]    = "R",
-            ["Rv"]    = "VR",
-            ["Rvc"]   = "VR",
-            ["Rvx"]   = "VR",
-            ["c"]     = "CMD",
-            ["cv"]    = "EX",
-            ["ce"]    = "EX",
-            ["r"]     = "R",
-            ["rm"]    = "M",
-            ["r?"]    = "",
-            ["!"]     = "SH",
-            ["t"]     = "T",
-          }
-          return mode_map[vim.api.nvim_get_mode().mode] or "__"
-        end,
-        color = function()
-          return {
-            fg = colors.bg,
-            bg = mode_color[vim.fn.mode()],
-            gui = "bold"
-          }
-        end,
-      }
-
-      ins_left {
-        function ()
-          return vim.b.gitsigns_head
-          --   local tag = vim.api.nvim_cmd("Git describe --tags --exact-match", true)
-          --   if vim.v.shell_error then
-            --     return " " .. vim.b.gitsigns_head
-          --   else
-            --     return " " .. tag
-          --   end
-        end,
-        icon = "",
-        cond = function ()
-          return vim.b.gitsigns_head ~= nil
-        end,
-        color = {
-          fg = colors.fg,
+        lualine_y = {
+          {
+            "encoding",
+            color = "lualine_c_normal",
+            fmt = string.upper,
+          },
+          {
+            "fileformat",
+            color = "lualine_c_normal",
+            icons_enabled = false,
+            fmt = string.upper,
+          },
         },
-        padding = {
-          left = 2
+        lualine_z = {
+          {
+            function()
+            return " "
+            end,
+            draw_empty = true,
+          },
         },
-      }
-
-      ins_left {
-        "diff",
-        symbols = {added = "+", modified = "~", removed = "-"},
-        diff_color = {
-          added = { fg = colors.green, },
-          modified = { fg = colors.orange },
-          removed = { fg = colors.red },
-        },
-        source = diff_source,
-        cond = conditions.hide_in_width,
-        padding = {
-          right = 0
-        },
-      }
-
-      ins_left {
-        "diagnostics",
-        sources = { "nvim_diagnostic" },
-        symbols = { error = " ", warn = " ", hint = "󰌵 ", info = " " },
-        diagnostics_color = {
-          color_error = { fg = colors.red },
-          color_warn = { fg = colors.yellow },
-          color_info = { fg = colors.cyan },
-        },
-        padding = {
-          left = 2
-        },
-      }
-
-      ins_left {
-        "searchcount",
-        icon = "󰍉",
-        padding = {
-          left = 2
-        }
-      }
-
-      ins_left {
-        function()
-          return "%="
-        end
-      }
-
-      ins_right {
-        "filename",
-        cond = conditions.buffer_not_empty,
-        path = 1,
-        symbols = {
-          modified = "",
-          readonly = "",
-          unnamed = "[No Name]",
-        },
-        padding = {
-          left = 2,
-          right = 2
-        },
-        color = function()
-          local mode_fg = colors.fg
-          if vim.bo.modified then
-            mode_fg = colors.red
-          elseif vim.bo.modifiable == false or vim.bo.readonly == true then
-            mode_fg = colors.magenta
-          end
-          return {
-            fg = mode_fg,
-          }
-        end,
-      }
-
-      ins_right {
-        "filetype",
-        icons_enabled = true,
-        padding = {
-          left = 0,
-          right = 1
-        },
-        color = {
-          fg = colors.fg,
-          bg = colors.bg,
-        }
-      }
-
-      ins_right {
-        "location"
-      }
-
-      ins_right {
-        "progress"
-      }
-
-      ins_right {
-        "filesize",
-        cond = conditions.buffer_not_empty,
-      }
-
-      ins_right {
-        "o:encoding",
-        fmt = string.upper,
-        cond = conditions.hide_in_width,
-        color = { fg = colors.fg },
-      }
-
-      ins_right {
-        "fileformat",
-        fmt = string.upper,
-        icons_enabled = false,
-        padding = {
-          left = 0,
-          right = 3
-        },
-        color = { fg = colors.fg },
-      }
-
-      ins_right {
-        function()
-          return "   "
-        end,
-        color = function()
-          return {
-            bg = mode_color[vim.fn.mode()],
-          }
-        end,
-        padding = { left = 0 },
-      }
-
-      require("lualine").setup(config)
-    end
+      },
+    },
   },
   {
     "folke/noice.nvim",
