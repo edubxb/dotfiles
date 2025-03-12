@@ -22,18 +22,14 @@ zle -N down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
 bindkey -e # Use emacs keybindings even if our EDITOR is set to vi
-bindkey "$key[Up]" up-line-or-beginning-search
-bindkey "$key[Down]" down-line-or-beginning-search
+bindkey " " magic-space
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey "^X^E" edit-command-line
 
-## Enable completion
 fpath+="${HOME}/.zfunc"
-autoload -Uz compinit
-autoload -Uz bashcompinit # Bash completion compatibility
-compinit
-bashcompinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -55,6 +51,12 @@ zstyle ':completion:*' verbose true
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 # zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+## Enable completion
+autoload -Uz compinit
+autoload -Uz bashcompinit # Bash completion compatibility
+compinit
+bashcompinit
+
 ## Command history ##
 export HISTFILE="${HOME}/.zsh_history"
 export HISTSIZE=1000
@@ -67,17 +69,19 @@ zshaddhistory() {
 }
 
 ## ZSH plugins ##
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
-if [[ ! -f "${ZINIT_HOME}/zinit.zsh" ]]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone git@github.com:zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-# zinit light marlonrichert/zsh-autocomplete
-zinit light zsh-users/zsh-syntax-highlighting
+zinit for \
+  light-mode Aloxaf/fzf-tab \
+  light-mode zsh-users/zsh-autosuggestions \
+  light-mode zsh-users/zsh-completions \
+  light-mode zsh-users/zsh-syntax-highlighting \
+  https://github.com/junegunn/fzf-git.sh/blob/main/fzf-git.sh
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[alias]="none"
@@ -127,6 +131,14 @@ if [[ -f /usr/share/zsh/vendor-completions/_git-extras ]]; then
   source /usr/share/zsh/vendor-completions/_git-extras
 fi
 
+## git absorb ##s
+if [[ -x /usr/lib/git-core/git-absorb ]]; then
+  zstyle ':completion:*:*:git:*' user-commands $existing_user_commands \
+      absorb:'automatically absorb staged changes into your current branch'
+  zstyle -g existing_user_commands ':completion:*:*:git:*' user-commands
+  git absorb --gen-completions zsh > "${HOME}/.zfunc/_git-absorb"
+fi
+
 ## fzf config ##
 if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
   source /usr/share/doc/fzf/examples/completion.zsh
@@ -144,12 +156,6 @@ if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
   export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --strip-cwd-prefix"
   export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always {}'"
   export FZF_ALT_C_OPTS="--preview 'lsd --color always --tree {}'"
-fi
-
-## ripgrep ##
-if which rg &> /dev/null; then
-  export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
-  rg --generate complete-zsh > "${HOME}/.zfunc/_rg"
 fi
 
 ## mise ##
