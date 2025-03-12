@@ -58,13 +58,13 @@
 	diffm = "!git diff $(git default-branch)"
 	diffs = "!git diff --staged"
 	diffu = diff @{u}
-	fixup = "!f() { local ref=HEAD; [ -n \"$1\" ] && ref=\"$1\"; git commit --fixup=${ref}; }; f"
+	fxc = "!f() { local ref=HEAD; [ -n \"$1\" ] && ref=\"$1\"; git commit --fixup=${ref}; }; f"
 	ls-ignored = ls-files --others --ignored --exclude-standard
 	mb = "!git switch $(git default-branch)"
 	puf = push --force-with-lease
 	rebaseme = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; git rebase --autosquash -i $(git merge-base \"${ref}\" HEAD); }; f"
 	shame = blame -w -M
-	squash = "!f() { local ref=HEAD; [ -n \"$1\" ] && ref=\"$1\"; git commit --squash=${ref}; }; f"
+	sqc = "!f() { local ref=HEAD; [ -n \"$1\" ] && ref=\"$1\"; git commit --squash=${ref}; }; f"
 	stash-all = stash push --include-untracked
 	trl = "!git reflog --all --pretty=raw | tig --pretty=raw"
 	unstage = "!git restore --staged"
