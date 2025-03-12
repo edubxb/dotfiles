@@ -196,4 +196,4 @@ fi
 # [[ -f "${SHELL_CONFIG_PATH}/zshrc_$(hostname -s)" ]] && source "${SHELL_CONFIG_PATH}/zshrc_$(hostname -s)"
 
 ## Oh My Posh ##
-eval "$(oh-my-posh init zsh --config ${SHELL_CONFIG_PATH}/edubxb.omp.json)"
+eval "$(oh-my-posh init zsh --config ${SHELL_CONFIG_PATH}/edubxb.omp.toml)"

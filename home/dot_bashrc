@@ -116,4 +116,4 @@ source <(kubectl completion bash)
 [[ -f "${SHELL_CONFIG_PATH}/functions.sh" ]] && source "${SHELL_CONFIG_PATH}/functions.sh"
 
 ## Oh My Posh ##
-eval "$(oh-my-posh init bash --config ${SHELL_CONFIG_PATH}/edubxb.omp.json)"
+eval "$(oh-my-posh init bash --config ${SHELL_CONFIG_PATH}/edubxb.omp.toml)"

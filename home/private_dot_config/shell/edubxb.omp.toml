@@ -1,0 +1,130 @@
+version = 3
+final_space = true
+
+[transient_prompt]
+  template = ' {{ now | date "15:04:05" }}  '
+  foreground = 'white'
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    template = '{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }}{{ end }} '
+    foreground = 'lightBlue'
+    type = 'session'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = '<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }}{{ end }}{{ if .Staging.Changed }} <r><b> {{ .Staging.String }} </b></r>{{ end }}{{ if gt .StashCount 1}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} '
+    foreground = 'white'
+    type = 'git'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      branch_ahead_icon = '󰁝'
+      branch_behind_icon = '󰁅'
+      branch_gone_icon = ''
+      branch_icon = ' '
+      branch_identical_icon = ''
+      commit_icon = ''
+      fetch_stash_count = true
+      fetch_status = true
+      tag_icon = ' '
+
+  [[blocks.segments]]
+    template = '{{ if .Segments.Git.Dir }}<b>{{ .Segments.Git.RepoName }}<d>{{ .PWD | replace .Segments.Git.Dir "" }} </d></b>{{ else }}<b>{{ .PWD }}</b>{{ end }}'
+    foreground = 'white'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      style = 'full'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    template = ' <b>󰏗 {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b>'
+    foreground = 'yellow'
+    type = 'project'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = ' <b>󰇧 {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b>'
+    foreground = 'yellow'
+    type = 'terraform'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      fetch_version = true
+
+  [[blocks.segments]]
+    template = ' <b>󰌠 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b>'
+    foreground = 'green'
+    type = 'python'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '󰅒 {{ .FormattedMs }}'
+    foreground = 'white'
+    type = 'executiontime'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      style = 'round'
+      threshold = 30001.0
+
+  [[blocks.segments]]
+    template = '{{ if gt .Code 1 }}{{ .Code }}{{ end }} '
+    foreground = 'red'
+    type = 'exit'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      always_enabled = false
+
+  [[blocks.segments]]
+    template = ''
+    foreground = 'white'
+    type = 'text'
+    style = 'plain'
+
+[[tooltips]]
+  template = '󱃾 <i>{{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }}</i>'
+  foreground = '#3382e3'
+  type = 'kubectl'
+  style = 'plain'
+  tips = ['kube', 'kubectl', 'kubenctx']
+
+[[tooltips]]
+  template = '󰅟 <i>{{ .Profile }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>'
+  foreground = '#FF9901'
+  type = 'aws'
+  style = 'plain'
+  tips = ['aws']
+
+  [tooltips.properties]
+    display_default = true
+
+[[tooltips]]
+  template = '󰅟 <i>{{ .Account }} :: {{ .Project }} :: {{ .Region }}</i>'
+  foreground = '#2A73E8'
+  type = 'gcp'
+  style = 'plain'
+  tips = ['gcloud', 'gsutil']
