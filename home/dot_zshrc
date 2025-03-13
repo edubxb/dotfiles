@@ -133,9 +133,9 @@ fi
 
 ## git absorb ##s
 if [[ -x /usr/lib/git-core/git-absorb ]]; then
+  zstyle -g existing_user_commands ':completion:*:*:git:*' user-commands
   zstyle ':completion:*:*:git:*' user-commands $existing_user_commands \
       absorb:'automatically absorb staged changes into your current branch'
-  zstyle -g existing_user_commands ':completion:*:*:git:*' user-commands
   git absorb --gen-completions zsh > "${HOME}/.zfunc/_git-absorb"
 fi
 
