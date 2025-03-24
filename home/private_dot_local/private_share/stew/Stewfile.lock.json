@@ -241,6 +241,16 @@
 			"binary": "uvx",
 			"url": "https://api.github.com/repos/astral-sh/uv/releases/assets/238360957",
 			"binaryHash": "42742fa7ab54d52c65acb0a6c9a0ce6869adf2920cc57272d9815f01bb9ad7b0"
+		},
+		{
+			"source": "github",
+			"owner": "argoproj",
+			"repo": "argo-rollouts",
+			"tag": "v1.8.0",
+			"asset": "kubectl-argo-rollouts-linux-amd64",
+			"binary": "kubectl-argo-rollouts",
+			"url": "https://api.github.com/repos/argoproj/argo-rollouts/releases/assets/224924003",
+			"binaryHash": "d27e53ad67f0a74a09229dbbbbd7e55c359891387d689c67a7b79f7e191d804f"
 		}
 	]
 }
