@@ -44,8 +44,16 @@ final_space = true
     type = 'path'
     style = 'plain'
 
+  [[blocks.segments]]
+    template = '{{ .Output }}'
+    type = 'command'
+    style = 'plain'
+    foreground = 'red'
+
     [blocks.segments.properties]
-      style = 'full'
+      shell = 'sh'
+      interpret = false
+      command = 'GIT_ROOT="$(git rev-parse --show-toplevel)"; test -f "${GIT_ROOT}/.pre-commit-config.yaml" && test ! -f "${GIT_ROOT}/.git/hooks/pre-commit" && echo 󰛣'
 
 [[blocks]]
   type = 'prompt'
@@ -87,7 +95,6 @@ final_space = true
     style = 'plain'
 
     [blocks.segments.properties]
-      style = 'round'
       threshold = 30001.0
 
   [[blocks.segments]]
