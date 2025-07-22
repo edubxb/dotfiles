@@ -24,20 +24,17 @@ alias nuke='killall -9 '
 ## yank ##
 alias yank='yank-cli'
 
-## yarn ##
-alias yarn='yarnpkg'
-
 ## colors are wonderful ##
 alias ip='ip --color'
 
 ## Better integration with GUI tools ##
 alias open='xdg-open'
 
-## lsd ##
-alias ls='lsd --group-dirs first'
-alias ll='lsd -l --group-dirs first'
-alias lla='lsd -la --group-dirs first'
-alias tree='lsd --tree --group-directories-first'
+## eza ##
+alias ls='eza --icons=auto --group-directories-first'
+alias ll='eza --icons=auto --color-scale --group-directories-first -l'
+alias lla='eza --icons=auto --color-scale --group-directories-first -la'
+alias tree='eza --icons=auto --color-scale --group-directories-first --tree'
 
 ## k8s ##
 alias kube='kubectl'
