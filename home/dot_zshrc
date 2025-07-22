@@ -179,6 +179,12 @@ if which kubectl &> /dev/null; then
   export KUBECONFIG="${CONFIG_PATH}/kube/config"
   kubectl completion zsh > "${HOME}/.zfunc/_kubectl"
 fi
+if which kustomize &> /dev/null; then
+  kustomize completion zsh > "${HOME}/.zfunc/_kustomize"
+fi
+if which helm &> /dev/null; then
+  helm completion zsh > "${HOME}/.zfunc/_helm"
+fi
 
 ## AWS ##
 if which aws &> /dev/null; then
