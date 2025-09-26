@@ -6,11 +6,11 @@
 			"source": "github",
 			"owner": "jandedobbeleer",
 			"repo": "oh-my-posh",
-			"tag": "v25.4.3",
+			"tag": "v26.25.0",
 			"asset": "posh-linux-amd64",
 			"binary": "oh-my-posh",
-			"url": "https://api.github.com/repos/JanDeDobbeleer/oh-my-posh/releases/assets/237714767",
-			"binaryHash": "94f4b60b0d6723825a1e1ccd354b3d4093e5a21958d5fdd866a4a6def8dac671"
+			"url": "https://api.github.com/repos/JanDeDobbeleer/oh-my-posh/releases/assets/296786367",
+			"binaryHash": "1f9831bc90e4f261ef18aa4abb45096cd3ee9eba577020b3b338b42ca6f9e3d3"
 		},
 		{
 			"source": "github",
@@ -36,11 +36,11 @@
 			"source": "github",
 			"owner": "Wilfred",
 			"repo": "difftastic",
-			"tag": "0.63.0",
+			"tag": "0.65.0",
 			"asset": "difft-x86_64-unknown-linux-gnu.tar.gz",
 			"binary": "difft",
-			"url": "https://api.github.com/repos/Wilfred/difftastic/releases/assets/228222596",
-			"binaryHash": "9d51d2a258b1a6cc1f6b1ed97e1961409d44c8f6fbae1f3947d9cdad76987307"
+			"url": "https://api.github.com/repos/Wilfred/difftastic/releases/assets/296633608",
+			"binaryHash": "1de384a69813b665e36a816f24ff4bbad15059006996a69cdf677c997a6bd5b0"
 		},
 		{
 			"source": "github",
@@ -66,81 +66,81 @@
 			"source": "github",
 			"owner": "derailed",
 			"repo": "k9s",
-			"tag": "v0.40.10",
+			"tag": "v0.50.12",
 			"asset": "k9s_Linux_amd64.tar.gz",
 			"binary": "k9s",
-			"url": "https://api.github.com/repos/derailed/k9s/releases/assets/237961316",
-			"binaryHash": "8160123d38820e59a1f8eb24416365f79ed04c67e08a70f490a0170374d745f9"
+			"url": "https://api.github.com/repos/derailed/k9s/releases/assets/295069379",
+			"binaryHash": "33dfadd0436152dbbdaed8290d991dde534b5bed6a394c2920b8e3f74d889bf6"
 		},
 		{
 			"source": "github",
 			"owner": "ankitpokhrel",
 			"repo": "jira-cli",
-			"tag": "v1.5.2",
-			"asset": "jira_1.5.2_linux_x86_64.tar.gz",
+			"tag": "v1.7.0",
+			"asset": "jira_1.7.0_linux_x86_64.tar.gz",
 			"binary": "jira",
-			"url": "https://api.github.com/repos/ankitpokhrel/jira-cli/releases/assets/194150759",
-			"binaryHash": "bfbd5f4a47e69e381efe792c6d9d0569cd431b37be54460c07d8fac90f0bbb06"
+			"url": "https://api.github.com/repos/ankitpokhrel/jira-cli/releases/assets/288071447",
+			"binaryHash": "bcbfef936edb88af257a8635408441b744352b0e113e083ea9d82bc2b7f5bda0"
 		},
 		{
 			"source": "github",
 			"owner": "johnkerl",
 			"repo": "miller",
-			"tag": "v6.13.0",
-			"asset": "miller-6.13.0-linux-amd64.tar.gz",
+			"tag": "v6.15.0",
+			"asset": "miller-6.15.0-linux-amd64.tar.gz",
 			"binary": "mlr",
-			"url": "https://api.github.com/repos/johnkerl/miller/releases/assets/197066116",
-			"binaryHash": "84353942b36656e6288f770991271a9f6e60036c66e2493bf81ba571f782edf0"
+			"url": "https://api.github.com/repos/johnkerl/miller/releases/assets/282634082",
+			"binaryHash": "9e71e3fa06f5b1a67f72272b77b3d0fb122186140ea4af48ce4067d822694fd5"
 		},
 		{
 			"source": "github",
 			"owner": "adevinta",
 			"repo": "maiao",
-			"tag": "1.2.0",
+			"tag": "1.2.1",
 			"asset": "git-review-Linux-amd64",
 			"binary": "git-review",
-			"url": "https://api.github.com/repos/adevinta/maiao/releases/assets/135858169",
-			"binaryHash": "159bc3f46ff6b3b14e2483f569305bcc62606439c6bd2ab310fe6b2859e107fd"
+			"url": "https://api.github.com/repos/adevinta/maiao/releases/assets/248754201",
+			"binaryHash": "521fae8d2a4ae5bc30dba4627f571d08fb768c55eea9239940e8ea2f4722b033"
 		},
 		{
 			"source": "github",
 			"owner": "antonmedv",
 			"repo": "fx",
-			"tag": "35.0.0",
+			"tag": "39.0.4",
 			"asset": "fx_linux_amd64",
 			"binary": "fx",
-			"url": "https://api.github.com/repos/antonmedv/fx/releases/assets/176251943",
-			"binaryHash": "7a7e8202a97a2059f22a95522eb8a0d08520bba57cd4fe9796c7ac30aac35dd9"
+			"url": "https://api.github.com/repos/antonmedv/fx/releases/assets/288101794",
+			"binaryHash": "8b012c8072dc28ccfdc60a307316fcce64c1d78bdaa9d393e6194ab68a5b44e9"
 		},
 		{
 			"source": "github",
 			"owner": "tmccombs",
 			"repo": "hcl2json",
-			"tag": "v0.6.5",
-			"asset": "hcl2json_linux_amd64",
+			"tag": "v0.6.8",
+			"asset": "hcl2json_linux_amd64.tar.gz",
 			"binary": "hcl2json",
-			"url": "https://api.github.com/repos/tmccombs/hcl2json/releases/assets/214896998",
-			"binaryHash": "05637e9f08ddaa15fd2c75ef8c73d2f28bbeb6d1b510b7421270ec3d7c9c3fd0"
+			"url": "https://api.github.com/repos/tmccombs/hcl2json/releases/assets/286336685",
+			"binaryHash": "449c0832e4a5111e27683827b057aa7993ec4cf0308d9c37386692804ee6ea7a"
 		},
 		{
 			"source": "github",
 			"owner": "ynqa",
 			"repo": "jnv",
-			"tag": "v0.5.0",
+			"tag": "v0.6.1",
 			"asset": "jnv-x86_64-unknown-linux-gnu.tar.xz",
 			"binary": "jnv",
-			"url": "https://api.github.com/repos/ynqa/jnv/releases/assets/218382399",
-			"binaryHash": "ed3504ce0bb7b3b4777d11f64014521cd8822c48fb8933beeb92498751295771"
+			"url": "https://api.github.com/repos/ynqa/jnv/releases/assets/274820634",
+			"binaryHash": "a0a056c853039459f5d0ed7ef101ea912ed2ec8866722eeb89d6a512c98d7abc"
 		},
 		{
 			"source": "github",
 			"owner": "wagoodman",
 			"repo": "dive",
-			"tag": "v0.12.0",
-			"asset": "dive_0.12.0_linux_amd64.tar.gz",
+			"tag": "v0.13.1",
+			"asset": "dive_0.13.1_linux_amd64.tar.gz",
 			"binary": "dive",
-			"url": "https://api.github.com/repos/wagoodman/dive/releases/assets/149421417",
-			"binaryHash": "32c6b1cccc13201cd2d9ad6d748a29125615d11d5126a03f698caf3b69c55179"
+			"url": "https://api.github.com/repos/wagoodman/dive/releases/assets/241842462",
+			"binaryHash": "9e3215e5bd4ce7a196e8ee4fe38a33850e847b407e7f4f0a5078e27178128286"
 		},
 		{
 			"source": "github",
@@ -176,41 +176,41 @@
 			"source": "github",
 			"owner": "cycloidio",
 			"repo": "inframap",
-			"tag": "v0.7.0",
+			"tag": "v0.8.0",
 			"asset": "inframap-linux-amd64.tar.gz",
 			"binary": "inframap-linux-amd64",
-			"url": "https://api.github.com/repos/cycloidio/inframap/releases/assets/172827943",
-			"binaryHash": "e989d48bd437147795c6d464781e8d7c483dbd5a571cac421946575ab2bf8e0c"
+			"url": "https://api.github.com/repos/cycloidio/inframap/releases/assets/282085108",
+			"binaryHash": "4011114370794355de4c7201a4a88c4b74c80c8dfb229638505d80f36567feec"
 		},
 		{
 			"source": "github",
 			"owner": "abhinav",
 			"repo": "git-spice",
-			"tag": "v0.12.0",
+			"tag": "v0.18.0",
 			"asset": "git-spice.Linux-x86_64.tar.gz",
 			"binary": "gs",
-			"url": "https://api.github.com/repos/abhinav/git-spice/releases/assets/235050858",
-			"binaryHash": "2f932c3f9c8dd62145420b5fb3340881c060e293d3e3851571ca9e719206d648"
+			"url": "https://api.github.com/repos/abhinav/git-spice/releases/assets/297026829",
+			"binaryHash": "cae1f4b317e1a31cdefd10d1a02a952e7148f9ef3ec83c5dcb6fce59582fc953"
 		},
 		{
 			"source": "github",
 			"owner": "birdayz",
 			"repo": "kaf",
-			"tag": "v0.2.11",
-			"asset": "kaf_0.2.11_Linux_x86_64.tar.gz",
+			"tag": "v0.2.13",
+			"asset": "kaf_0.2.13_Linux_x86_64.tar.gz",
 			"binary": "kaf",
-			"url": "https://api.github.com/repos/birdayz/kaf/releases/assets/237764099",
-			"binaryHash": "52cb72c6f21ffc185530cd5d87a34294866f085cb13d2d94dd26af0137e87eb3"
+			"url": "https://api.github.com/repos/birdayz/kaf/releases/assets/246991779",
+			"binaryHash": "2fe3968415e9df0d5ef3c0ee83dc68612e5f3ae4a8e676009e5e2d99d75c7176"
 		},
 		{
 			"source": "github",
 			"owner": "ollama",
 			"repo": "ollama",
-			"tag": "v0.6.1",
+			"tag": "v0.12.2",
 			"asset": "ollama-linux-amd64.tgz",
 			"binary": "ollama",
-			"url": "https://api.github.com/repos/ollama/ollama/releases/assets/237572340",
-			"binaryHash": "83dd001dee6bbee1ec28492a455b294889cbd4e187e095d16695ecc18ec2e3bc"
+			"url": "https://api.github.com/repos/ollama/ollama/releases/assets/297017866",
+			"binaryHash": "ccfd91590f4d147507af8a90306e9904708640f663ba8bcc73dcad779899e0b7"
 		},
 		{
 			"source": "github",
@@ -226,21 +226,21 @@
 			"source": "github",
 			"owner": "astral-sh",
 			"repo": "uv",
-			"tag": "0.6.7",
+			"tag": "0.8.22",
 			"asset": "uv-x86_64-unknown-linux-gnu.tar.gz",
 			"binary": "uv",
-			"url": "https://api.github.com/repos/astral-sh/uv/releases/assets/238360957",
-			"binaryHash": "0522f677971811e227fc8b18854069be07da0b456655feee7c5b3c9b06a84c00"
+			"url": "https://api.github.com/repos/astral-sh/uv/releases/assets/296507346",
+			"binaryHash": "a261804d9493a96e7eebf13bcffc1b7ecc87dbd7da9a2800af94c20182d1a70d"
 		},
 		{
 			"source": "github",
 			"owner": "astral-sh",
 			"repo": "uv",
-			"tag": "0.6.7",
+			"tag": "0.8.22",
 			"asset": "uv-x86_64-unknown-linux-gnu.tar.gz",
 			"binary": "uvx",
-			"url": "https://api.github.com/repos/astral-sh/uv/releases/assets/238360957",
-			"binaryHash": "42742fa7ab54d52c65acb0a6c9a0ce6869adf2920cc57272d9815f01bb9ad7b0"
+			"url": "https://api.github.com/repos/astral-sh/uv/releases/assets/296507346",
+			"binaryHash": "421b1bb58429180a04ade98da066b5a5b6763e8ed74edef97359701c4cb42db8"
 		},
 		{
 			"source": "github",
@@ -251,6 +251,86 @@
 			"binary": "kubectl-argo-rollouts",
 			"url": "https://api.github.com/repos/argoproj/argo-rollouts/releases/assets/224924003",
 			"binaryHash": "d27e53ad67f0a74a09229dbbbbd7e55c359891387d689c67a7b79f7e191d804f"
+		},
+		{
+			"source": "github",
+			"owner": "mikefarah",
+			"repo": "yq",
+			"tag": "v4.47.1",
+			"asset": "yq_linux_amd64.tar.gz",
+			"binary": "yq",
+			"url": "https://api.github.com/repos/mikefarah/yq/releases/assets/275478342",
+			"binaryHash": "0fb28c6680193c41b364193d0c0fc4a03177aecde51cfc04d506b1517158c2fb"
+		},
+		{
+			"source": "github",
+			"owner": "danielmiessler",
+			"repo": "fabric",
+			"tag": "v1.4.318",
+			"asset": "fabric_Linux_x86_64.tar.gz",
+			"binary": "fabric",
+			"url": "https://api.github.com/repos/danielmiessler/Fabric/releases/assets/296809600",
+			"binaryHash": "cd9a3af8e470394ce492cb899725fc0c36f3de8143fb63811db1ae43c1cdf99e"
+		},
+		{
+			"source": "github",
+			"owner": "opencode-ai",
+			"repo": "opencode",
+			"tag": "v0.0.55",
+			"asset": "opencode-linux-x86_64.tar.gz",
+			"binary": "opencode-ai",
+			"url": "https://api.github.com/repos/opencode-ai/opencode/releases/assets/267762405",
+			"binaryHash": "f7fe18703f9d0cc2352d0a94c8c62bfd378b6681e017a2bbf78c2ecadad75544"
+		},
+		{
+			"source": "github",
+			"owner": "sst",
+			"repo": "opencode",
+			"tag": "v0.11.4",
+			"asset": "opencode-linux-x64.zip",
+			"binary": "opencode-sst",
+			"url": "https://api.github.com/repos/sst/opencode/releases/assets/297435568",
+			"binaryHash": "0435a133909cc2bddd566c2d23dce9c899040767a6a07c9363cc08d78941e712"
+		},
+		{
+			"source": "github",
+			"owner": "wtfutil",
+			"repo": "wtf",
+			"tag": "v0.46.1",
+			"asset": "wtf_0.46.1_linux_amd64.tar.gz",
+			"binary": "wtfutil",
+			"url": "https://api.github.com/repos/wtfutil/wtf/releases/assets/290451493",
+			"binaryHash": "f3649b926a24de72b7a0986201e1a6ed30252edd514408e51d401e60adf94232"
+		},
+		{
+			"source": "github",
+			"owner": "cloudflare",
+			"repo": "cf-terraforming",
+			"tag": "v0.24.0",
+			"asset": "cf-terraforming_0.24.0_linux_amd64.tar.gz",
+			"binary": "cf-terraforming",
+			"url": "https://api.github.com/repos/cloudflare/cf-terraforming/releases/assets/271843467",
+			"binaryHash": "e6737e1a30a2cc5ae5996d05b61a4a64839269a455730de0d24fdb6a57fe4a8d"
+		},
+		{
+			"source": "github",
+			"owner": "macropower",
+			"repo": "kat",
+			"tag": "v0.25.1",
+			"asset": "kat_Linux_x86_64.tar.gz",
+			"binary": "kat",
+			"url": "https://api.github.com/repos/MacroPower/kat/releases/assets/286008840",
+			"binaryHash": "653fcf6abc9bafc89c5c55f59473ec0f23b5c8dcd6c4616afb5bcc062832e5a5"
+		},
+		{
+			"source": "other",
+			"owner": "",
+			"repo": "",
+			"tag": "",
+			"asset": "gmap",
+			"binary": "gmap",
+			"url": "https://github.com/seeyebe/gmap",
+			"binaryHash": "65e91a5e2d49fe35bfc6859945e6f9fec0e8052166fc6936df686079bca283dc"
 		}
 	]
 }
