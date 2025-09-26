@@ -1,19 +1,27 @@
 version = 3
 final_space = true
 
-[transient_prompt]
-  template = ' {{ now | date "15:04:05" }}  '
-  foreground = 'white'
-
 [upgrade]
   source = 'cdn'
   interval = '168h'
   auto = false
   notice = false
 
+[transient_prompt]
+  template = '<b><r>  {{ now | date "15:04:05" }} </r></b> '
+  newline = true 
+  foreground = 'white'
+
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '┌╴'
+    foreground = 'white'
+    type = 'text'
+    style = 'plain'
 
   [[blocks.segments]]
     template = '{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }}{{ end }} '
@@ -89,7 +97,13 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    template = '󰅒 {{ .FormattedMs }}'
+    template = '└╴'
+    foreground = 'white'
+    type = 'text'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = '󰅒 {{ .FormattedMs }} '
     foreground = 'white'
     type = 'executiontime'
     style = 'plain'
@@ -98,7 +112,7 @@ final_space = true
       threshold = 30001.0
 
   [[blocks.segments]]
-    template = '{{ if gt .Code 0 }}{{ .Code }}{{ end }} '
+    template = '{{ if gt .Code 0 }}{{ .Code }}{{ end }}'
     foreground = 'red'
     type = 'exit'
     style = 'plain'
