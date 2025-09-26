@@ -196,7 +196,7 @@ function gcesh {
                     --bind 'ctrl-t:toggle-all' \
                     --preview-window right:50%:wrap \
                     --preview "__gce_show ${configuration} {2} {1}" \
-                    --preview "gcloud compute instances describe --configuration ${configuration} --zone {2} --format='yaml(id,tags,machineType,labels,networkInterfaces)' {1} | bat -f -p -l yaml" \
+                    --preview "gcloud compute instances describe --configuration ${configuration} --zone {2} --format='yaml(id,tags,machineType,labels,networkInterfaces,lastStartTimestamp,creationTimestamp)' {1} | bat -f -p -l yaml" \
                     --prompt " ${configuration} > " --ansi -q "$*") )
   IFS="${_IFS}"
 
