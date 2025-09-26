@@ -4,7 +4,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 ## cat with wings ##
-if which batcat &> /dev/null; then
+if which batcat &>/dev/null; then
   # Debian package
   alias cat='batcat -p'
 else
