@@ -9,8 +9,28 @@ final_space = true
 
 [transient_prompt]
   template = '<b><r>  {{ now | date "15:04:05" }} </r></b> '
-  newline = true 
   foreground = 'white'
+  newline = true 
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    template = '{{ if gt .Code 0 }}└─<b><r>{{ .Code }}</r></b>{{ end }}'
+    background = 'transparent'
+    foreground = 'red'
+    type = 'exit'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      always_enabled = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+  force = true
 
 [[blocks]]
   type = 'prompt'
@@ -18,7 +38,7 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    template = '┌╴'
+    template = '▍'
     foreground = 'white'
     type = 'text'
     style = 'plain'
@@ -97,7 +117,7 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    template = '└╴'
+    template = '▍'
     foreground = 'white'
     type = 'text'
     style = 'plain'
@@ -110,15 +130,6 @@ final_space = true
 
     [blocks.segments.properties]
       threshold = 30001.0
-
-  [[blocks.segments]]
-    template = '{{ if gt .Code 0 }}{{ .Code }}{{ end }}'
-    foreground = 'red'
-    type = 'exit'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      always_enabled = false
 
   [[blocks.segments]]
     template = ''
