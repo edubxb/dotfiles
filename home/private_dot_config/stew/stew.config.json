@@ -1,4 +1,5 @@
 {
 	"stewPath": "/home/edubxb/.local/share/stew",
-	"stewBinPath": "/home/edubxb/.local/bin"
+	"stewBinPath": "/home/edubxb/.local/bin",
+	"excludedFromUpgradeAll": []
 }
