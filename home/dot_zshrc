@@ -200,6 +200,11 @@ if which gcloud &> /dev/null; then
   source /usr/share/google-cloud-sdk/completion.zsh.inc
 fi
 
+## jira-cli ##
+if which jira &> /dev/null; then
+  jira completion zsh > "${HOME}/.zfunc/_jira"
+fi
+
 ## aliases & functions ##
 [[ -f "${SHELL_CONFIG_PATH}/aliases.sh" ]] && source "${SHELL_CONFIG_PATH}/aliases.sh"
 [[ -f "${SHELL_CONFIG_PATH}/functions.sh" ]] && source "${SHELL_CONFIG_PATH}/functions.sh"
