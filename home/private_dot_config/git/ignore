@@ -2,6 +2,8 @@
 .git/
 # worktrees
 wkts
+# custom ignores
+**/*.ignore.*
 
 ### env stuff ###
 .direnv
