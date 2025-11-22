@@ -36,7 +36,7 @@
 	keepBackup = false
 	prompt = false
 [delta]
-	features = side-by-side line-numbers
+	features = line-numbers
 	hyperlinks = true
 	navigate = true
 [interactive]
