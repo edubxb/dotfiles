@@ -1,3 +1,11 @@
+function set_poshcontext {
+  unset POSH_PRECOMMIT_MISSING
+  GIT_ROOT=$(git rev-parse --show-toplevel 2> /dev/null)
+  if [[ -n "${GIT_ROOT}" ]] && [[ -f "${GIT_ROOT}/.pre-commit-config.yaml" ]] && [[ ! -f "${GIT_ROOT}/.git/hooks/pre-commit" ]]; then
+    export POSH_PRECOMMIT_MISSING=true
+  fi
+}
+
 function fp {
   local projects target
 
