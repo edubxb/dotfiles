@@ -8,7 +8,7 @@ final_space = true
   notice = false
 
 [transient_prompt]
-  template = '<b><r>  {{ now | date "15:04:05" }} </r></b> '
+  template = '<b><r>  {{ now | date "15:04:05" }}</r></b> '
   foreground = 'white'
   newline = true 
 
@@ -17,14 +17,28 @@ final_space = true
   alignment = 'left'
 
   [[blocks.segments]]
-    template = '{{ if gt .Code 0 }}└─<b><r>{{ .Code }}</r></b>{{ end }}'
-    background = 'transparent'
+    template = '{{ if gt .Code 0 }}└─<b><r>{{ .Code }}</r></b>{{ end }}'
     foreground = 'red'
     type = 'exit'
     style = 'plain'
 
     [blocks.segments.properties]
-      always_enabled = false
+      always_enabled = true 
+
+  [[blocks.segments]]
+    template = '{{ if eq .Code 0 }}└─{{ else }}<red,white> </>{{ end }}<b><r>󰅒 {{ .FormattedMs }}</r></b>'
+    foreground = 'white'
+    type = 'executiontime'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      threshold = 30001.0
+
+  [[blocks.segments]]
+    template = '{{ if gt .Code 0 }}{{ if not (.Segments.Contains "Executiontime") }}{{ end }}{{ end }}'
+    foreground = 'red'
+    type = 'text'
+    style = 'plain'
 
 [[blocks]]
   type = 'prompt'
@@ -50,7 +64,7 @@ final_space = true
     style = 'plain'
 
   [[blocks.segments]]
-    template = '<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }}{{ end }}{{ if .Staging.Changed }} <r><b> {{ .Staging.String }} </b></r>{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} '
+    template = '{{ if .IsWorkTree }} {{ end }}<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }}{{ end }}{{ if .Staging.Changed }} <r><b> {{ .Staging.String }} </b></r>{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{end}} '
     foreground = 'white'
     type = 'git'
     style = 'plain'
@@ -73,28 +87,22 @@ final_space = true
     style = 'plain'
 
   [[blocks.segments]]
-    template = '{{ .Output }}'
-    type = 'command'
-    style = 'plain'
+    template = '{{ if eq .Env.POSH_PRECOMMIT_MISSING "true" }}󰛣{{ end }}'
+    type = 'text'
     foreground = 'red'
-
-    [blocks.segments.properties]
-      shell = 'sh'
-      interpret = false
-      command = 'GIT_ROOT="$(git rev-parse --show-toplevel)"; test -f "${GIT_ROOT}/.pre-commit-config.yaml" && test ! -f "${GIT_ROOT}/.git/hooks/pre-commit" && echo 󰛣'
 
 [[blocks]]
   type = 'prompt'
   alignment = 'right'
 
   [[blocks.segments]]
-    template = ' <b>󰏗 {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b>'
+    template = ' <b>󰏗  {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b>'
     foreground = 'yellow'
     type = 'project'
     style = 'plain'
 
   [[blocks.segments]]
-    template = ' <b>󰇧 {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b>'
+    template = ' <b>󰇧  {{ .WorkspaceName }}{{ if .Version }}{{ .Version }}{{ end }}</b>'
     foreground = 'yellow'
     type = 'terraform'
     style = 'plain'
@@ -103,7 +111,7 @@ final_space = true
       fetch_version = true
 
   [[blocks.segments]]
-    template = ' <b>󰌠 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b>'
+    template = ' <b>󰌠  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}</b>'
     foreground = 'green'
     type = 'python'
     style = 'plain'
@@ -123,29 +131,32 @@ final_space = true
     style = 'plain'
 
   [[blocks.segments]]
-    template = '󰅒 {{ .FormattedMs }} '
-    foreground = 'white'
-    type = 'executiontime'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      threshold = 30001.0
-
-  [[blocks.segments]]
     template = ''
     foreground = 'white'
     type = 'text'
     style = 'plain'
 
 [[tooltips]]
-  template = '󱃾 <i>{{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }}</i>'
+  template = '󱃾  <i>{{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }}</i>'
   foreground = '#3382e3'
   type = 'kubectl'
   style = 'plain'
-  tips = ['kube', 'kubectl', 'kubenctx']
+  tips = ['kube', 'kubectl', 'kubenctx', 'argocd']
 
 [[tooltips]]
-  template = '󰅟 <i>{{ .Profile }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>'
+  template = '    {{ .Output }}'
+  foreground = '#ee8671'
+  type = 'command'
+  style = 'plain'
+  tips = ['argocd']
+
+  [tooltips.properties]
+    shell = 'sh'
+    interpret = false
+    command = 'argocd context | sed -nr "/\*/ s/^\*.* ([^ ]+) .*/\1/p"'
+
+[[tooltips]]
+  template = '󰅟  <i>{{ .Profile }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>'
   foreground = '#FF9901'
   type = 'aws'
   style = 'plain'
@@ -155,7 +166,7 @@ final_space = true
     display_default = true
 
 [[tooltips]]
-  template = '󰅟 <i>{{ .Account }} :: {{ .Project }} :: {{ .Region }}</i>'
+  template = '󰅟  <i>{{ if .ActiveConfig }}{{ .ActiveConfig }}{{ end }}{{ if .Project }} :: {{ .Project }}{{ end }}{{ if .Region }}/{{ .Region }}{{ end }}</i>'
   foreground = '#2A73E8'
   type = 'gcp'
   style = 'plain'
