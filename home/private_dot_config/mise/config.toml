@@ -1,0 +1,40 @@
+[settings]
+env_shell_expand = true
+experimental = true
+idiomatic_version_file_enable_tools = []
+minimum_release_age = "7d"
+
+[tools]
+"github:abhinav/git-spice" = "latest"
+"github:bjarneo/ku" = "latest"
+"github:danielmiessler/fabric" = "latest"
+"github:mbrt/gmailctl" = "latest"
+"github:rivolink/leaf" = "latest"
+"github:samwho/spacer" = "latest"
+"github:skyscanner/turbolift" = "latest"
+"pipx:mitmproxy" = "latest"
+"pipx:piptree" = "latest"
+"pipx:poetry" = "latest"
+"pipx:qmk" = "latest"
+"pipx:rexi" = "latest"
+"pipx:roombapy" = "latest"
+awscli = { version = "latest", symlink_bins = "true" }
+deno = "latest"
+difftastic = "latest"
+fnox = "latest"
+fx = "latest"
+helm = "latest"
+jnv = "latest"
+krew = "latest"
+kubectl = "latest"
+kustomize = "latest"
+llmfit = "latest"
+miller = "latest"
+navi = "latest"
+neovim = "latest"
+oh-my-posh = "latest"
+ollama = "latest"
+opencode = "latest"
+usage = "latest"
+uv = "latest"
+wtfutil = "latest"
