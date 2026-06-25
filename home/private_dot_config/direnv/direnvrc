@@ -1,1 +1,0 @@
-VIRTUAL_ENV="$(git rev-parse --show-toplevel)/.venv/$(basename ${PWD})"
