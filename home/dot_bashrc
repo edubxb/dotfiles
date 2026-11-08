@@ -1,12 +1,6 @@
 ## if not running interactively, don't do anything ##
 [[ -z "$PS1" ]] && return
 
-## disable flow control key binding ##
-stty -ixon
-
-## tabs expanded to 4 spaces ##
-tabs -4
-
 ## Bash options ##
 shopt -s autocd
 shopt -s cdspell
@@ -28,92 +22,23 @@ HISTIGNORE='&:[bf]g:cd:clear:exit:f[dp]:help?( *):history?(*):man?( *):pwd:* --h
 HISTSIZE=1000
 HISTTIMEFORMAT='%F %T  '
 
-## edit & view ##
-export NVIM_GTK_NO_HEADERBAR=1
-export NVIM_GTK_NO_WINDOW_DECORATION=1
-export NVIM_GTK_PREFER_DARK_THEME=1
-export EDITOR="nvim"
-export VISUAL="nvim-gtk --no-fork"
-export PAGER="less"
-export LESS="-F -R -X -x1,5"
+## shell initialization ##
+source "${HOME}/.config/shell/init.sh"
 
-## Config paths ##
-CONFIG_PATH="${HOME}/.config"
-SHELL_CONFIG_PATH="${CONFIG_PATH}/shell"
+## tool-specific config ##
+for config_file in \
+    "${SHELL_CONFIG_PATH}/conf.d"/*.sh; do
+  [[ -r "${config_file}" ]] && source "${config_file}"
+done
 
-## colors for less, man, etc. ##
-[[ -f "${CONFIG_PATH}/less/TERMCAP" ]] && source "${CONFIG_PATH}/less/TERMCAP"
+## misecompsync completions (bash) ##
+for f in "${XDG_DATA_HOME:-${HOME}/.local/share}/mise-completions/bash"/*; do
+  [[ -f "${f}" ]] && source "${f}"
+done
 
-## make less more friendly for non-text input files ##
-[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL="/bin/sh" lesspipe)"
-
-## enable ls color support ##
-if [[ -x /usr/bin/dircolors ]]; then
-  test -r "${CONFIG_PATH}/dircolors" && eval "$(dircolors -b ${CONFIG_PATH}/dircolors)" || eval "$(dircolors -b)"
-fi
-
-## use time command if installed ##
-command -v time &> /dev/null && alias "time=command $(command -v time)"
-
-## projects paths ##
-export PROJECTS_PATH="${HOME}/Area51/personal:${HOME}/Area51/floss:${HOME}/Area51/work"
-
-## fzf config ##
-if [[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]]; then
-  source /usr/share/doc/fzf/examples/key-bindings.bash
-  export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
-                           --inline-info --tabstop=4 \
-                           --pointer='‣' --marker='•' \
-                           --color hl:#DBC074,hl+:#C94F6D,fg:#DFDFE5,fg+:#DFDFE5,bg+:#223249 \
-                           --color prompt:#719CD6,spinner:#719CD6,pointer:#CDCECF,marker:#DFDFE5 \
-                           --color header:#DFDFE5,info:#81B29A,border:#719CD6"
-  export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --exclude .git --strip-cwd-prefix"
-  export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --exclude .git --strip-cwd-prefix"
-  export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --exclude .git --strip-cwd-prefix"
-  export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always {}'"
-  export FZF_ALT_C_OPTS="--preview 'lsd --color always --tree {}'"
-fi
-
-## ripgrep ##
-export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
-
-## AWS ##
-export AWS_DEFAULT_OUTPUT="text"
-export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
-export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
-complete -C "${HOME}/Apps/aws-cli/v2/current/bin/aws_completer" aws
-
-## poetry ##
-source <(poetry completions bash)
-
-# GitHub cli ##
-eval "$(gh completion -s bash)"
-
-## ansible ##
-export ANSIBLE_NOCOWS=1
-
-## psql ##
-export PSQLRC="${CONFIG_PATH}/psql/psqlrc"
-export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
-
-## taskwarrior ##
-export TASKRC="${CONFIG_PATH}/taskrc"
-export VIT_DIR="${CONFIG_PATH}/vit"
-
-## navi ##
-export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
-
-## k8s ##
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-export KUBECONFIG="${CONFIG_PATH}/kube/config"
-source <(kubectl completion bash)
+## aliases ##
+source "${SHELL_CONFIG_PATH}/aliases.sh"
+source "${SHELL_CONFIG_PATH}/alias-completions.sh"
 
 ## host-dependent config ##
 [[ -f "${SHELL_CONFIG_PATH}/bashrc_$(hostname -s)" ]] && source "${SHELL_CONFIG_PATH}/bashrc_$(hostname -s)"
-
-## aliases & functions ##
-[[ -f "${SHELL_CONFIG_PATH}/aliases.sh" ]] && source "${SHELL_CONFIG_PATH}/aliases.sh"
-[[ -f "${SHELL_CONFIG_PATH}/functions.sh" ]] && source "${SHELL_CONFIG_PATH}/functions.sh"
-
-## Oh My Posh ##
-eval "$(oh-my-posh init bash --config ${SHELL_CONFIG_PATH}/edubxb.omp.toml)"

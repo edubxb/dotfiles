@@ -9,6 +9,7 @@ setopt hist_ignore_space
 setopt hist_no_store
 setopt hist_reduce_blanks
 setopt hist_verify
+setopt numeric_glob_sort
 setopt share_history
 
 autoload -Uz select-word-style
@@ -30,6 +31,7 @@ bindkey "^[[1;5D" backward-word
 bindkey "^X^E" edit-command-line
 
 fpath+="${HOME}/.zfunc"
+fpath=("${XDG_DATA_HOME:-$HOME/.local/share}/mise-completions/zsh" $fpath)
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -51,16 +53,9 @@ zstyle ':completion:*' verbose true
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 # zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-## Enable completion
-autoload -Uz compinit
-autoload -Uz bashcompinit # Bash completion compatibility
-compinit
-bashcompinit
-
 ## Command history ##
-export HISTFILE="${HOME}/.zsh_history"
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=50000
+export SAVEHIST=50000
 export HISTORY_IGNORE="([bf]g|cd#( *)#|clear|exit|f[cdp]|history|man#( *)#|pwd|( *)#help|( .*)version)"
 zshaddhistory() {
   emulate -L zsh
@@ -70,18 +65,9 @@ zshaddhistory() {
 
 ## ZSH plugins ##
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+[ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname "$ZINIT_HOME")"
+[ ! -d "$ZINIT_HOME/.git" ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-zinit for \
-  light-mode Aloxaf/fzf-tab \
-  light-mode zsh-users/zsh-autosuggestions \
-  light-mode zsh-users/zsh-completions \
-  light-mode zsh-users/zsh-syntax-highlighting \
-  https://github.com/junegunn/fzf-git.sh/blob/main/fzf-git.sh
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[alias]="none"
@@ -91,126 +77,32 @@ ZSH_HIGHLIGHT_STYLES[function]="none"
 ZSH_HIGHLIGHT_STYLES[precommand]="none"
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-## disable flow control key binding ##
-stty -ixon
+## shell initialization ##
+source "${HOME}/.config/shell/init.sh"
 
-## tabs expanded to 4 spaces ##
-tabs -4
+## tool-specific config ##
+for config_file in \
+    "${SHELL_CONFIG_PATH}/conf.d"/*.sh(N); do
+  source "${config_file}"
+done
 
-## edit & view ##
-export EDITOR="nvim"
-export PAGER="less"
-export LESS="-F -R -X -x1,5"
-
-## pkb ##
-export PKB_HOME="${HOME}/Documents/PKB"
-
-## projects ##
-export PROJECTS_ROOT="${HOME}/Area51"
-
-## Config paths ##
-CONFIG_PATH="${HOME}/.config"
-SHELL_CONFIG_PATH="${CONFIG_PATH}/shell"
-
-## enable ls color support ##
-if [[ -x /usr/bin/dircolors ]]; then
-  test -r "${CONFIG_PATH}/dircolors" && eval "$(dircolors -b ${CONFIG_PATH}/dircolors)" || eval "$(dircolors -b)"
-fi
-
-## colors for less, man, etc. ##
-[[ -f "${CONFIG_PATH}/less/TERMCAP" ]] && source "${CONFIG_PATH}/less/TERMCAP"
-
-## make less more friendly for non-text input files ##
-[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL="/bin/sh" lesspipe)"
-
-## use time command if installed ##
-command -v time &> /dev/null && alias "time=command $(command -v time)"
-
-## git-extras ##
-if [[ -f /usr/share/zsh/vendor-completions/_git-extras ]]; then
-  source /usr/share/zsh/vendor-completions/_git-extras
-fi
-
-## git absorb ##s
-if [[ -x /usr/lib/git-core/git-absorb ]]; then
-  zstyle -g existing_user_commands ':completion:*:*:git:*' user-commands
-  zstyle ':completion:*:*:git:*' user-commands $existing_user_commands \
-      absorb:'automatically absorb staged changes into your current branch'
-  git absorb --gen-completions zsh > "${HOME}/.zfunc/_git-absorb"
-fi
-
-## fzf config ##
-if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
-  source /usr/share/doc/fzf/examples/completion.zsh
-fi
-if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
-  export FZF_DEFAULT_OPTS="--filepath-word --no-mouse --reverse \
-                           --inline-info --tabstop=4 \
-                           --pointer='‣' --marker='•' \
-                           --color hl:#DBC074,hl+:#C94F6D,fg:#DFDFE5,fg+:#DFDFE5,bg+:#223249 \
-                           --color prompt:#719CD6,spinner:#719CD6,pointer:#CDCECF,marker:#DFDFE5 \
-                           --color header:#DFDFE5,info:#81B29A,border:#719CD6"
-  export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --strip-cwd-prefix"
-  export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --strip-cwd-prefix"
-  export FZF_CTRL_T_COMMAND="fdfind --type f --type d --hidden --follow --strip-cwd-prefix"
-  export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always {}'"
-  export FZF_ALT_C_OPTS="--preview 'eza --icons=auto --color=always --tree --color-scale --group-directories-first {}'"
-fi
-
-## mise ##
-if which mise &> /dev/null; then
-  eval "$(mise activate zsh)"
-  mise completion zsh > "${HOME}/.zfunc/_mise"
-fi
-
-## ansible ##
-export ANSIBLE_NOCOWS=1
-
-## psql ##
-export PSQLRC="${CONFIG_PATH}/psql/psqlrc"
-export PGSERVICEFILE="${CONFIG_PATH}/psql/pg_service.conf"
-
-## navi ##
-export NAVI_PATH="${CONFIG_PATH}/navi/cheats"
-
-## k8s ##
-if which kubectl &> /dev/null; then
-  export KUBECONFIG="${CONFIG_PATH}/kube/config"
-  kubectl completion zsh > "${HOME}/.zfunc/_kubectl"
-fi
-if which kustomize &> /dev/null; then
-  kustomize completion zsh > "${HOME}/.zfunc/_kustomize"
-fi
-if which helm &> /dev/null; then
-  helm completion zsh > "${HOME}/.zfunc/_helm"
-fi
-
-## AWS ##
-if which aws &> /dev/null; then
-  export AWS_DEFAULT_OUTPUT="text"
-  export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
-  export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
-  complete -C aws_completer aws
-fi
-
-## GCP ##
-if which gcloud &> /dev/null; then
-  export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-  source /usr/share/google-cloud-sdk/completion.zsh.inc
-fi
-
-## jira-cli ##
-if which jira &> /dev/null; then
-  jira completion zsh > "${HOME}/.zfunc/_jira"
-fi
-
-## aliases & functions ##
-[[ -f "${SHELL_CONFIG_PATH}/aliases.sh" ]] && source "${SHELL_CONFIG_PATH}/aliases.sh"
-[[ -f "${SHELL_CONFIG_PATH}/functions.sh" ]] && source "${SHELL_CONFIG_PATH}/functions.sh"
+## aliases ##
+source "${SHELL_CONFIG_PATH}/aliases.sh"
+source "${SHELL_CONFIG_PATH}/alias-completions.sh"
 
 ## host-dependent config ##
-# [[ -f "${SHELL_CONFIG_PATH}/zshrc_$(hostname -s)" ]] && source "${SHELL_CONFIG_PATH}/zshrc_$(hostname -s)"
+[[ -f "${SHELL_CONFIG_PATH}/$(hostname -s).sh" ]] && source "${SHELL_CONFIG_PATH}/$(hostname -s).sh"
 
-## Oh My Posh ##
-eval "$(oh-my-posh init zsh --config ${SHELL_CONFIG_PATH}/edubxb.omp.toml)"
+## ZSH plugins ##
+zinit for \
+  light-mode zsh-users/zsh-autosuggestions \
+  light-mode zsh-users/zsh-completions \
+  light-mode zsh-users/zsh-syntax-highlighting
+
+## Enable completion (after plugins so their fpath additions are picked up)
+autoload -Uz compinit
+autoload -Uz bashcompinit # Bash completion compatibility
+compinit
+bashcompinit
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit

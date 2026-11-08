@@ -34,14 +34,8 @@ alias open='xdg-open'
 alias ls='eza --icons=auto --group-directories-first'
 alias ll='eza --icons=auto --color-scale --group-directories-first -l'
 alias lla='eza --icons=auto --color-scale --group-directories-first -la'
-alias tree='eza --icons=auto --color-scale --group-directories-first --tree'
-
-## k8s ##
-alias kube='kubectl'
-alias kubenctx='kubectl config unset current-context'
-
-## terraform ##
-alias tf='terraform'
+alias tree='eza --icons=auto --color-scale --group-directories-first --tree --git-ignore'
+alias treed='eza --icons=auto --color-scale --group-directories-first --tree --only-dirs --git-ignore'
 
 ## useful ##
 alias myip='curl https://api.ipify.org/'

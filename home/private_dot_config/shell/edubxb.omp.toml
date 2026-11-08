@@ -1,5 +1,7 @@
-version = 3
+version = 4
 final_space = true
+pwd = 'osc7'
+streaming = 100
 
 [upgrade]
   source = 'cdn'
@@ -129,6 +131,12 @@ final_space = true
     foreground = 'white'
     type = 'text'
     style = 'plain'
+
+  [[blocks.segments]]
+    type = "text"
+    style = "plain"
+    foreground = "white"
+    template = "{{ if gt .Jobs 0 }}{{ .Jobs }} 󱤷 {{ end }}"
 
   [[blocks.segments]]
     template = ''
