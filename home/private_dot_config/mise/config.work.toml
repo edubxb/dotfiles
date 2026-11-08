@@ -1,0 +1,15 @@
+[tools]
+"github:ankitpokhrel/jira-cli" = "latest"
+"github:bjarneo/ku" = "latest"
+"pipx:tftui" = "latest"
+awscli = { version = "latest", symlink_bins = "true" }
+helm = "latest"
+krew = "latest"
+kubectl = "latest"
+kustomize = "latest"
+terraform = "latest"
+
+[shell_alias]
+kube = "kubectl"
+kubenctx = "kubectl config unset current-context"
+terraform = "tf"

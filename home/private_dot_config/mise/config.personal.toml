@@ -1,0 +1,8 @@
+[tools]
+"cargo:paulc/dymo-cli" = "latest"
+"pipx:esptool" = "latest"
+"pipx:headroom-ai" = { version = "latest", extras = "all" }
+"pipx:qmk" = "latest"
+"pipx:roombapy" = "latest"
+llmfit = "latest"
+ollama = "latest"
