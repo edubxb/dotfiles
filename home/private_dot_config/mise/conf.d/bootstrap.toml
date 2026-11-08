@@ -1,0 +1,20 @@
+[bootstrap.user]
+login_shell = "/bin/zsh"
+
+[bootstrap.packages]
+"apt:bat" = "latest"
+"apt:cbonsai" = "latest"
+"apt:curl" = "latest"
+"apt:eza" = "latest"
+"apt:fd-find" = "latest"
+"apt:fzf" = "latest"
+"apt:git" = "latest"
+"apt:iproute2" = "latest"
+"apt:jq" = "latest"
+"apt:less" = "latest"
+"apt:libglib2.0-bin" = "latest"
+"apt:neo-cli" = "latest"
+"apt:ripgrep" = "latest"
+"apt:wl-clipboard" = "latest"
+"apt:xdg-utils" = "latest"
+"apt:yank" = "latest"
