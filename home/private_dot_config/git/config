@@ -24,19 +24,26 @@
 	colorMoved = default
 	indentHeuristic = true
 	noprefix = true
-	tool = vimdiff
+	tool = diffbandit 
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
 	cmd = nvim -d \"${LOCAL}\" \"${REMOTE}\"
+[difftool "diffbandit"]
+	cmd = diffbandit diff \"${LOCAL}\" \"${REMOTE}\"
 [merge]
 	conflictStyle = zdiff3
-	tool = meld
+	tool = diffbandit 
 [mergetool]
 	keepBackup = false
 	prompt = false
+[mergetool "codediff"]
+  cmd = nvim \"${MERGED}\" -c \"CodeDiff merge \\\"${MERGED}\\\"\"
+[mergetool "diffbandit"]
+	cmd = diffbandit merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" --path \"$MERGED\"
+	trustExitCode = true
 [delta]
-	features = line-numbers
+	features = side-by-side line-numbers
 	hyperlinks = true
 	navigate = true
 [interactive]
