@@ -1,9 +1,12 @@
 ### git ###
 .git/
 # worktrees
-wkts
+.worktrees
 # custom ignores
 **/*.ignore.*
+
+# exclude local configs ##
+**/*.local.*
 
 ### env stuff ###
 .direnv
@@ -46,3 +49,11 @@ node_modules/
 
 # VS Code
 .vscode/
+
+### AI stuff ###
+# OpenCode
+**/opencode.json*
+**/.opencode/
+
+# Claude Code
+**/.claude/settings.local.json
