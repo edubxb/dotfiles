@@ -33,4 +33,3 @@ else
   PROJECTS_PATH=""
 fi
 export PROJECTS_PATH
-export RIPGREP_CONFIG_PATH="${CONFIG_PATH}/ripgrep"
