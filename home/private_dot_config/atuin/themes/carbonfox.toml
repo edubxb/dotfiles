@@ -1,0 +1,19 @@
+[theme]
+name = "carbonfox"
+
+[colors]
+Base = "#f2f4f8"
+AlertInfo = "#78A9FF"
+AlertWarn = "#BE95FF"
+AlertError = "#EE5396"
+Annotation = "#6e6f70"
+Guidance = "#33B1FF"
+Important = "#3DDBD9"
+Title = "#78A9FF"
+Muted = "#7e7f81"
+SyntaxCommand = "#f2f4f8"
+SyntaxFlag = "#f2f4f8"
+SyntaxString = "#25be6a"
+SyntaxVariable = "#dfdfe0"
+SyntaxOperator = "#b8b9bc"
+SyntaxComment = "#6e6f70"

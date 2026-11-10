@@ -49,6 +49,7 @@ package_manager = "pnpm"
 "pipx:rexi" = "latest"
 "pipx:sqlit-tui" = { version = "latest", uvx_args = "--with 'paramiko<4.0.0' --with sshtunnel --with psycopg2-binary" }
 ast-grep = "latest"
+atuin = "latest"
 bun = "latest"
 deno = "latest"
 difftastic = "latest"

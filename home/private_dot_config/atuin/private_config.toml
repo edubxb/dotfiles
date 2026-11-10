@@ -1,0 +1,19 @@
+auto_sync = false
+data_dir = "~/.local/share/atuin"
+dialect = "uk"
+invert = true
+show_help = false
+show_numeric_shortcuts = false
+show_preview = true
+style = "full"
+timezone = "local"
+update_check = false
+
+[logs]
+dir = "~/.local/state/atuin"
+
+[ui]
+columns = ["exit", "time", "duration", "directory", "command"]
+
+[theme]
+name = "carbonfox"
