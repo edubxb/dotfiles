@@ -54,6 +54,7 @@ zstyle ':completion:*' verbose true
 # zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 ## Command history ##
+# History file path set in ~/.config/shell/init.sh
 export HISTSIZE=50000
 export SAVEHIST=50000
 export HISTORY_IGNORE="([bf]g|cd#( *)#|clear|exit|f[cdp]|history|man#( *)#|pwd|( *)#help|( .*)version)"

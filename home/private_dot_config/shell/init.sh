@@ -11,6 +11,10 @@ fi
 CONFIG_PATH="${XDG_CONFIG_HOME:-${HOME}/.config}"
 SHELL_CONFIG_PATH="${CONFIG_PATH}/shell"
 
+## history file (one per shell, under XDG state) ##
+HISTFILE="${XDG_STATE_HOME:-${HOME}/.local/state}/${CURRENT_SHELL}/history"
+mkdir -p "${HISTFILE%/*}"
+
 ## terminal defaults ##
 stty -ixon
 tabs -4

@@ -16,6 +16,7 @@ shopt -s hostcomplete
 shopt -s lithist
 
 ## Bash history ##
+# History file path set in ~/config/shell/init.sh
 HISTCONTROL='ignoreboth:erasedups'
 HISTFILESIZE=3000
 HISTIGNORE='&:[bf]g:cd:clear:exit:f[dp]:help?( *):history?(*):man?( *):pwd:* --help:* --version'
