@@ -1,0 +1,2 @@
+# exclude local configs ##
+**/*.local.*
