@@ -9,8 +9,6 @@ package_manager = "pnpm"
 
 [tools]
 "aqua:lusingander/serie" = "latest"
-"cargo:lumen" = "latest"
-"cargo:tsowell/wiremix" = "latest"
 "github:EdJoPaTo/mqttui" = "latest"
 "github:Gentleman-Programming/engram" = "latest"
 "github:abhinav/git-spice" = "latest"
@@ -27,6 +25,7 @@ package_manager = "pnpm"
 "github:graykode/abtop" = "latest"
 "github:homeport/dyff" = "latest"
 "github:homeport/termshot" = "latest"
+"github:jnsahaj/lumen" = "latest"
 "github:kovidgoyal/kitty" = { version = "latest", asset_pattern = "kitty-*-x86_64.txz" }
 "github:kyu08/fzf-make" = "latest"
 "github:lhvy/pipes-rs" = { version = "latest", bin_path = "target/x86_64-unknown-linux-gnu/release" }
