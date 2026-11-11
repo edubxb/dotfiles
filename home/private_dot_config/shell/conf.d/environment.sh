@@ -11,5 +11,5 @@ function fev {
                --preview 'printenv {}' \
                --bind 'ctrl-x:execute-silent(unset {1})')
 
-  [[ -n "${target}" ]] && wl-copy "$(printenv ${target})"
+  [[ -n "${target}" ]] && wl-copy "$(printenv "${target}")"
 }

@@ -42,19 +42,19 @@ fok() {
     sed -nE "s/.+'Account: ([^ ]+) \(([0-9]+)\)', friendly_role_name='(.+)'\)/\1 \2 \3/p" | \
     column -t > "${cache_file}"
   fi
-  # shellcheck disable=SC2207
-  aws_role=( $(fzf --sync --min-height 10 --height 15 -n 1 -q "$*" < "${cache_file}") ) || return
-  account_id="${aws_role[1]}"
-  account_name="${aws_role[0]}"
-  role_name="${aws_role[2]}"
+  aws_role=$(fzf --sync --min-height 10 --height 15 -n 1 -q "$*" < "${cache_file}") || return
+  read -r account_name account_id role_name <<< "${aws_role}"
   CRED_PROFILE="${account_name}" gimme-aws-creds --roles "arn:aws:iam::${account_id}:role/${role_name}" 2> /dev/null
 }
 
-# __ec2_preview - show instance details using aws CLI (replaces awless)
-__ec2_preview() {
-  local profile="$1"
-  local instance_id="$2"
-  aws ec2 describe-instances --profile "${profile}" --instance-ids "${instance_id}" --output yaml 2>/dev/null
+# jq filter shared by ec2md() and the ec2sh preview
+EC2MD_FILTER='.Reservations[0].Instances[0] as $i | ["| Field | Value |", "| --- | --- |", "| ID | `\($i.InstanceId)` |", "| Type | \($i.InstanceType) |", "| State | \($i.State.Name) |", "| AZ | \($i.Placement.AvailabilityZone) |", "| Private IP | \($i.PrivateIpAddress // "-") |", "| Public IP | \($i.PublicIpAddress // "-") |", "| Launch | \($i.LaunchTime) |", "| Image | \($i.ImageId) |", "", "## Tags", "", "| Key | Value |", "| --- | --- |"] + (($i.Tags // []) | sort_by(.Key) | map("| \(.Key) | \(.Value) |")) + [""] | join("\n")'
+
+# ec2md - render an instance's details as markdown
+ec2md() {
+  aws ec2 describe-instances --profile "${1}" --instance-ids "${2}" --output json 2>/dev/null \
+    | jq -r "${EC2MD_FILTER}" \
+    | gum format
 }
 
 # ec2sh - pick running EC2 instances and connect via SSM or SSH
@@ -72,40 +72,45 @@ ec2sh() {
 
   shift
 
-  local target instance address_idx=2
+  local target key_bind selected_instances first_instance remaining_instances instance address_idx=2
 
-  local IFS=$'\n'
-  # shellcheck disable=SC2207
-  target=( $(aws ec2 describe-instances --profile "${profile}" --output=text \
-                 --query "Reservations[].Instances[][InstanceId,PrivateIpAddress,PublicIpAddress,State.Name,LaunchTime]" \
+  target=$(aws ec2 describe-instances --profile "${profile}" --output=text \
+                 --query "Reservations[].Instances[][InstanceId,PrivateIpAddress,PublicIpAddress,not_null(Tags[?Key=='Name']|[0].Value,'-')]" \
                  --filters Name=instance-state-name,Values=running 2>/dev/null |
-             fzf --sync --no-hscroll --tabstop=1 -d $'\t' --multi \
-                 --with-nth 1..4 --nth 1,2 \
-                 --expect=enter --expect=space --expect=ctrl-space \
+             fzf --sync --no-hscroll --tabstop=8 -d $'\t' --multi \
+                 --nth 1,2,4 \
+                 --expect=space --expect=ctrl-space \
                  --bind 'ctrl-t:toggle-all' \
                  --preview-window right:60%:wrap \
-                 --preview "__ec2_preview ${profile} {1}" \
-                 --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 1,3,4) )
+                 --preview "aws ec2 describe-instances --profile ${profile} --instance-ids {1} --output json 2>/dev/null | jq -r '${EC2MD_FILTER}' | gum format" \
+                 --prompt " ${profile} ❯ " --ansi -q "$*" | cut -f 1,2,3) || return
 
-  if [[ -n "${target}" ]]; then
-    local key_bind="${target[0]}"
-    local instances=( "${target[@]:1}" )
+  if [[ -n "${target}" && "${target}" == *$'\n'* ]]; then
+    key_bind=${target%%$'\n'*}
+    selected_instances=${target#*$'\n'}
+    [[ -n "${selected_instances}" ]] || return
+    first_instance=${selected_instances%%$'\n'*}
+    if [[ "${selected_instances}" == *$'\n'* ]]; then
+      remaining_instances=${selected_instances#*$'\n'}
+    fi
 
-    if [[ ${key_bind} = 'enter' ]]; then
+    if [[ -z "${key_bind}" ]]; then
       # SSM Session Manager
-      for instance in "${instances[@]:1}"; do
+      while IFS= read -r instance; do
+        [[ -n "${instance}" ]] || continue
         kitty @ launch --type tab --tab-title "ssm-$(cut -f 1 <<< "${instance}")" \
           aws --profile "${profile}" ssm start-session --target "$(cut -f 1 <<< "${instance}")" &> /dev/null
-      done
-      aws --profile "${profile}" ssm start-session --target "$(cut -f 1 <<< "${instances[0]}")"
+      done <<< "${remaining_instances}"
+      aws --profile "${profile}" ssm start-session --target "$(cut -f 1 <<< "${first_instance}")"
     else
       # SSH
       [[ ${key_bind} = 'ctrl-space' ]] && address_idx=3
-      for instance in "${instances[@]:1}"; do
+      while IFS= read -r instance; do
+        [[ -n "${instance}" ]] || continue
         kitty @ launch --type tab --tab-title "ssh-$(cut -f ${address_idx} <<< "${instance}")" \
           ssh "$(cut -f ${address_idx} <<< "${instance}")" &> /dev/null
-      done
-      ssh "$(cut -f ${address_idx} <<< "${instances[0]}")"
+      done <<< "${remaining_instances}"
+      ssh "$(cut -f ${address_idx} <<< "${first_instance}")"
     fi
   fi
 }
@@ -126,9 +131,10 @@ if [[ -n "${BASH_VERSION:-}" ]]; then
 # zsh completion
 elif [[ -n "${ZSH_VERSION:-}" ]]; then
   _ec2sh() {
-    local -a profiles
-    profiles=(${(f)"$(__awskeys_list 2>/dev/null | grep "    ")"})
-    _describe 'profiles' profiles
+    local profile
+    while IFS= read -r profile; do
+      compadd -- "${profile#    }"
+    done < <(__awskeys_list 2>/dev/null | grep '^    ')
   }
   compdef _ec2sh ec2sh
 fi

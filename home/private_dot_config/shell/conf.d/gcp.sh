@@ -25,11 +25,9 @@ function gcesh {
 
   shift $#
 
-  local instance instances name target zone session
+  local instance name zone ignored target session key_bind selected_instances first_instance remaining_instances
 
-  _IFS="${IFS}"
-  IFS=$'\n'
-  target=( $(gcloud compute instances list --configuration "${configuration}" \
+  target=$(gcloud compute instances list --configuration "${configuration}" \
                      --filter="status:running" \
                      --format="table[no-heading](name:sort=1, zone:label=zone, networkInterfaces[0].networkIP, networkInterfaces[0].accessConfigs[0].natIP)" |
               fzf --sync --no-hscroll -d ' +' --multi \
@@ -38,23 +36,26 @@ function gcesh {
                   --bind 'ctrl-t:toggle-all' \
                   --preview-window right:50%:wrap \
                   --preview "gcloud compute instances describe --configuration ${configuration} --zone {2} --format='yaml(id,tags,machineType,labels,networkInterfaces,lastStartTimestamp,creationTimestamp)' {1} | bat -f -p -l yaml" \
-                  --prompt " ${configuration} > " --ansi -q "$*") )
-  IFS="${_IFS}"
+                  --prompt " ${configuration} > " --ansi -q "$*") || return
 
-  if [[ -n "${target}" ]]; then
-    key_bind="${target[@]:0:1}"
-    instances=( "${target[@]:1}" )
+  if [[ -n "${target}" && "${target}" == *$'\n'* ]]; then
+    key_bind=${target%%$'\n'*}
+    selected_instances=${target#*$'\n'}
+    [[ -n "${selected_instances}" ]] || return
+    first_instance=${selected_instances%%$'\n'*}
+    if [[ "${selected_instances}" == *$'\n'* ]]; then
+      remaining_instances=${selected_instances#*$'\n'}
+    fi
     if [[ ${key_bind} = 'enter' ]]; then
-      name=$((tr -s " " | cut -d " " -f 1) <<< ${instances[1]})
-      zone=$((tr -s " " | cut -d " " -f 2) <<< ${instances[1]})
+      read -r name zone ignored <<< "$(tr -s ' ' <<< "${first_instance}")"
       session="gcloud_ssh#$(((RANDOM % 99) + 1))"
       kitty @ launch --type tab --tab-title "${session}" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
       kitty @ goto-layout --match "title:${session}" grid
-      for instance in "${instances[@]:1}"; do
-        name=$((tr -s " " | cut -d " " -f 1) <<< ${instance})
-        zone=$((tr -s " " | cut -d " " -f 2) <<< ${instance})
+      while IFS= read -r instance; do
+        [[ -n "${instance}" ]] || continue
+        read -r name zone ignored <<< "$(tr -s ' ' <<< "${instance}")"
         kitty @ launch --match "title:${session}" gcloud compute ssh --configuration "${configuration}" --zone "${zone}" --tunnel-through-iap "${name}" &> /dev/null
-      done
+      done <<< "${remaining_instances}"
     fi
   fi
 }

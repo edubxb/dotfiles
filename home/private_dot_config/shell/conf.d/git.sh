@@ -5,14 +5,15 @@ if ! command -v git &> /dev/null || ! command -v fzf &> /dev/null; then
 fi
 
 function fsb {
-  local tags local_branches remote_branches target
+  local tags local_branches remote_branches choices target
   git rev-parse HEAD &> /dev/null || return
   tags=$(git tag --sort=-v:refname | sed 's/^/ /')
   remote_branches=$(git branch -r | sed -nE '/HEAD/!s|.* ([^/]+)/(.+)| \e[3m\1\e[0m \2|p')
   local_branches=$(git branch | sed -E 's/.* (.+)/ \1/') || return
-  [[ -n "${remote_branches}" ]] && remote_branches="\n${remote_branches}"
-  [[ -n "${tags}" ]] && tags="\n${tags}"
-  target=$(echo -e "${local_branches}${remote_branches}${tags}" |
+  choices=${local_branches}
+  [[ -n "${remote_branches}" ]] && choices+=$'\n'"${remote_branches}"
+  [[ -n "${tags}" ]] && choices+=$'\n'"${tags}"
+  target=$(printf '%s\n' "${choices}" |
            fzf --border --height 35% --no-hscroll --tabstop=1 -d ' ' -n 2.. --ansi \
                --preview-window right:70% \
                --preview 'git log --oneline --graph --color=always --date=short \
@@ -20,11 +21,11 @@ function fsb {
                       $(tr " " "/" <<< {2..}) -- | head -'$LINES \
                +m -q "$*") || return
 
-  [[ -n "${target}" ]] && git checkout $(sed -E "s/(.+ )?(.+)/\2/" <<< "${target}")
+  [[ -n "${target}" ]] && git checkout "$(sed -E "s/(.+ )?(.+)/\2/" <<< "${target}")"
 }
 
 function fas {
-  local files target
+  local files target file
 
   git rev-parse HEAD &> /dev/null || return
   files=$(git -c color.status=always status --short)
@@ -36,5 +37,8 @@ function fas {
                --bind 'ctrl-t:execute-silent(git difftool $(cut -d" " -f 1 <<< {2..}))' \
                <<< "${files}" | sed -E 's/^ ?. (.+)/\1/') || return
 
-  [[ -n "${target}" ]] && git add ${target}
+  [[ -n "${target}" ]] || return
+  while IFS= read -r file; do
+    [[ -n "${file}" ]] && git add -- "${file}" || return
+  done <<< "${target}"
 }

@@ -1,17 +1,21 @@
 ## alias completions ##
 if [[ -n "${ZSH_VERSION:-}" ]]; then
-  for alias_name in ${(k)aliases}; do
-    alias_value="${aliases[${alias_name}]}"
+  while IFS= read -r alias_definition; do
+    alias_name=${alias_definition#alias }
+    alias_name=${alias_name%%=*}
+    alias_value=${alias_definition#*=}
+    alias_value=${alias_value#\'}
+    alias_value=${alias_value%\'}
     command_name="${alias_value%% *}"
-    completion="${_comps[${command_name}]-}"
+    completion=${_comps[$command_name]-}
 
     if [[ -z "${completion}" ]]; then
-      autoload -Uz "_${command_name}" 2> /dev/null
+      autoload "_${command_name}" 2> /dev/null
       completion="_${command_name}"
     fi
 
-    if (( $+functions[${completion}] )); then
+    if [[ -n "${completion}" ]]; then
       compdef "${completion}" "${alias_name}"
     fi
-  done
+  done < <(alias -L)
 fi
