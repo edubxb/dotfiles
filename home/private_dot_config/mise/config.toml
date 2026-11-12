@@ -9,8 +9,10 @@ package_manager = "pnpm"
 
 [tools]
 "aqua:lusingander/serie" = "latest"
+"github:1jehuang/mermaid-rs-renderer" = "latest"
 "github:EdJoPaTo/mqttui" = "latest"
 "github:Gentleman-Programming/engram" = "latest"
+"github:Skardyy/mcat" = "latest"
 "github:abhinav/git-spice" = "latest"
 "github:agavra/tuicr" = "latest"
 "github:akitaonrails/ai-jail" = "latest"
@@ -29,6 +31,7 @@ package_manager = "pnpm"
 "github:kovidgoyal/kitty" = { version = "latest", asset_pattern = "kitty-*-x86_64.txz" }
 "github:kyu08/fzf-make" = "latest"
 "github:lhvy/pipes-rs" = { version = "latest", bin_path = "target/x86_64-unknown-linux-gnu/release" }
+"github:m96-chan/blinkterm" = { version = "latest", asset_pattern = "blinkterm-*-x86_64-unknown-linux-gnu.tar.gz" }
 "github:max-sixty/worktrunk" = "latest"
 "github:mbrt/gmailctl" = "latest"
 "github:mexirica/aptui" = "latest"
