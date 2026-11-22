@@ -12,4 +12,4 @@ terraform = "latest"
 [shell_alias]
 kube = "kubectl"
 kubenctx = "kubectl config unset current-context"
-terraform = "tf"
+tf = "terraform"
