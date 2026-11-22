@@ -58,7 +58,29 @@
 	amend = commit --amend --reuse-message=HEAD
 	bcl = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; git log --no-merges --oneline --boundary --left-right $(git branch --show-current)...${ref}; }; f"
 	blobs = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | grep blob | cut -d ' ' -f3- | sort -nr | numfmt --to=iec-i --suffix=B --padding=7 --round=nearest"
-	bup = "!f() { local ref=\"$(git default-branch)\"; [ -n \"$1\" ] && ref=\"$1\"; { git fetch; git stash push --include-untracked; git switch ${ref}; git pull --rebase; } && { git switch -; git rebase ${ref}; git stash pop --index; } }; f"
+  bup = "!f() { \
+      unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE; \
+      ref=${1:-$(git default-branch)}; cur=$(git branch --show-current); \
+      [ -n \"$cur\" ] || { echo 'bup: not on a branch' >&2; return 1; }; \
+      git fetch || return; \
+      if [ \"$cur\" = \"$ref\" ]; then git pull --rebase --autostash; return; fi; \
+      dirty() { [ -n \"$(git -C \"$1\" status --porcelain)\" ]; }; \
+      here=$(git rev-parse --show-toplevel); \
+      main=$(git worktree list --porcelain | sed -n '1s/^worktree //p'); \
+      hold=$(git worktree list --porcelain | awk -v b=\"branch refs/heads/$ref\" '/^worktree /{w=substr($0,10)} $0==b{print w; exit}'); \
+      hs=; ms=; \
+      if dirty .; then git stash push --include-untracked -m bup || return; hs=1; fi; \
+      if [ -n \"$hold\" ]; then \
+          git -C \"$hold\" pull --rebase --autostash; \
+      elif [ \"$here\" = \"$main\" ]; then \
+          git switch -q \"$ref\" && git pull --rebase && git switch -q \"$cur\"; \
+      else \
+          { ! dirty \"$main\" || { git -C \"$main\" stash push --include-untracked -m bup-main && ms=1; }; } && \
+          git -C \"$main\" switch -q \"$ref\" && git -C \"$main\" pull --rebase && git -C \"$main\" checkout -q - && \
+          { [ -z \"$ms\" ] || git -C \"$main\" stash pop --index; }; \
+      fi && git rebase \"$ref\" && { [ -z \"$hs\" ] || git stash pop --index; } || \
+      { echo \"bup: stopped, check 'git status' and 'git stash list'\" >&2; return 1; }; \
+  }; f"
 	cdiff = difftool --tool cdiff
 	changed-files = "!git diffm --name-only"
 	default-branch = "!git remote show origin | grep HEAD | cut -d' ' -f5"
