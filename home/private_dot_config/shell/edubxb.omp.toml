@@ -164,7 +164,7 @@ streaming = 100
     command = 'argocd context | sed -nr "/\*/ s/^\*.* ([^ ]+) .*/\1/p"'
 
 [[tooltips]]
-  template = '󰅟  <i>{{ .Profile }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>'
+  template = '{{ if and .Env.AWS_PROFILE (not .Env.AWS_ACCESS_KEY_ID) }}󰅟  <i>{{ .Env.AWS_PROFILE }}{{ with .Env.POSH_AWS_SSO_LEFT }} ({{ . }}){{ end }}{{ if .Region }} :: {{ .Region }}{{ end }}</i>{{ end }}'
   foreground = '#FF9901'
   type = 'aws'
   style = 'plain'
@@ -172,6 +172,13 @@ streaming = 100
 
   [tooltips.properties]
     display_default = true
+
+[[tooltips]]
+  template = '{{ if or .Env.AWS_ACCESS_KEY_ID (not .Env.AWS_PROFILE) }}󰅟  <i>{{ if .Env.AWS_ACCESS_KEY_ID }}env keys{{ else }}no profile{{ end }}{{ if .Env.AWS_REGION }} :: {{ .Env.AWS_REGION }}{{ else if .Env.AWS_DEFAULT_REGION }} :: {{ .Env.AWS_DEFAULT_REGION }}{{ end }}</i>{{ end }}'
+  foreground = '#FF9901'
+  type = 'text'
+  style = 'plain'
+  tips = ['aws']
 
 [[tooltips]]
   template = '󰅟  <i>{{ if .ActiveConfig }}{{ .ActiveConfig }}{{ end }}{{ if .Project }} :: {{ .Project }}{{ end }}{{ if .Region }}/{{ .Region }}{{ end }}</i>'
