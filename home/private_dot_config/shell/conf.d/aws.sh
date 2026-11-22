@@ -47,19 +47,11 @@ fok() {
   CRED_PROFILE="${account_name}" gimme-aws-creds --roles "arn:aws:iam::${account_id}:role/${role_name}" 2> /dev/null
 }
 
-# jq filter shared by ec2md() and the ec2sh preview
-EC2MD_FILTER='.Reservations[0].Instances[0] as $i | ["| Field | Value |", "| --- | --- |", "| ID | `\($i.InstanceId)` |", "| Type | \($i.InstanceType) |", "| State | \($i.State.Name) |", "| AZ | \($i.Placement.AvailabilityZone) |", "| Private IP | \($i.PrivateIpAddress // "-") |", "| Public IP | \($i.PublicIpAddress // "-") |", "| Launch | \($i.LaunchTime) |", "| Image | \($i.ImageId) |", "", "## Tags", "", "| Key | Value |", "| --- | --- |"] + (($i.Tags // []) | sort_by(.Key) | map("| \(.Key) | \(.Value) |")) + [""] | join("\n")'
-
-# ec2md - render an instance's details as markdown
-ec2md() {
-  aws ec2 describe-instances --profile "${1}" --instance-ids "${2}" --output json 2>/dev/null \
-    | jq -r "${EC2MD_FILTER}" \
-    | gum format
-}
-
 # ec2sh - pick running EC2 instances and connect via SSM or SSH
 ec2sh() {
   local profile
+  # jq filter for the markdown preview
+  local EC2MD_FILTER='.Reservations[0].Instances[0] as $i | ["| Field | Value |", "| --- | --- |", "| ID | `\($i.InstanceId)` |", "| Type | \($i.InstanceType) |", "| State | \($i.State.Name) |", "| AZ | \($i.Placement.AvailabilityZone) |", "| Private IP | \($i.PrivateIpAddress // "-") |", "| Public IP | \($i.PublicIpAddress // "-") |", "| Launch | \($i.LaunchTime) |", "| Image | \($i.ImageId) |", "", "## Tags", "", "| Key | Value |", "| --- | --- |"] + (($i.Tags // []) | sort_by(.Key) | map("| \(.Key) | `\(.Value)` |")) + [""] | join("\n")'
 
   if [[ -n "$1" ]]; then
     profile="$1"
