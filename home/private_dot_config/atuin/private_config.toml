@@ -15,5 +15,8 @@ dir = "~/.local/state/atuin"
 [ui]
 columns = ["exit", "time", "duration", "directory", "command"]
 
+[search]
+filters = ["workspace", "global", "directory"]
+
 [theme]
 name = "carbonfox"
