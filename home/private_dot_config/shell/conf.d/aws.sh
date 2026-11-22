@@ -3,11 +3,23 @@ export AWS_DEFAULT_OUTPUT="text"
 export AWS_CONFIG_FILE="${CONFIG_PATH}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${CONFIG_PATH}/aws/credentials"
 
-# AWS CLI completion (bash only; zsh handles via compinit)
-if [[ -n "${BASH_VERSION:-}" ]] && command -v complete &> /dev/null && \
-  command -v aws &> /dev/null && \
-  command -v aws_completer &> /dev/null; then
-  complete -C "$(command -v aws_completer)" aws
+# AWS CLI completion (aws_completer, shared by bash and zsh)
+if command -v aws_completer &> /dev/null; then
+  case "${CURRENT_SHELL}" in
+    zsh)
+      # conf.d runs before bashcompinit; `complete` needs it, so defer
+      # to the first prompt, where bashcompinit has already run.
+      _aws_completion_init() {
+        complete -C "$(command -v aws_completer)" aws
+        add-zsh-hook -d precmd _aws_completion_init
+      }
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd _aws_completion_init
+      ;;
+    bash)
+      complete -C "$(command -v aws_completer)" aws
+      ;;
+  esac
 fi
 
 # Guard: only load AWS functions if aws CLI and fzf exist
@@ -22,14 +34,6 @@ fap() {
            sed -nr -e 's/\[profile (.+)\]/\1/p' |
            fzf --min-height 10 --height 15 -q "$*" ) || return
   export AWS_PROFILE="${target}"
-}
-
-# fak - pick AWS keys (requires __awskeys_list/__awskeys_export from env)
-fak() {
-  local target
-  target=$(__awskeys_list 2>/dev/null | grep "^ " | tr -d ' ' |
-           fzf --min-height 10 --height 15 -q "$*") || return
-  __awskeys_export "${target}"
 }
 
 # fok - assume role via gimme-aws-creds
@@ -113,9 +117,9 @@ if [[ -n "${BASH_VERSION:-}" ]]; then
     local cur
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
-    [[ "${COMP_CWORD}" -eq 2 ]] && return 0
+    [[ "${COMP_CWORD}" -ne 1 ]] && return 0
     local profile_list
-    profile_list="$(__awskeys_list 2>/dev/null | grep "    ")"
+    profile_list="$(sed -nE 's/^\[profile (.+)\]/\1/p' "${AWS_CONFIG_FILE}" 2>/dev/null)"
     COMPREPLY=( $(compgen -W "${profile_list}" -- "${cur}") )
     return 0
   }
@@ -123,10 +127,10 @@ if [[ -n "${BASH_VERSION:-}" ]]; then
 # zsh completion
 elif [[ -n "${ZSH_VERSION:-}" ]]; then
   _ec2sh() {
-    local profile
-    while IFS= read -r profile; do
-      compadd -- "${profile#    }"
-    done < <(__awskeys_list 2>/dev/null | grep '^    ')
+    (( CURRENT == 2 )) || return 1
+    local -a profiles
+    profiles=(${(f)"$(sed -nE 's/^\[profile (.+)\]/\1/p' "${AWS_CONFIG_FILE}" 2>/dev/null)"})
+    compadd -a profiles
   }
   compdef _ec2sh ec2sh
 fi
