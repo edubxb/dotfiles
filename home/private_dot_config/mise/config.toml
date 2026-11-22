@@ -77,4 +77,4 @@ fireworks ="confetty fireworks"
 pipes = "pipes-rs -b true -c rgb -k curved -p 25"
 
 [hooks]
-postinstall = "misecompsync"
+postinstall = "misecompsync --shell zsh --shell bash"
