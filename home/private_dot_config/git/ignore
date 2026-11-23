@@ -2,6 +2,7 @@
 .git/
 # worktrees
 .worktrees
+.worktreeinclude
 # custom ignores
 **/*.ignore.*
 

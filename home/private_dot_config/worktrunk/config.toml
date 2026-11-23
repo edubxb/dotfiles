@@ -1,0 +1,11 @@
+worktree-path = "{{ repo_path }}/.worktrees/{{ branch | sanitize }}"
+skip-commit-generation-prompt = true
+
+[post-start]
+copy = "wt step copy-ignored --require-include"
+
+[step.copy-ignored]
+exclude = [".terragrunt-cache/", ".terraform/"]
+
+[commit.generation]
+command = "opencode run --standalone --archived --agent worktrunk"
