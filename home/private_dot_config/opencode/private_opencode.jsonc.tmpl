@@ -1,0 +1,56 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+{{- if eq .purpose "work" }}
+  "policies": [
+    { "action": "provider.use", "resource": "*", "effect": "deny" },
+    // { "action": "provider.use", "resource": "openai", "effect": "allow" },
+    { "action": "provider.use", "resource": "claude-agent", "effect": "allow" }
+  ],
+{{- end }}
+  "mcp": {
+    "servers": {
+{{- if eq .purpose "work" }}
+      "atlassian": {
+        "type": "remote",
+        "url": "https://mcp.atlassian.com/v2/mcp",
+      },
+{{- end }}
+      "engram": {
+        "command": [
+          "engram",
+          "mcp",
+          "--tools=agent"
+        ],
+        "type": "local"
+      },
+      "whiteboard": {
+        "type": "local",
+        "command": [
+          "sh",
+          "-c",
+          "exec \"$HOME/.local/bin/whiteboard\" mcp"
+        ]
+      }
+    }
+  },
+  // Always-on output-style skills, loaded with AGENTS.md every session.
+  "instructions": [
+    "~/.agents/skills/i-have-adhd/SKILL.md",
+    "~/.agents/skills/caveman/SKILL.md"
+  ],
+  "plugins": [
+    "@dietrichgebert/ponytail",
+    "@slkiser/opencode-quota@latest",
+    "opencode-skills-tui"
+  ],
+  // Cheap model for maintenance and helper agents.
+  "agents": {
+    "title": { "model": {{ .opencode_cheap_model | quote }} },
+    "summary": { "model": {{ .opencode_cheap_model | quote }} },
+    "worktrunk": {
+      "description": "Generates commit messages for worktrunk",
+      "hidden": true,
+      "model": {{ .opencode_cheap_model | quote }}
+    }
+  }
+}

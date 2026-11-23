@@ -11,7 +11,7 @@ package_manager = "pnpm"
 "aqua:lusingander/serie" = "latest"
 "github:1jehuang/mermaid-rs-renderer" = "latest"
 "github:EdJoPaTo/mqttui" = "latest"
-"github:Gentleman-Programming/engram" = "latest"
+"github:Gentleman-Programming/engram" = { version = "latest", postinstall = '''"$MISE_TOOL_INSTALL_PATH/engram" setup opencode && f="${XDG_CONFIG_HOME:-$HOME/.config}/opencode/opencode.jsonc" && { [ ! -f "$f" ] || sed -i -E "s|\"[^\"]*/mise/installs/github-gentleman-programming-engram/[^\"]*/engram\"|\"engram\"|" "$f"; }''' }
 "github:Skardyy/mcat" = "latest"
 "github:abhinav/git-spice" = "latest"
 "github:agavra/tuicr" = "latest"
@@ -32,7 +32,7 @@ package_manager = "pnpm"
 "github:kyu08/fzf-make" = "latest"
 "github:lhvy/pipes-rs" = { version = "latest", bin_path = "target/x86_64-unknown-linux-gnu/release" }
 "github:m96-chan/blinkterm" = { version = "latest", asset_pattern = "blinkterm-*-x86_64-unknown-linux-gnu.tar.gz" }
-"github:max-sixty/worktrunk" = "latest"
+"github:max-sixty/worktrunk" = { version = "latest", postinstall = '"$MISE_TOOL_INSTALL_PATH/wt" config plugins opencode install --yes' }
 "github:mbrt/gmailctl" = "latest"
 "github:mexirica/aptui" = "latest"
 "github:nolabs-ai/nono" = "latest"

@@ -1,0 +1,4 @@
+{
+    "review.telemetry.enabled": false,
+    "review.keymap": "vim"
+}

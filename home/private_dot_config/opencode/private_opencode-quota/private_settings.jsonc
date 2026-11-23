@@ -1,0 +1,25 @@
+// Every setting and its default: https://github.com/slkiser/opencode-quota/blob/main/docs/readme/configuration.md
+{
+  "version": 6,
+  "sidebar": {
+    "show": true,
+    "sessionTokens": true
+  },
+  "toast": {
+    "show": false,
+    "sessionTokens": true
+  },
+  "words": {
+    "percent": "remaining",
+    "sessionTokens": "tree"
+  },
+  "layout": {
+    "bar": "shades"
+  },
+  "providers": {
+    "off": []
+  },
+  "statusLine": {
+    "home": true
+  }
+}
