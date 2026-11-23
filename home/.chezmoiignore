@@ -1,0 +1,4 @@
+{{- if ne .purpose "work" }}
+# Work-only files.
+.config/git/config.work
+{{- end }}

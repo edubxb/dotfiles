@@ -1,9 +1,18 @@
 {{- $email := promptString "email" -}}
-{{- $work_email := promptString "work_email" -}}
+{{- $purpose := promptChoiceOnce . "purpose" "Workstation purpose" (list "work" "personal") -}}
+{{- $work_email := "" -}}
+{{- if eq $purpose "work" -}}
+{{-   $work_email = promptString "work_email" -}}
+{{- end -}}
+{{- $opencode_cheap_model := promptStringOnce . "opencode_cheap_model" "OpenCode cheap model (provider/model)" -}}
 
 [diff]
     pager = "delta"
 
 [data]
     email = {{ $email | quote }}
+    purpose = {{ $purpose | quote }}
+{{- if eq $purpose "work" }}
     work_email = {{ $work_email | quote }}
+{{- end }}
+    opencode_cheap_model = {{ $opencode_cheap_model | quote }}
