@@ -99,6 +99,7 @@
 	unstage = "!git restore --staged"
 	ups = "!f() { local remote=\"origin\"; [ -n \"$1\" ] && remote=\"$1\"; git push -u \"${remote}\" $(git rev-parse --abbrev-ref HEAD); }; f"
 	wip = "!f() { git commit -m \"WIP: $*\"; }; f"
+	root = "!f() { case \"$1\" in \"\") git rev-parse --show-toplevel ;; --default) git worktree list --porcelain | sed -n \"1s/^worktree //p\" ;; *) echo \"usage: git root [--default]\" >&2; return 1 ;; esac; }; f"
 [color "branch"]
 	current = 229 bold
 	local = 229
