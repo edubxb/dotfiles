@@ -1,8 +1,72 @@
+-- Markdown style for rumdl, shared by the linter and the formatter so they agree
+local rumdl_args = {
+	"--config", "MD013.line-length=100",
+	"--config", "MD013.reflow=true",
+	"--config", 'MD004.style="dash"',
+	"--config", 'MD049.style="underscore"',
+	"--config", 'MD050.style="asterisk"',
+	"--config", "MD060.enabled=true",
+	"--config", 'MD060.style="aligned"',
+}
+
 return {
 	{
 		"LazyVim/LazyVim",
 		opts = {
 			colorscheme = "carbonfox",
+		},
+	},
+	{
+		"mason-org/mason.nvim",
+		-- CLI tools not covered by an extra (LSP servers go in nvim-lspconfig servers)
+		opts = {
+			ensure_installed = {
+				"actionlint",
+				"rumdl", -- its LSP is disabled, so the servers list won't install it
+			},
+		},
+	},
+	{
+		-- Markdown: rumdl formats (wraps prose at 100 columns) and applies lint fixes
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				["markdown"] = { "rumdl", "markdown-toc" },
+				["markdown.mdx"] = { "rumdl", "markdown-toc" },
+			},
+			formatters = {
+				rumdl = {
+					prepend_args = rumdl_args,
+				},
+			},
+		},
+	},
+	{
+		-- Markdown lint: rumdl instead of markdownlint-cli2
+		"mfussenegger/nvim-lint",
+		opts = {
+			linters_by_ft = {
+				markdown = { "rumdl" },
+			},
+			linters = {
+				rumdl = {
+					prepend_args = rumdl_args,
+					-- nvim-lint reads stderr, but rumdl >= 0.3 prints JSON to stdout
+					stream = "stdout",
+				},
+			},
+		},
+	},
+	{
+		-- rumdl runs through nvim-lint and conform; its LSP server ignores the flags above
+		"neovim/nvim-lspconfig",
+		opts = {
+			servers = {
+				ast_grep = {},
+				mpls = {},
+				rumdl = { enabled = false },
+				terragrunt_ls = {},
+			},
 		},
 	},
 	{
