@@ -89,7 +89,7 @@ streaming = 100
     style = 'plain'
 
   [[blocks.segments]]
-    template = '{{ if eq .Env.POSH_PRECOMMIT_MISSING "true" }}󰛣{{ end }}'
+    template = '{{ if eq .Env.POSH_GIT_HOOKS_MISSING "true" }}󰛣{{ end }}'
     type = 'text'
     foreground = 'red'
 

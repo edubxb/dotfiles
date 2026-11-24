@@ -1,19 +1,30 @@
 ## Oh My Posh ##
-if ! command -v git &> /dev/null; then
-  return 0
-fi
-
 if command -v oh-my-posh &> /dev/null; then
   eval "$(oh-my-posh init "${CURRENT_SHELL}" --config "${SHELL_CONFIG_PATH}/edubxb.omp.toml")"
 fi
 
 # Must be defined after `oh-my-posh init`, which declares an empty placeholder.
 function set_poshcontext {
-  unset POSH_PRECOMMIT_MISSING POSH_AWS_SSO_LEFT
-  local GIT_ROOT
-  GIT_ROOT=$(git rev-parse --show-toplevel 2> /dev/null)
-  if [[ -n "${GIT_ROOT}" ]] && [[ -f "${GIT_ROOT}/.pre-commit-config.yaml" ]] && [[ ! -f "${GIT_ROOT}/.git/hooks/pre-commit" ]]; then
-    export POSH_PRECOMMIT_MISSING=true
+  unset POSH_GIT_HOOKS_MISSING POSH_AWS_SSO_LEFT
+  # `--git-path hooks` resolves the shared hooks dir for worktrees (where `.git` is a file)
+  # and honours `core.hooksPath`.
+  local git_paths git_root hooks_dir cfg
+  if command -v git &> /dev/null; then
+    git_paths=$(git rev-parse --path-format=absolute --show-toplevel --git-path hooks 2> /dev/null)
+  fi
+  git_root=${git_paths%%$'\n'*}
+  hooks_dir=${git_paths#*$'\n'}
+  if [[ -n "${git_root}" ]]; then
+    if [[ -f "${git_root}/.pre-commit-config.yaml" ]] && [[ ! -f "${hooks_dir}/pre-commit" ]]; then
+      export POSH_GIT_HOOKS_MISSING=true
+    fi
+    # Lefthook installs one script per configured hook; each one mentions "lefthook".
+    for cfg in {,.}lefthook.{yml,yaml,json,jsonc,toml} .config/lefthook.{yml,yaml,json,jsonc,toml}; do
+      if [[ -f "${git_root}/${cfg}" ]]; then
+        grep -rqs lefthook "${hooks_dir}" || export POSH_GIT_HOOKS_MISSING=true
+        break
+      fi
+    done
   fi
 
   local sso_session sso_cache left
