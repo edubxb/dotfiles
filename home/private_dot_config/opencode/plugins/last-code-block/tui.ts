@@ -13,16 +13,16 @@ const SEND_ID = "local.send-last-code-block"
 // language, the body, and a closing fence of the same characters.
 const FENCE = /^ {0,3}(`{3,}|~{3,})([^\n]*)\n([\s\S]*?)\n? {0,3}\1[ \t]*$/gm
 
-// Only the languages that code-block-background draws with a frame (sh, shell
-// and zsh are OpenCode aliases of bash). Keep in sync with that plugin.
-const FRAMED = new Set(["bash", "sh", "shell", "zsh", "console", "diff"])
+// Blocks that <leader>k copies. code-block-decoration frames more languages
+// than these; this list is on purpose, not a mirror of that plugin.
+const COPYABLE = new Set(["bash", "sh", "shell", "zsh", "console", "diff"])
 // Blocks that are safe to paste into a shell (not console output, not diffs).
 const SHELL_LANGUAGES = new Set(["bash", "sh", "shell", "zsh"])
 
 // Kitty user variable that marks the runner window.
 const RUNNER_VAR = "oc_run"
 
-export function lastCodeBlock(text: string, languages: Set<string> = FRAMED): string | undefined {
+export function lastCodeBlock(text: string, languages: Set<string> = COPYABLE): string | undefined {
   let last: string | undefined
   for (const match of text.matchAll(FENCE)) {
     const language = match[2].trim().split(/\s+/)[0].toLowerCase()
@@ -151,13 +151,13 @@ export default Plugin.define({
         const code = lastCodeBlock(text, languages)
         if (code !== undefined) return code
       }
-      toast(languages === SHELL_LANGUAGES ? "No sh code block found" : "No framed code block found", "warning")
+      toast(languages === SHELL_LANGUAGES ? "No sh code block found" : "No bash, console or diff block found", "warning")
       return undefined
     }
 
     const copyLast = async () => {
       try {
-        const code = await findLast(FRAMED)
+        const code = await findLast(COPYABLE)
         if (code === undefined) return
         await copyToClipboard(code)
         const lines = code.split("\n").length
