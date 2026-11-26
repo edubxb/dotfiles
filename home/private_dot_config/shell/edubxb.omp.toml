@@ -12,28 +12,25 @@ streaming = 100
 [transient_prompt]
   template = '<b><r>  {{ now | date "15:04:05" }}</r></b> '
   foreground = 'white'
-  newline = true 
+  newline = true
 
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
 
   [[blocks.segments]]
-    template = '{{ if gt .Code 0 }}└─<b><r>{{ .Code }}</r></b>{{ end }}'
+    template = "{{ if gt .Code 0 }} │\n └─<b><r>{{ .Code }}{{ if eq .Code 130 }} Ctrl+C{{ end }}</r></b>{{ end }}"
     foreground = 'red'
     type = 'exit'
     style = 'plain'
 
-    [blocks.segments.properties]
-      always_enabled = true 
-
   [[blocks.segments]]
-    template = '{{ if eq .Code 0 }}└─{{ else }}<red,white> </>{{ end }}<b><r>󰅒 {{ .FormattedMs }}</r></b>'
+    template = "{{ if eq .Code 0 }} │\n └─{{ else }}<red,white> </>{{ end }}<b><r>󰅒 {{ .FormattedMs }}</r></b>"
     foreground = 'white'
     type = 'executiontime'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       threshold = 30001.0
 
   [[blocks.segments]]
@@ -66,12 +63,12 @@ streaming = 100
     style = 'plain'
 
   [[blocks.segments]]
-    template = '{{ if .IsWorkTree }} {{ end }}<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }}{{ end }}{{ if .Staging.Changed }} <r><b> {{ .Staging.String }} </b></r>{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{end}} '
+    template = '{{ if .IsWorkTree }} {{ end }}<b><d>{{ .HEAD }}</d></b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} <r><b> {{ .Staging.String }} </b></r>{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{end}} '
     foreground = 'white'
     type = 'git'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       branch_ahead_icon = '󰁝'
       branch_behind_icon = '󰁅'
       branch_gone_icon = ''
@@ -90,15 +87,16 @@ streaming = 100
 
   [[blocks.segments]]
     template = '{{ if eq .Env.POSH_GIT_HOOKS_MISSING "true" }}󰛣{{ end }}'
-    type = 'text'
     foreground = 'red'
+    type = 'text'
+    style = 'plain'
 
 [[blocks]]
   type = 'prompt'
   alignment = 'right'
 
   [[blocks.segments]]
-    template = ' <b>󰏗  {{ if .Name }}{{ .Name }}{{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b>'
+    template = ' <b>󰏗  {{ .Name }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}:{{.Version}}{{ end }}{{ end }}</b>'
     foreground = 'yellow'
     type = 'project'
     style = 'plain'
@@ -109,7 +107,7 @@ streaming = 100
     type = 'terraform'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       fetch_version = true
 
   [[blocks.segments]]
@@ -118,7 +116,7 @@ streaming = 100
     type = 'python'
     style = 'plain'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       display_mode = 'context'
 
 [[blocks]]
@@ -133,10 +131,10 @@ streaming = 100
     style = 'plain'
 
   [[blocks.segments]]
-    type = "text"
-    style = "plain"
-    foreground = "white"
-    template = "{{ if gt .Jobs 0 }}{{ .Jobs }} 󱤷 {{ end }}"
+    template = '{{ if gt .Jobs 0 }}{{ .Jobs }} 󱤷 {{ end }}'
+    foreground = 'white'
+    type = 'text'
+    style = 'plain'
 
   [[blocks.segments]]
     template = ''
